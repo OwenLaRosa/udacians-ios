@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<LMColumnView backgroundColor="#1EB4E2"
+    topSpacing="24"
+    bottomSpacing="16">
+
+    <UILabel id="titleLabel"
+        textAlignment="center"
+        textColor="#ffffff"
+        text="Udacians!"
+        font="System 25"/>
+
+    <LMSpacer weight="1"/>
+
+    <UILabel id="loginLabel"
+        textAlignment="center"
+        textColor="#ffffff"
+        text="Login with Udacity"
+        font="System 20"/>
+
+    <UITextField id="emailTextField"
+        textColor="#ffffff"
+        backgroundColor="#81D4FA"
+        placeholder="Email Address"
+        height="46"/>
+
+    <UITextField id="passwordTextField"
+        textColor="#ffffff"
+        backgroundColor="#81D4FA"
+        placeholder="Password"
+        height="46"/>
+
+    <UIButton id="loginButton"
+        tintColor="#ffffff"
+        backgroundColor="#01579B"
+        title="Login"
+        height="46"/>
+
+    <LMSpacer weight="1"/>
+
+    <UILabel id="noticeLabel"
+        textAlignment="center"
+        textColor="#ffffff"
+        numberOfLines="0"
+        text="Disclaimer Goes Here"
+        font="System 15"/>
+
+</LMColumnView>
