@@ -12,6 +12,7 @@ import MarkupKit
 class LoginViewController: UIViewController {
     
     @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var logoImageView: UIImageView!
     @IBOutlet var loginLabel: UILabel!
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!

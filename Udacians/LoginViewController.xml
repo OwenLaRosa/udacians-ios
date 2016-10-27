@@ -11,6 +11,12 @@
         font="System 25"/>
 
     <LMSpacer weight="1"/>
+    
+    <UIImageView id="logoImageView"
+        width="150"
+        height="150"
+        image="udacity_logo"
+        contentMode="scaleAspectFit"/>
 
     <UILabel id="loginLabel"
         textAlignment="center"
@@ -36,7 +42,7 @@
         title="Login"
         height="46"/>
 
-    <LMSpacer weight="1"/>
+    <LMSpacer weight="4"/>
 
     <UILabel id="noticeLabel"
         textAlignment="center"
