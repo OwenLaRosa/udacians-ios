@@ -31,6 +31,13 @@ class LoginViewController: UIViewController {
     @IBAction func login() {
         
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        // indent cursor from the left edge
+        emailTextField.layer.sublayerTransform = CATransform3DMakeTranslation(8, 0, 0)
+        passwordTextField.layer.sublayerTransform = CATransform3DMakeTranslation(8, 0, 0)
+    }
 
 }
-
