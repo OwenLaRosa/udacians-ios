@@ -19,6 +19,7 @@
 		5A585C951DC245F1009647A0 /* MarkupKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5A585C921DC245D9009647A0 /* MarkupKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5A585C981DC24766009647A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5A585C971DC24766009647A0 /* GoogleService-Info.plist */; };
 		5A585C9A1DC24C07009647A0 /* LoginViewController.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5A585C991DC24C07009647A0 /* LoginViewController.xml */; };
+		5A8555CA1DC51BFA00D8BF46 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8555C91DC51BFA00D8BF46 /* SwiftyJSON.swift */; };
 		8947E9B9CEE9336695CEDC86 /* Pods_UdaciansTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A52C36BF5ABFA3C60CC8A8FC /* Pods_UdaciansTests.framework */; };
 		E66B077D5593A7C29E37A930 /* Pods_UdaciansUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F11DB150579277D50885F4E /* Pods_UdaciansUITests.framework */; };
 /* End PBXBuildFile section */
@@ -72,6 +73,7 @@
 		5A585C921DC245D9009647A0 /* MarkupKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MarkupKit.framework; sourceTree = "<group>"; };
 		5A585C971DC24766009647A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5A585C991DC24C07009647A0 /* LoginViewController.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = LoginViewController.xml; sourceTree = "<group>"; };
+		5A8555C91DC51BFA00D8BF46 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		65C96328D892443BC50FA6AC /* Pods-UdaciansTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UdaciansTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UdaciansTests/Pods-UdaciansTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7F11DB150579277D50885F4E /* Pods_UdaciansUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UdaciansUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		855C340DD5C2F0EFD58C9577 /* Pods_Udacians.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Udacians.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,6 +149,7 @@
 		5A585C631DC2449A009647A0 /* Udacians */ = {
 			isa = PBXGroup;
 			children = (
+				5A8555C91DC51BFA00D8BF46 /* SwiftyJSON.swift */,
 				5A585C641DC2449B009647A0 /* AppDelegate.swift */,
 				5A585C661DC2449B009647A0 /* LoginViewController.swift */,
 				5A585C991DC24C07009647A0 /* LoginViewController.xml */,
@@ -461,6 +464,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A8555CA1DC51BFA00D8BF46 /* SwiftyJSON.swift in Sources */,
 				5A585C671DC2449B009647A0 /* LoginViewController.swift in Sources */,
 				5A585C651DC2449B009647A0 /* AppDelegate.swift in Sources */,
 			);
