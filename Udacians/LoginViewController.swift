@@ -29,7 +29,14 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func login() {
-        
+        _ = UdacityClient.shared.getToken(email: emailTextField.text!, password: passwordTextField.text!) {success, code in
+            if success {
+                print(UdacityClient.shared.token)
+                print(code)
+            } else {
+                print("login failed")
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {

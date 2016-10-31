@@ -40,7 +40,8 @@
         tintColor="#ffffff"
         backgroundColor="#01579B"
         title="Login"
-        height="46"/>
+        height="46"
+        onPrimaryActionTriggered="login"/>
 
     <LMSpacer weight="4"/>
 
