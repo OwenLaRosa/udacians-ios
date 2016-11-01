@@ -19,6 +19,10 @@ public class Profile {
     var twitter = ""
     var enrollments = [String]()
     
+    init(enrollments: [String]) {
+        self.enrollments = enrollments
+    }
+    
     init(snapshot: FIRDataSnapshot) {
         let root = snapshot.value as! [String: Any]
         

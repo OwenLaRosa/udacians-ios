@@ -42,6 +42,7 @@ class LoginViewController: UIViewController {
                         print("login successful: \(authData)")
                         _ = UdacityClient.shared.getDataForUserId(userId: authData!.uid) {user, code in
                             print("response code: \(code)")
+                            print("user: \(user?.firstName) \(user?.lastName) \(user?.profile?.enrollments)")
                         }
                     }
                 })

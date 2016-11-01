@@ -97,9 +97,25 @@ public class UdacityClient {
             if error != nil {
                 completionHandler(nil, (response as? HTTPURLResponse)?.statusCode ?? 0)
             } else {
+                // responses from Udacity API must be trimmed
                 let newData = data!.subdata(in: 5..<data!.count)
                 let jsonObject = JSON(data: newData)
-                print("json object\(jsonObject)")
+                let firstName = jsonObject["user"]["first_name"].stringValue
+                let lastName = jsonObject["user"]["last_name"].stringValue
+                let user = User(userId: userId, firstName: firstName, lastName: lastName)
+                
+                let enrollments = jsonObject["user"]["_enrollments"].arrayValue
+                // enrollments that have their own group chat
+                var valid = [String]()
+                for i in enrollments {
+                    // only include Nanodegree courses
+                    if i["node_key"].stringValue.hasPrefix("nd") {
+                        valid.append(i["node_key"].stringValue)
+                    }
+                }
+                let profile = Profile(enrollments: valid)
+                user.profile = profile
+                completionHandler(user, 200)
             }
         }
         task.resume()
