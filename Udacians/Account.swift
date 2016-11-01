@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Account {
+public class Account {
     
     // email address used to sign in to Udacity
     let email: String

@@ -40,6 +40,9 @@ class LoginViewController: UIViewController {
                         print("login failed: \(error)")
                     } else {
                         print("login successful: \(authData)")
+                        _ = UdacityClient.shared.getDataForUserId(userId: authData!.uid) {user, code in
+                            print("response code: \(code)")
+                        }
                     }
                 })
             

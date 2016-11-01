@@ -9,7 +9,7 @@
 import Foundation
 import FirebaseDatabase
 
-class Profile {
+public class Profile {
     
     var profilePicture = ""
     var about = ""
