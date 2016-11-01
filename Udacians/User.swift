@@ -34,8 +34,8 @@ class User {
         let basic = root["basic"] as! [String: Any]
         firstName = basic["firstName"] as? String ?? ""
         lastName = basic["lastName"] as? String ?? ""
-        longitude = root["longitude"] as? Double
-        latitude = root["latitude"] as? Double
+        longitude = basic["longitude"] as? Double
+        latitude = basic["latitude"] as? Double
     }
     
     func toAny() -> Any? {
