@@ -38,7 +38,7 @@ public class UdacityClient {
         request.httpBody = "{\"username\": \"\(email)\", \"password\": \"\(password)\"}".data(using: String.Encoding.utf8)
         let task = session.dataTask(with: request) {data, response, error in
             if error != nil {
-                completionHandler(false, (response as! HTTPURLResponse).statusCode)
+                completionHandler(false, (response as? HTTPURLResponse)?.statusCode ?? 0)
             } else {
                 let jsonObject = JSON(data: data!)
                 let code = jsonObject[self.KEY_CODE].intValue
