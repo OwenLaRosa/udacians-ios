@@ -8,6 +8,9 @@
 
 import UIKit
 import MarkupKit
+import Firebase
+import FirebaseAuth
+import FirebaseDatabase
 
 class LoginViewController: UIViewController {
     
@@ -31,10 +34,17 @@ class LoginViewController: UIViewController {
     @IBAction func login() {
         _ = UdacityClient.shared.getToken(email: emailTextField.text!, password: passwordTextField.text!) {success, code in
             if success {
-                print(UdacityClient.shared.token)
-                print(code)
+                // once we have the token, use it to authenticate with firebase
+                FIRAuth.auth()?.signIn(withCustomToken: UdacityClient.shared.token, completion: {authData, error in
+                    if error != nil {
+                        print("login failed: \(error)")
+                    } else {
+                        print("login successful: \(authData)")
+                    }
+                })
+            
             } else {
-                print("login failed")
+                print("login failed \(code)")
             }
         }
     }

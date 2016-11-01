@@ -8,6 +8,8 @@ target 'Udacians' do
   # Pods for Udacians
 
   pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Database'
 
   target 'UdaciansTests' do
     inherit! :search_paths
