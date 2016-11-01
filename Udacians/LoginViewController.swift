@@ -41,8 +41,10 @@ class LoginViewController: UIViewController {
                     } else {
                         print("login successful: \(authData)")
                         _ = UdacityClient.shared.getDataForUserId(userId: authData!.uid) {user, code in
-                            print("response code: \(code)")
-                            print("user: \(user?.firstName) \(user?.lastName) \(user?.profile?.enrollments)")
+                            // sync user's basic profile information
+                            let usersRef = FIRDatabase.database().reference(withPath: "users")
+                            let me = usersRef.child(authData!.uid).child("basic")
+                            me.setValue(user?.toAny())
                         }
                     }
                 })
