@@ -32,5 +32,17 @@ class Profile {
         enrollments = profile["enrollments"] as? [String] ?? [String]()
     }
     
+    func toAny() -> Any {
+        return [
+            "profilePicture": profilePicture,
+            "about": about,
+            "webstie": website,
+            "blog": blog,
+            "linkedIn": linkedIn,
+            "twitter": twitter,
+            "enrollments": enrollments
+        ]
+    }
+    
     
 }

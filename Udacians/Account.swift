@@ -22,4 +22,11 @@ class Account {
         self.user = user
     }
     
+    func toAny() -> Any {
+        return [
+            "email": email,
+            "network": network
+        ]
+    }
+    
 }

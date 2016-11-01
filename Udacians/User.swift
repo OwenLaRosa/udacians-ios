@@ -38,4 +38,14 @@ class User {
         latitude = root["latitude"] as? Double
     }
     
+    func toAny() -> Any? {
+        var data: [String: Any] = ["firstName": firstName, "lastName": lastName]
+        if longitude != nil && latitude != nil {
+            // only upload lon and lat if user has provided location
+            data["longitude"] = longitude!
+            data["latitude"] = latitude!
+        }
+        return data
+    }
+    
 }
