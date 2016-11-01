@@ -37,15 +37,18 @@ public class Profile {
     }
     
     func toAny() -> Any {
-        return [
+        var data: [String: Any] = [
             "profilePicture": profilePicture,
             "about": about,
             "webstie": website,
             "blog": blog,
             "linkedIn": linkedIn,
-            "twitter": twitter,
-            "enrollments": enrollments
+            "twitter": twitter
         ]
+        for i in enrollments {
+            data[i] = true
+        }
+        return data
     }
     
     
