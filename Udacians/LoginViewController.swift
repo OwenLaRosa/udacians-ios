@@ -24,6 +24,32 @@ class LoginViewController: UIViewController {
     
     override func loadView() {
         view = LMViewBuilder.view(withName: "LoginViewController", owner: self, root: nil)
+        
+        // automatically attempt sign in if there's a valid token
+        if let token = UserDefaults.standard.string(forKey: "token") {
+            print("token: \(token)")
+            FIRAuth.auth()?.signIn(withCustomToken: token, completion: {authData, error in
+                if error != nil {
+                    // token expired, login again
+                    print("token expired")
+                } else {
+                    // token expired, login again
+                    print("successfully logged in")
+                    // get a reference to the signed in user
+                    let userRef = FIRDatabase.database().reference(withPath: "users").child(authData!.uid)
+                    let basicRef = userRef.child("basic")
+                    basicRef.observe(.value, with: {snapshot in
+                        // read and save users' profile info
+                        let root = snapshot.value as! [String: Any]
+                        let user = User(userId: authData!.uid, firstName: root["firstName"] as! String, lastName: root["lastName"] as! String)
+                        print("user: \(user.firstName) \(user.lastName)")
+                    })
+                }
+            })
+        } else {
+            // no token yet, log in
+            print("no token")
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,6 +65,7 @@ class LoginViewController: UIViewController {
                     if error != nil {
                         print("login failed: \(error)")
                     } else {
+                        UserDefaults.standard.set(UdacityClient.shared.token, forKey: "token")
                         print("login successful: \(authData)")
                         _ = UdacityClient.shared.getDataForUserId(userId: authData!.uid) {user, code in
                             // sync user's basic profile information
