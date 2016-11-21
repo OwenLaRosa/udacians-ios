@@ -10,6 +10,7 @@ target 'Udacians' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
+  pod 'GoogleMaps'
 
   target 'UdaciansTests' do
     inherit! :search_paths
