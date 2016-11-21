@@ -12,8 +12,7 @@ import FirebaseDatabase
 public class User {
     
     let userId: String
-    let firstName: String
-    let lastName: String
+    let name: String
     var longitude: Double?
     var latitude: Double?
     
@@ -22,8 +21,7 @@ public class User {
     
     init(userId: String, firstName: String, lastName: String) {
         self.userId = userId
-        self.firstName = firstName
-        self.lastName = lastName
+        self.name = "\(firstName) \(lastName)"
     }
     
     init(snapshot: FIRDataSnapshot) {
@@ -32,14 +30,13 @@ public class User {
         userId = snapshot.key
         
         let basic = root["basic"] as! [String: Any]
-        firstName = basic["firstName"] as? String ?? ""
-        lastName = basic["lastName"] as? String ?? ""
+        name = basic["name"] as? String ?? ""
         longitude = basic["longitude"] as? Double
         latitude = basic["latitude"] as? Double
     }
     
     func toAny() -> Any? {
-        var data: [String: Any] = ["firstName": firstName, "lastName": lastName]
+        var data: [String: Any] = ["name": name]
         if longitude != nil && latitude != nil {
             // only upload lon and lat if user has provided location
             data["longitude"] = longitude!

@@ -36,6 +36,18 @@ public class Profile {
         enrollments = profile["enrollments"] as? [String] ?? [String]()
     }
     
+    /// return a dictionary of enrollments that can be stored in firebase
+    /// keys are the course IDs, value is boolean true
+    var enrollmentsDictionary: [String: Bool] {
+        get {
+            var dictionary = [String: Bool]()
+            for i in enrollments {
+                dictionary[i] = true
+            }
+            return dictionary
+        }
+    }
+    
     func toAny() -> Any {
         var data: [String: Any] = [
             "profilePicture": profilePicture,

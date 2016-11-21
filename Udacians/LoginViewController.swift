@@ -35,15 +35,15 @@ class LoginViewController: UIViewController {
                 } else {
                     // token expired, login again
                     print("successfully logged in")
-                    // get a reference to the signed in user
+                    /*// get a reference to the signed in user
                     let userRef = FIRDatabase.database().reference(withPath: "users").child(authData!.uid)
                     let basicRef = userRef.child("basic")
                     basicRef.observe(.value, with: {snapshot in
                         // read and save users' profile info
                         let root = snapshot.value as! [String: Any]
                         let user = User(userId: authData!.uid, firstName: root["firstName"] as! String, lastName: root["lastName"] as! String)
-                        print("user: \(user.firstName) \(user.lastName)")
-                    })
+                        print("user: \(user.name)")
+                    })*/
                 }
             })
         } else {
@@ -70,8 +70,11 @@ class LoginViewController: UIViewController {
                         _ = UdacityClient.shared.getDataForUserId(userId: authData!.uid) {user, code in
                             // sync user's basic profile information
                             let usersRef = FIRDatabase.database().reference(withPath: "users")
-                            let me = usersRef.child(authData!.uid).child("basic")
-                            me.setValue(user?.toAny())
+                            let name = usersRef.child(authData!.uid).child("basic").child("name")
+                            name.setValue(user!.name)
+                            // sync user's current enrollments
+                            let enrollments = usersRef.child(authData!.uid).child("enrollments")
+                            enrollments.setValue(user!.profile?.enrollments)
                         }
                     }
                 })
