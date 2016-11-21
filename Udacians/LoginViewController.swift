@@ -74,7 +74,7 @@ class LoginViewController: UIViewController {
                             name.setValue(user!.name)
                             // sync user's current enrollments
                             let enrollments = usersRef.child(authData!.uid).child("enrollments")
-                            enrollments.setValue(user!.profile?.enrollments)
+                            enrollments.setValue(user!.profile?.enrollmentsDictionary)
                         }
                     }
                 })
