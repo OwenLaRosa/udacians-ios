@@ -1,11 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="42C-GJ-5zW">
+            <objects>
+                <navigationController id="M0W-ie-79u" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Ekf-yl-o1g">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="zzt-qf-7BL" kind="relationship" relationship="rootViewController" id="BtL-N3-Hfv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s1i-vC-Ssw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1194" y="-592"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="rBI-Te-gYc">
+            <objects>
+                <viewController id="zzt-qf-7BL" customClass="MainViewController" customModule="Udacians" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SWf-J2-OdJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="7yu-Pc-q7B"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qrX-gV-HcW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gxU-I1-UD4">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <connections>
+                                    <segue destination="wH1-fc-iQy" kind="embed" id="VFb-ZG-Wz2"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gxU-I1-UD4" firstAttribute="bottom" secondItem="7yu-Pc-q7B" secondAttribute="top" id="7aI-rA-Tez"/>
+                            <constraint firstAttribute="trailing" secondItem="gxU-I1-UD4" secondAttribute="trailing" id="9ds-Vs-0bm"/>
+                            <constraint firstItem="gxU-I1-UD4" firstAttribute="leading" secondItem="qrX-gV-HcW" secondAttribute="leading" id="JzK-RZ-y7H"/>
+                            <constraint firstItem="gxU-I1-UD4" firstAttribute="top" secondItem="SWf-J2-OdJ" secondAttribute="bottom" id="P81-p3-30u"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="25D-uX-FYg"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hAB-d6-Oh9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-314.39999999999998" y="-592.35382308845578"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -19,9 +71,42 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <connections>
+                        <segue destination="M0W-ie-79u" kind="show" identifier="ShowMainView" id="AJi-52-y44"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-314" y="119"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="aEK-yy-DmS">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uxw-zI-n5V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="wH1-fc-iQy" customClass="MapViewController" customModule="Udacians" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yFu-vj-8eQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AbU-gZ-tIb">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="AbU-gZ-tIb" secondAttribute="trailing" id="14h-8f-RG2"/>
+                            <constraint firstItem="AbU-gZ-tIb" firstAttribute="leading" secondItem="yFu-vj-8eQ" secondAttribute="leading" id="CSv-3n-s8z"/>
+                            <constraint firstItem="AbU-gZ-tIb" firstAttribute="top" secondItem="yFu-vj-8eQ" secondAttribute="top" id="cPQ-c3-Dta"/>
+                            <constraint firstAttribute="bottom" secondItem="AbU-gZ-tIb" secondAttribute="bottom" id="pmj-fD-jOM"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="AbU-gZ-tIb" id="TzP-0i-Na0"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-314.39999999999998" y="-1276.0119940029986"/>
         </scene>
     </scenes>
 </document>

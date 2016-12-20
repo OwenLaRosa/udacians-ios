@@ -24,6 +24,8 @@
 		5A585C9A1DC24C07009647A0 /* LoginViewController.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5A585C991DC24C07009647A0 /* LoginViewController.xml */; };
 		5A8555CA1DC51BFA00D8BF46 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8555C91DC51BFA00D8BF46 /* SwiftyJSON.swift */; };
 		5A8555CC1DC51CBA00D8BF46 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8555CB1DC51CBA00D8BF46 /* UdacityClient.swift */; };
+		5AE1EEDA1E09B22D00731775 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE1EED91E09B22D00731775 /* MainViewController.swift */; };
+		5AE1EEDC1E09B52800731775 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE1EEDB1E09B52800731775 /* MapViewController.swift */; };
 		8947E9B9CEE9336695CEDC86 /* Pods_UdaciansTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A52C36BF5ABFA3C60CC8A8FC /* Pods_UdaciansTests.framework */; };
 		E66B077D5593A7C29E37A930 /* Pods_UdaciansUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F11DB150579277D50885F4E /* Pods_UdaciansUITests.framework */; };
 /* End PBXBuildFile section */
@@ -82,6 +84,9 @@
 		5A585C991DC24C07009647A0 /* LoginViewController.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = LoginViewController.xml; sourceTree = "<group>"; };
 		5A8555C91DC51BFA00D8BF46 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		5A8555CB1DC51CBA00D8BF46 /* UdacityClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
+		5AE1EED91E09B22D00731775 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		5AE1EEDB1E09B52800731775 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		5AE1EEDD1E09B72800731775 /* Udacians.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = Udacians.xcworkspace; sourceTree = "<group>"; };
 		65C96328D892443BC50FA6AC /* Pods-UdaciansTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UdaciansTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UdaciansTests/Pods-UdaciansTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7F11DB150579277D50885F4E /* Pods_UdaciansUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UdaciansUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		855C340DD5C2F0EFD58C9577 /* Pods_Udacians.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Udacians.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,6 +129,7 @@
 		104B75EB7A185680B5575015 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5AE1EEDD1E09B72800731775 /* Udacians.xcworkspace */,
 				855C340DD5C2F0EFD58C9577 /* Pods_Udacians.framework */,
 				A52C36BF5ABFA3C60CC8A8FC /* Pods_UdaciansTests.framework */,
 				7F11DB150579277D50885F4E /* Pods_UdaciansUITests.framework */,
@@ -170,6 +176,8 @@
 				5A48F3211DC8F4F100D49219 /* Profile.swift */,
 				5A48F3251DC8FB5900D49219 /* Account.swift */,
 				5A48F3231DC8FB4500D49219 /* User.swift */,
+				5AE1EED91E09B22D00731775 /* MainViewController.swift */,
+				5AE1EEDB1E09B52800731775 /* MapViewController.swift */,
 			);
 			path = Udacians;
 			sourceTree = "<group>";
@@ -480,9 +488,11 @@
 				5A8555CA1DC51BFA00D8BF46 /* SwiftyJSON.swift in Sources */,
 				5A48F3241DC8FB4500D49219 /* User.swift in Sources */,
 				5A585C671DC2449B009647A0 /* LoginViewController.swift in Sources */,
+				5AE1EEDC1E09B52800731775 /* MapViewController.swift in Sources */,
 				5A48F3221DC8F4F100D49219 /* Profile.swift in Sources */,
 				5A585C651DC2449B009647A0 /* AppDelegate.swift in Sources */,
 				5A48F3261DC8FB5900D49219 /* Account.swift in Sources */,
+				5AE1EEDA1E09B22D00731775 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

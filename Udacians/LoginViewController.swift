@@ -44,6 +44,7 @@ class LoginViewController: UIViewController {
                         let user = User(userId: authData!.uid, firstName: root["firstName"] as! String, lastName: root["lastName"] as! String)
                         print("user: \(user.name)")
                     })*/
+                    self.performSegue(withIdentifier: "ShowMainView", sender: nil)
                 }
             })
         } else {
@@ -75,6 +76,8 @@ class LoginViewController: UIViewController {
                             // sync user's current enrollments
                             let enrollments = usersRef.child(authData!.uid).child("enrollments")
                             enrollments.setValue(user!.profile?.enrollmentsDictionary)
+                            // present the app's main screen
+                            self.performSegue(withIdentifier: "ShowMainView", sender: nil)
                         }
                     }
                 })
