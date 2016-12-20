@@ -17,7 +17,7 @@ public class UdacityClient {
     public var token = ""
     
     // endpoint for session method
-    private let URL_SESSION = "http://localhost:8080/_ah/api/myApi/v1/session"
+    private let URL_SESSION = "https://udacians-df696.appspot.com/_ah/api/myApi/v1/session"
     // endpoint for direct udacity login
     private let URL_LOGIN = "https://www.udacity.com/api/session"
     // endpoint for getting public user data
