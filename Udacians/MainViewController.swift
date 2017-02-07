@@ -8,12 +8,6 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
-    
-    @IBOutlet weak var container: UIView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+class MainViewController: UITabBarController {
     
 }
