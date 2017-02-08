@@ -26,6 +26,7 @@
 		5A585C951DC245F1009647A0 /* MarkupKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5A585C921DC245D9009647A0 /* MarkupKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5A585C981DC24766009647A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5A585C971DC24766009647A0 /* GoogleService-Info.plist */; };
 		5A585C9A1DC24C07009647A0 /* LoginViewController.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5A585C991DC24C07009647A0 /* LoginViewController.xml */; };
+		5A76DF8A1E4A6B820032969E /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76DF891E4A6B820032969E /* PostTableViewCell.swift */; };
 		5A8555CA1DC51BFA00D8BF46 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8555C91DC51BFA00D8BF46 /* SwiftyJSON.swift */; };
 		5A8555CC1DC51CBA00D8BF46 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8555CB1DC51CBA00D8BF46 /* UdacityClient.swift */; };
 		5AE1EEDA1E09B22D00731775 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE1EED91E09B22D00731775 /* MainViewController.swift */; };
@@ -90,6 +91,7 @@
 		5A585C921DC245D9009647A0 /* MarkupKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MarkupKit.framework; sourceTree = "<group>"; };
 		5A585C971DC24766009647A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5A585C991DC24C07009647A0 /* LoginViewController.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = LoginViewController.xml; sourceTree = "<group>"; };
+		5A76DF891E4A6B820032969E /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		5A8555C91DC51BFA00D8BF46 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		5A8555CB1DC51CBA00D8BF46 /* UdacityClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
 		5AE1EED91E09B22D00731775 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				5A48F3231DC8FB4500D49219 /* User.swift */,
 				5AE1EED91E09B22D00731775 /* MainViewController.swift */,
 				5A4FE8C11E4A444900896D79 /* FeedViewController.swift */,
+				5A76DF891E4A6B820032969E /* PostTableViewCell.swift */,
 				5A4FE8C31E4A445700896D79 /* SocialViewController.swift */,
 				5A4FE8C51E4A447700896D79 /* CommunityViewController.swift */,
 				5A4FE8C71E4A448900896D79 /* MeViewController.swift */,
@@ -505,6 +508,7 @@
 				5AE1EEDC1E09B52800731775 /* MapViewController.swift in Sources */,
 				5A48F3221DC8F4F100D49219 /* Profile.swift in Sources */,
 				5A585C651DC2449B009647A0 /* AppDelegate.swift in Sources */,
+				5A76DF8A1E4A6B820032969E /* PostTableViewCell.swift in Sources */,
 				5A4FE8C61E4A447700896D79 /* CommunityViewController.swift in Sources */,
 				5A48F3261DC8FB5900D49219 /* Account.swift in Sources */,
 				5AE1EEDA1E09B22D00731775 /* MainViewController.swift in Sources */,
