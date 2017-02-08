@@ -99,6 +99,7 @@
 		5AE1EEDB1E09B52800731775 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		5AE1EEDD1E09B72800731775 /* Udacians.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = Udacians.xcworkspace; sourceTree = "<group>"; };
 		5AFD42A21E4BCF2000D15EAF /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		5AFD42A41E4BD9CC00D15EAF /* Udacians-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Udacians-Bridging-Header.h"; sourceTree = "<group>"; };
 		65C96328D892443BC50FA6AC /* Pods-UdaciansTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UdaciansTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UdaciansTests/Pods-UdaciansTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7F11DB150579277D50885F4E /* Pods_UdaciansUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UdaciansUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		855C340DD5C2F0EFD58C9577 /* Pods_Udacians.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Udacians.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -196,6 +197,7 @@
 				5A4FE8C51E4A447700896D79 /* CommunityViewController.swift */,
 				5A4FE8C71E4A448900896D79 /* MeViewController.swift */,
 				5AE1EEDB1E09B52800731775 /* MapViewController.swift */,
+				5AFD42A41E4BD9CC00D15EAF /* Udacians-Bridging-Header.h */,
 			);
 			path = Udacians;
 			sourceTree = "<group>";
@@ -309,6 +311,7 @@
 					5A585C601DC2449A009647A0 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = V5C4GVWJRU;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					5A585C741DC2449B009647A0 = {
@@ -667,6 +670,7 @@
 			baseConfigurationReference = E8261D9B965FCE2433F52D60 /* Pods-Udacians.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = V5C4GVWJRU;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -676,6 +680,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.owenlarosa.Udacians;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Udacians/Udacians-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -685,6 +691,7 @@
 			baseConfigurationReference = 879F70E92E6DF9E41D385372 /* Pods-Udacians.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = V5C4GVWJRU;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -694,6 +701,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.owenlarosa.Udacians;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Udacians/Udacians-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

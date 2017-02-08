@@ -19,15 +19,25 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SDWebImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>21203079BD3C68A7DB4C407FA016C584</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2DA0D7E7079E25384DAC2A631C99EC47</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>34081BA31A916152248B9193740C23D9</key>
+		<key>5C38FF7C9F0F6740046BAF02CBFDCCAF</key>
 		<dict>
 			<key>primary</key>
 			<true/>

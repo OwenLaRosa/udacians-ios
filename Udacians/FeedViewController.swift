@@ -44,6 +44,12 @@ class FeedViewController: UIViewController, UITableViewDataSource {
         // getting the index like this ensures they're shown in reverse order
         let post = posts[posts.count - indexPath.row - 1]
         let nameRef = ref.child("users").child(post.sender).child("basic").child("name")
+        let profilePhotoRef = ref.child("users").child(post.sender).child("basic").child("photo")
+        profilePhotoRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            if let profilePhotoUrl = URL(string: snapshot.value as? String ?? "") {
+                cell.profileImageView.sd_setImage(with: profilePhotoUrl)
+            }
+        })
         nameRef.observeSingleEvent(of: .value, with: { (snapshot) in
             cell.nameLabel.text = snapshot.value as? String ?? ""
         })
