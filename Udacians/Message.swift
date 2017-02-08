@@ -21,7 +21,7 @@ class Message {
         self.id = id
         self.sender = data["sender"] as? String ?? ""
         self.content = data["content"] as? String ?? ""
-        self.imageUrl = data["imageUrl"] as? String ?? ""
+        self.imageUrl = data["imageUrl"] as? String
         self.date = data["date"] as? NSDate
     }
     

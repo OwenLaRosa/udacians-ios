@@ -48,6 +48,11 @@ class FeedViewController: UIViewController, UITableViewDataSource {
             cell.nameLabel.text = snapshot.value as? String ?? ""
         })
         cell.contentLabel.text = post.content
+        if post.imageUrl == nil {
+            cell.contentImageView.isHidden = true
+        } else {
+            cell.contentImageView.isHidden = false
+        }
         
         return cell
     }
