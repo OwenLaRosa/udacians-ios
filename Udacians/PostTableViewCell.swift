@@ -17,4 +17,21 @@ class PostTableViewCell: LMTableViewCell {
     @IBOutlet var contentLabel: UILabel!
     @IBOutlet var contentImageView: UIImageView!
     
+    // download tasks assigned to the cell for profile and content images
+    var profileImageTask: URLSessionDataTask? {
+        didSet {
+            if let taskToCancel = oldValue {
+                taskToCancel.cancel()
+            }
+        }
+    }
+    
+    var contentImageTask: URLSessionDataTask? {
+        didSet {
+            if let taskToCancel = oldValue {
+                taskToCancel.cancel()
+            }
+        }
+    }
+    
 }

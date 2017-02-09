@@ -33,6 +33,11 @@ class FeedViewController: UIViewController, UITableViewDataSource {
         })
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        feedTableView.reloadData()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
     }
@@ -46,8 +51,17 @@ class FeedViewController: UIViewController, UITableViewDataSource {
         let nameRef = ref.child("users").child(post.sender).child("basic").child("name")
         let profilePhotoRef = ref.child("users").child(post.sender).child("basic").child("photo")
         profilePhotoRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            if let profilePhotoUrl = URL(string: snapshot.value as? String ?? "") {
-                cell.profileImageView.sd_setImage(with: profilePhotoUrl)
+            if let _ = URL(string: snapshot.value as? String ?? "") {
+                if let storedImage = WebImageCache.shared.image(with: post.sender) {
+                    cell.profileImageView.image = storedImage
+                } else {
+                    cell.profileImageTask = WebImageCache.shared.downloadImage(at: snapshot.value as! String) {imageData in
+                        DispatchQueue.main.async {
+                            WebImageCache.shared.storeImage(image: imageData, withIdentifier: post.sender)
+                            cell.profileImageView.image = imageData
+                        }
+                    }
+                }
             }
         })
         nameRef.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -57,7 +71,18 @@ class FeedViewController: UIViewController, UITableViewDataSource {
         if post.imageUrl == nil {
             cell.contentImageView.isHidden = true
         } else {
-            cell.contentImageView.isHidden = false
+            if let storedImage = WebImageCache.shared.image(with: post.id) {
+                cell.profileImageView.image = storedImage
+                cell.contentImageView.isHidden = false
+            } else {
+                cell.contentImageTask = WebImageCache.shared.downloadImage(at: post.imageUrl) {imageData in
+                    DispatchQueue.main.async {
+                        WebImageCache.shared.storeImage(image: imageData, withIdentifier: post.id)
+                        cell.contentImageView.image = imageData
+                        cell.contentImageView.isHidden = false
+                    }
+                }
+            }
         }
         
         return cell

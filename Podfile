@@ -11,8 +11,6 @@ target 'Udacians' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'GoogleMaps'
-  platform :ios, '7.0'
-  pod 'SDWebImage', '~>3.8'
 
   target 'UdaciansTests' do
     inherit! :search_paths

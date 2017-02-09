@@ -11,6 +11,7 @@
 		5A48F3221DC8F4F100D49219 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A48F3211DC8F4F100D49219 /* Profile.swift */; };
 		5A48F3241DC8FB4500D49219 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A48F3231DC8FB4500D49219 /* User.swift */; };
 		5A48F3261DC8FB5900D49219 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A48F3251DC8FB5900D49219 /* Account.swift */; };
+		5A4F82F31E4CCC520047869A /* WebImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4F82F21E4CCC520047869A /* WebImageCache.swift */; };
 		5A4FE8C21E4A444900896D79 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4FE8C11E4A444900896D79 /* FeedViewController.swift */; };
 		5A4FE8C41E4A445700896D79 /* SocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4FE8C31E4A445700896D79 /* SocialViewController.swift */; };
 		5A4FE8C61E4A447700896D79 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4FE8C51E4A447700896D79 /* CommunityViewController.swift */; };
@@ -72,6 +73,7 @@
 		5A48F3211DC8F4F100D49219 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		5A48F3231DC8FB4500D49219 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5A48F3251DC8FB5900D49219 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		5A4F82F21E4CCC520047869A /* WebImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebImageCache.swift; sourceTree = "<group>"; };
 		5A4FE8C11E4A444900896D79 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		5A4FE8C31E4A445700896D79 /* SocialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
 		5A4FE8C51E4A447700896D79 /* CommunityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
@@ -99,7 +101,6 @@
 		5AE1EEDB1E09B52800731775 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		5AE1EEDD1E09B72800731775 /* Udacians.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = Udacians.xcworkspace; sourceTree = "<group>"; };
 		5AFD42A21E4BCF2000D15EAF /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		5AFD42A41E4BD9CC00D15EAF /* Udacians-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Udacians-Bridging-Header.h"; sourceTree = "<group>"; };
 		65C96328D892443BC50FA6AC /* Pods-UdaciansTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UdaciansTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UdaciansTests/Pods-UdaciansTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7F11DB150579277D50885F4E /* Pods_UdaciansUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UdaciansUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		855C340DD5C2F0EFD58C9577 /* Pods_Udacians.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Udacians.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				5A8555C91DC51BFA00D8BF46 /* SwiftyJSON.swift */,
+				5A4F82F21E4CCC520047869A /* WebImageCache.swift */,
 				5AFD42A21E4BCF2000D15EAF /* Message.swift */,
 				5A585C641DC2449B009647A0 /* AppDelegate.swift */,
 				5A585C661DC2449B009647A0 /* LoginViewController.swift */,
@@ -197,7 +199,6 @@
 				5A4FE8C51E4A447700896D79 /* CommunityViewController.swift */,
 				5A4FE8C71E4A448900896D79 /* MeViewController.swift */,
 				5AE1EEDB1E09B52800731775 /* MapViewController.swift */,
-				5AFD42A41E4BD9CC00D15EAF /* Udacians-Bridging-Header.h */,
 			);
 			path = Udacians;
 			sourceTree = "<group>";
@@ -507,6 +508,7 @@
 			files = (
 				5A4FE8C81E4A448900896D79 /* MeViewController.swift in Sources */,
 				5A8555CC1DC51CBA00D8BF46 /* UdacityClient.swift in Sources */,
+				5A4F82F31E4CCC520047869A /* WebImageCache.swift in Sources */,
 				5A8555CA1DC51BFA00D8BF46 /* SwiftyJSON.swift in Sources */,
 				5A4FE8C21E4A444900896D79 /* FeedViewController.swift in Sources */,
 				5A48F3241DC8FB4500D49219 /* User.swift in Sources */,
