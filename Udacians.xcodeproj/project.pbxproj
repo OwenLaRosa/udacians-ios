@@ -12,6 +12,7 @@
 		5A48F3241DC8FB4500D49219 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A48F3231DC8FB4500D49219 /* User.swift */; };
 		5A48F3261DC8FB5900D49219 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A48F3251DC8FB5900D49219 /* Account.swift */; };
 		5A4F82F31E4CCC520047869A /* WebImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4F82F21E4CCC520047869A /* WebImageCache.swift */; };
+		5A4F82F51E4D14520047869A /* PostWithImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4F82F41E4D14520047869A /* PostWithImageTableViewCell.swift */; };
 		5A4FE8C21E4A444900896D79 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4FE8C11E4A444900896D79 /* FeedViewController.swift */; };
 		5A4FE8C41E4A445700896D79 /* SocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4FE8C31E4A445700896D79 /* SocialViewController.swift */; };
 		5A4FE8C61E4A447700896D79 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4FE8C51E4A447700896D79 /* CommunityViewController.swift */; };
@@ -74,6 +75,7 @@
 		5A48F3231DC8FB4500D49219 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5A48F3251DC8FB5900D49219 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		5A4F82F21E4CCC520047869A /* WebImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebImageCache.swift; sourceTree = "<group>"; };
+		5A4F82F41E4D14520047869A /* PostWithImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostWithImageTableViewCell.swift; sourceTree = "<group>"; };
 		5A4FE8C11E4A444900896D79 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		5A4FE8C31E4A445700896D79 /* SocialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
 		5A4FE8C51E4A447700896D79 /* CommunityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				5AE1EED91E09B22D00731775 /* MainViewController.swift */,
 				5A4FE8C11E4A444900896D79 /* FeedViewController.swift */,
 				5A76DF891E4A6B820032969E /* PostTableViewCell.swift */,
+				5A4F82F41E4D14520047869A /* PostWithImageTableViewCell.swift */,
 				5A4FE8C31E4A445700896D79 /* SocialViewController.swift */,
 				5A4FE8C51E4A447700896D79 /* CommunityViewController.swift */,
 				5A4FE8C71E4A448900896D79 /* MeViewController.swift */,
@@ -516,6 +519,7 @@
 				5AE1EEDC1E09B52800731775 /* MapViewController.swift in Sources */,
 				5A48F3221DC8F4F100D49219 /* Profile.swift in Sources */,
 				5A585C651DC2449B009647A0 /* AppDelegate.swift in Sources */,
+				5A4F82F51E4D14520047869A /* PostWithImageTableViewCell.swift in Sources */,
 				5A76DF8A1E4A6B820032969E /* PostTableViewCell.swift in Sources */,
 				5A4FE8C61E4A447700896D79 /* CommunityViewController.swift in Sources */,
 				5A48F3261DC8FB5900D49219 /* Account.swift in Sources */,

@@ -29,13 +29,9 @@ class FeedViewController: UIViewController, UITableViewDataSource {
             let id = snapshot.key
             let post = Message(id: id, data: snapshot.value as! [String: Any])
             self.posts.append(post)
+            self.posts.append(post)
             self.feedTableView.reloadData()
         })
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        feedTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,11 +39,18 @@ class FeedViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell") as! PostTableViewCell
+        var cell: PostTableViewCell!
         
         // appending to the end of the array is more efficient, but this means more recent posts are at the end
         // getting the index like this ensures they're shown in reverse order
         let post = posts[posts.count - indexPath.row - 1]
+        
+        if post.imageUrl == nil {
+            cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell") as! PostTableViewCell
+        } else {
+            cell = tableView.dequeueReusableCell(withIdentifier: "PostWithImageTableViewCell") as! PostWithImageTableViewCell
+        }
+        
         let nameRef = ref.child("users").child(post.sender).child("basic").child("name")
         let profilePhotoRef = ref.child("users").child(post.sender).child("basic").child("photo")
         profilePhotoRef.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -62,30 +65,42 @@ class FeedViewController: UIViewController, UITableViewDataSource {
                         }
                     }
                 }
+            } else {
+                cell.profileImageView.image = nil
             }
         })
         nameRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            cell.nameLabel.text = snapshot.value as? String ?? ""
+            if self.indexPathIsVisible(tableView: self.feedTableView, indexPath: indexPath) {
+                cell.nameLabel.text = snapshot.value as? String ?? ""
+            }
         })
         cell.contentLabel.text = post.content
-        if post.imageUrl == nil {
-            cell.contentImageView.isHidden = true
-        } else {
+        
+        if post.imageUrl != nil {
             if let storedImage = WebImageCache.shared.image(with: post.id) {
-                cell.profileImageView.image = storedImage
-                cell.contentImageView.isHidden = false
+                DispatchQueue.main.async {
+                    (cell as! PostWithImageTableViewCell).profileImageView.image = storedImage
+                }
             } else {
-                cell.contentImageTask = WebImageCache.shared.downloadImage(at: post.imageUrl) {imageData in
+                (cell as! PostWithImageTableViewCell).contentImageTask = WebImageCache.shared.downloadImage(at: post.imageUrl) {imageData in
                     DispatchQueue.main.async {
                         WebImageCache.shared.storeImage(image: imageData, withIdentifier: post.id)
-                        cell.contentImageView.image = imageData
-                        cell.contentImageView.isHidden = false
+                        (cell as! PostWithImageTableViewCell).contentImageView.image = imageData
                     }
                 }
             }
         }
         
         return cell
+    }
+    
+    private func indexPathIsVisible(tableView: UITableView, indexPath: IndexPath) -> Bool {
+        for i in tableView.indexPathsForVisibleRows! {
+            if i.row == indexPath.row {
+                return true
+            }
+        }
+        return false
     }
     
 }
