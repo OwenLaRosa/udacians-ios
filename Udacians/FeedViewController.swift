@@ -15,6 +15,8 @@ class FeedViewController: UIViewController, UITableViewDataSource {
     
     private var posts = [Message]()
     
+    private var userId = "3050228546"
+    
     var ref: FIRDatabaseReference!
     
     override func viewDidLoad() {
@@ -24,14 +26,31 @@ class FeedViewController: UIViewController, UITableViewDataSource {
         feedTableView.estimatedRowHeight = 140
         
         ref = FIRDatabase.database().reference()
-        let postsRef = ref.child("posts")
-        postsRef.queryOrderedByKey().observe(.childAdded, with: { (snapshot) in
-            let id = snapshot.key
-            let post = Message(id: id, data: snapshot.value as! [String: Any])
-            self.posts.append(post)
-            self.posts.append(post)
-            self.feedTableView.reloadData()
+        
+        let connectionsRef = ref.child("users").child(userId).child("connections")
+        connectionsRef.observe(.value, with: { (snapshot) in
+            // user IDs of users we're following
+            var connections = [String]()
+            for i in snapshot.children.allObjects as! [FIRDataSnapshot] {
+                connections.append(i.key as! String)
+            }
+            self.getConnectionPostLinks(connections: connections)
         })
+    }
+    
+    private func getConnectionPostLinks(connections: [String]) {
+        for i in connections {
+            let userPostLinksRef = ref.child("users").child(i).child("posts")
+            userPostLinksRef.observe(.childAdded, with: { (snapshot) in
+                let postRef = self.ref.child("posts").child(snapshot.key)
+                postRef.observe(.value, with: { (snapshot) in
+                    let post = Message(id: snapshot.key, data: snapshot.value as! [String: AnyObject])
+                    self.posts.append(post)
+                    self.posts.sort(by: {$0.0.id > $0.1.id})
+                    self.feedTableView.reloadData()
+                })
+            })
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
