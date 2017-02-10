@@ -13,6 +13,8 @@ class FeedViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet var feedTableView: UITableView!
     
+    private var viewAppeared = false
+    
     private var posts = [Message]()
     
     private var userId = "3050228546"
@@ -26,16 +28,24 @@ class FeedViewController: UIViewController, UITableViewDataSource {
         feedTableView.estimatedRowHeight = 140
         
         ref = FIRDatabase.database().reference()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        let connectionsRef = ref.child("users").child(userId).child("connections")
-        connectionsRef.observe(.value, with: { (snapshot) in
-            // user IDs of users we're following
-            var connections = [String]()
-            for i in snapshot.children.allObjects as! [FIRDataSnapshot] {
-                connections.append(i.key as! String)
-            }
-            self.getConnectionPostLinks(connections: connections)
-        })
+        // only add the listener once to prevent duplicate entries
+        if (!viewAppeared) {
+            viewAppeared = true
+            let connectionsRef = ref.child("users").child(userId).child("connections")
+            connectionsRef.observe(.value, with: { (snapshot) in
+                // user IDs of users we're following
+                var connections = [String]()
+                for i in snapshot.children.allObjects as! [FIRDataSnapshot] {
+                    connections.append(i.key)
+                }
+                self.getConnectionPostLinks(connections: connections)
+            })
+        }
     }
     
     private func getConnectionPostLinks(connections: [String]) {
