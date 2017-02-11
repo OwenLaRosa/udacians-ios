@@ -123,6 +123,7 @@ class ChatsTableViewDataSource: NSObject, UITableViewDataSource {
                 guard let result = snapshot.value as? [String: Any] else {
                     cell.nameLabel.text = chat
                     cell.descriptionLabel.text = "Course Discussion"
+                    cell.photoImageView.image = UIImage(named: "udacity_logo")
                     return
                 }
                 let name = result["name"] as? String
