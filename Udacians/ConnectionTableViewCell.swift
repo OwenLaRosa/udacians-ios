@@ -15,6 +15,8 @@ class ConnectionTableViewCell: UITableViewCell {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
     
+    var connection = ""
+    
     var photoImageTask: URLSessionDataTask? {
         didSet {
             if let taskToCancel = oldValue {

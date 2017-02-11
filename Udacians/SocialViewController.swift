@@ -18,8 +18,8 @@ class SocialViewController: UIViewController {
     let userId = "3050228546"
     
     var chatsTableViewDataSource: ChatsTableViewDataSource!
-    var connectionsTableViewDataSource: ConnectionsTableViewDataSource!
-    var followersTableViewDataSource: FollowersTableViewDataSource!
+    var followingTableViewDataSource: ConnectionsTableViewDataSource!
+    var followersTableViewDataSource: ConnectionsTableViewDataSource!
     var directMessagesTableViewDataSource: DirectMessagesTableViewDataSource!
     
     var ref: FIRDatabaseReference!
@@ -31,8 +31,8 @@ class SocialViewController: UIViewController {
         tableView.estimatedRowHeight = 140
         
         chatsTableViewDataSource = ChatsTableViewDataSource()
-        connectionsTableViewDataSource = ConnectionsTableViewDataSource()
-        followersTableViewDataSource = FollowersTableViewDataSource()
+        followingTableViewDataSource = ConnectionsTableViewDataSource()
+        followersTableViewDataSource = ConnectionsTableViewDataSource()
         directMessagesTableViewDataSource = DirectMessagesTableViewDataSource()
         
         ref = FIRDatabase.database().reference()
@@ -64,6 +64,24 @@ class SocialViewController: UIViewController {
                 }
             }
         })
+        let followingRef = userRef.child("connections")
+        followingRef.observe(.value, with: {(snapshot) in
+            for i in snapshot.children.allObjects as! [FIRDataSnapshot]  {
+                self.followingTableViewDataSource.connections.append(i.key)
+            }
+            if self.segmentedControl.selectedSegmentIndex == 1 {
+                self.tableView.reloadData()
+            }
+        })
+        let followersRef = userRef.child("followers")
+        followersRef.observe(.value, with: {(snapshot) in
+            for i in snapshot.children.allObjects as! [FIRDataSnapshot] {
+                self.followersTableViewDataSource.connections.append(i.key)
+            }
+            if self.segmentedControl.selectedSegmentIndex == 2 {
+                self.tableView.reloadData()
+            }
+        })
         
         tableView.dataSource = chatsTableViewDataSource
     }
@@ -74,7 +92,7 @@ class SocialViewController: UIViewController {
             tableView.dataSource = chatsTableViewDataSource
             break
         case 1: // connections
-            tableView.dataSource = connectionsTableViewDataSource
+            tableView.dataSource = followingTableViewDataSource
             break
         case 2: // followers
             tableView.dataSource = followersTableViewDataSource
@@ -187,36 +205,52 @@ class ConnectionsTableViewDataSource: NSObject, UITableViewDataSource {
     
     var ref: FIRDatabaseReference!
     
+    var connections = [String]()
+    
     override init() {
         ref = FIRDatabase.database().reference()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return connections.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ConnectionTableViewCell") as! ConnectionTableViewCell
         
-        return cell
-    }
-    
-}
-
-class FollowersTableViewDataSource: NSObject, UITableViewDataSource {
-    
-    var ref: FIRDatabaseReference!
-    
-    override init() {
-        ref = FIRDatabase.database().reference()
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ConnectionTableViewCell") as! ConnectionTableViewCell
+        let connection = connections[indexPath.row]
+        
+        cell.connection = connection
+        let userBasicRef = ref.child("users").child(connection).child("basic")
+        let nameRef = userBasicRef.child("name")
+        nameRef.observe(.value, with: {(snapshot) in
+            cell.nameLabel.text = snapshot.value as? String ?? ""
+        })
+        let titleRef = userBasicRef.child("title")
+        titleRef.observe(.value, with: {(snapshot) in
+            cell.titleLabel.text = snapshot.value as? String ?? ""
+        })
+        let photoRef = userBasicRef.child("photo")
+        photoRef.observe(.value, with: {(snapshot) in
+            if let imageUrl = snapshot.value as? String {
+                if let storedImage = WebImageCache.shared.image(with: connection) {
+                    cell.photoImageView.image = storedImage
+                } else {
+                    cell.photoImageTask = WebImageCache.shared.downloadImage(at: imageUrl) {imageData in
+                        DispatchQueue.main.async {
+                            WebImageCache.shared.storeImage(image: imageData, withIdentifier: connection)
+                            cell.photoImageView.image = imageData
+                        }
+                    }
+                }
+            } else {
+                cell.photoImageView.image = UIImage(named: "udacity_logo")
+            }
+        })
+        let locationRef = ref.child("locations").child(connection)
+        locationRef.observe(.value, with: {(snapshot) in
+            cell.locationLabel.text = snapshot.value as? String ?? ""
+        })
         
         return cell
     }
