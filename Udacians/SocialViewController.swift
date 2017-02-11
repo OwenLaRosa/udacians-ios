@@ -27,6 +27,9 @@ class SocialViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 140
+        
         ref = FIRDatabase.database().reference()
         
         let userRef = ref.child("users").child(userId)
