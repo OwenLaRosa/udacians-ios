@@ -143,6 +143,8 @@ class ChatsTableViewDataSource: NSObject, UITableViewDataSource {
                             }
                         }
                     }
+                } else {
+                    cell.photoImageView.image = UIImage(named: "udacity_logo")
                 }
             })
         } else {
@@ -170,6 +172,8 @@ class ChatsTableViewDataSource: NSObject, UITableViewDataSource {
                             }
                         }
                     }
+                } else {
+                    cell.photoImageView.image = UIImage(named: "udacity_logo")
                 }
             })
         }
