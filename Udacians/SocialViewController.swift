@@ -228,7 +228,7 @@ class ConnectionsTableViewDataSource: NSObject, UITableViewDataSource {
         })
         let titleRef = userBasicRef.child("title")
         titleRef.observe(.value, with: {(snapshot) in
-            cell.titleLabel.text = snapshot.value as? String ?? ""
+            cell.titleLabel.text = snapshot.value as? String ?? "I'm a Udacian!"
         })
         let photoRef = userBasicRef.child("photo")
         photoRef.observe(.value, with: {(snapshot) in
@@ -247,9 +247,9 @@ class ConnectionsTableViewDataSource: NSObject, UITableViewDataSource {
                 cell.photoImageView.image = UIImage(named: "udacity_logo")
             }
         })
-        let locationRef = ref.child("locations").child(connection)
+        let locationRef = ref.child("locations").child(connection).child("location")
         locationRef.observe(.value, with: {(snapshot) in
-            cell.locationLabel.text = snapshot.value as? String ?? ""
+            cell.locationLabel.text = snapshot.value as? String ?? "Unknown Location"
         })
         
         return cell
