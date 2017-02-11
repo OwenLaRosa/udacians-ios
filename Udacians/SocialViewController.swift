@@ -30,16 +30,28 @@ class SocialViewController: UIViewController {
         ref = FIRDatabase.database().reference()
         
         let userRef = ref.child("users").child(userId)
+        let enrollmentsRef = userRef.child("enrollments")
+        enrollmentsRef.observe(.childAdded, with: {(snapshot) in
+            self.chatsTableViewDataSource.enrollments.append(snapshot.key)
+            // only force a reload if this segment has been selected
+            if self.segmentedControl.selectedSegmentIndex == 0 {
+                self.tableView.reloadData()
+            }
+        })
         let topicsRef = userRef.child("topics")
         topicsRef.observe(.childAdded, with: {(snapshot) in
             self.chatsTableViewDataSource.topicIds.append(snapshot.key)
-            self.tableView.reloadData()
+            if self.segmentedControl.selectedSegmentIndex == 0 {
+                self.tableView.reloadData()
+            }
         })
         topicsRef.observe(.childRemoved, with: {(snapshot) in
             for i in 0..<self.chatsTableViewDataSource.topicIds.count {
                 if self.chatsTableViewDataSource.topicIds[i] == snapshot.key {
                     self.chatsTableViewDataSource.topicIds.remove(at: i)
-                    self.tableView.reloadData()
+                    if self.segmentedControl.selectedSegmentIndex == 0 {
+                        self.tableView.reloadData()
+                    }
                     break
                 }
             }
@@ -73,12 +85,14 @@ class SocialViewController: UIViewController {
 class ChatsTableViewDataSource: NSObject, UITableViewDataSource {
     
     var topicIds = [String]()
+    var enrollments = [String]()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return topicIds.count
+        return enrollments.count + topicIds.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatTableViewCell") as! ChatTableViewCell
         
         return cell
