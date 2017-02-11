@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // connect to firebase on startup
         FIRApp.configure()
+        FIRDatabase.database().persistenceEnabled = true
         
         // set up Google Maps
         GMSServices.provideAPIKey("AIzaSyDd4YX1xiy9u0uHcloSlmefAiv2svg1WFo")
