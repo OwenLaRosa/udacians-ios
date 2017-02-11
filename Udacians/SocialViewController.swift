@@ -185,24 +185,40 @@ class ChatsTableViewDataSource: NSObject, UITableViewDataSource {
 
 class ConnectionsTableViewDataSource: NSObject, UITableViewDataSource {
     
+    var ref: FIRDatabaseReference!
+    
+    override init() {
+        ref = FIRDatabase.database().reference()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ConnectionTableViewCell") as! ConnectionTableViewCell
+        
+        return cell
     }
     
 }
 
 class FollowersTableViewDataSource: NSObject, UITableViewDataSource {
     
+    var ref: FIRDatabaseReference!
+    
+    override init() {
+        ref = FIRDatabase.database().reference()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ConnectionTableViewCell") as! ConnectionTableViewCell
+        
+        return cell
     }
     
 }
