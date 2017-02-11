@@ -65,6 +65,7 @@ class SocialViewController: UIViewController {
         default:
             return
         }
+        tableView.reloadData()
     }
     
 }
