@@ -17,10 +17,10 @@ class SocialViewController: UIViewController {
     
     let userId = "3050228546"
     
-    let chatsTableViewDataSource = ChatsTableViewDataSource()
-    let connectionsTableViewDataSource = ConnectionsTableViewDataSource()
-    let followersTableViewDataSource = FollowersTableViewDataSource()
-    let directMessagesTableViewDataSource = DirectMessagesTableViewDataSource()
+    var chatsTableViewDataSource: ChatsTableViewDataSource!
+    var connectionsTableViewDataSource: ConnectionsTableViewDataSource!
+    var followersTableViewDataSource: FollowersTableViewDataSource!
+    var directMessagesTableViewDataSource: DirectMessagesTableViewDataSource!
     
     var ref: FIRDatabaseReference!
     
@@ -29,6 +29,11 @@ class SocialViewController: UIViewController {
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
+        
+        chatsTableViewDataSource = ChatsTableViewDataSource()
+        connectionsTableViewDataSource = ConnectionsTableViewDataSource()
+        followersTableViewDataSource = FollowersTableViewDataSource()
+        directMessagesTableViewDataSource = DirectMessagesTableViewDataSource()
         
         ref = FIRDatabase.database().reference()
         
@@ -87,16 +92,64 @@ class SocialViewController: UIViewController {
 
 class ChatsTableViewDataSource: NSObject, UITableViewDataSource {
     
+    var ref: FIRDatabaseReference!
+    
     var topicIds = [String]()
     var enrollments = [String]()
+    
+    override init() {
+        ref = FIRDatabase.database().reference()
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return enrollments.count + topicIds.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatTableViewCell") as! ChatTableViewCell
+        
+        // determine if this chat is for an enrollment or topic
+        var chat: String
+        if indexPath.row <= enrollments.count - 1 {
+            // enrollments come first, so use the normal index
+            
+            chat = enrollments[indexPath.row]
+            let isBeta = chat.hasSuffix("beta")
+            if isBeta {
+                chat = chat.replacingOccurrences(of: "beta", with: "")
+            }
+            let enrollmentReference = ref.child("nano_degrees").child(chat)
+            enrollmentReference.observe(.value, with: {(snapshot) in
+                guard let result = snapshot.value as? [String: Any] else {
+                    cell.nameLabel.text = chat
+                    cell.descriptionLabel.text = "Course Discussion"
+                    return
+                }
+                let name = result["name"] as? String
+                cell.nameLabel.text = name ?? snapshot.key
+                if name != nil {
+                    cell.descriptionLabel.text = "General discussion for students in the \(name!)" + (isBeta ? " Beta" : "")
+                } else {
+                    cell.descriptionLabel.text = "Course discussion"
+                }
+                if let imageUrl = result["image"] as? String {
+                    if let storedImage = WebImageCache.shared.image(with: chat) {
+                        cell.photoImageView.image = storedImage
+                    } else {
+                        cell.photoImageTask = WebImageCache.shared.downloadImage(at: imageUrl) {imageData in
+                            DispatchQueue.main.async {
+                                WebImageCache.shared.storeImage(image: imageData, withIdentifier: chat)
+                                cell.photoImageView.image = imageData
+                            }
+                        }
+                    }
+                }
+            })
+        } else {
+            // chats come after enrollments so we need to offset the index by number of enrollments
+            chat = topicIds[indexPath.row - enrollments.count]
+        }
+        
         
         return cell
     }
