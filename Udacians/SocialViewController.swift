@@ -14,9 +14,12 @@ class SocialViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    let userId = "3050228546"
+    
     let chatsTableViewDataSource = ChatsTableViewDataSource()
     let connectionsTableViewDataSource = ConnectionsTableViewDataSource()
     let followersTableViewDataSource = FollowersTableViewDataSource()
+    let directMessagesTableViewDataSource = DirectMessagesTableViewDataSource()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +37,9 @@ class SocialViewController: UIViewController {
             break
         case 2: // followers
             tableView.dataSource = followersTableViewDataSource
+            break
+        case 3: // direct messages
+            tableView.dataSource = directMessagesTableViewDataSource
             break
         default:
             return
@@ -67,6 +73,18 @@ class ConnectionsTableViewDataSource: NSObject, UITableViewDataSource {
 }
 
 class FollowersTableViewDataSource: NSObject, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
+}
+
+class DirectMessagesTableViewDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 0
