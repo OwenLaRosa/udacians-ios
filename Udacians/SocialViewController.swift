@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SocialViewController: UIViewController {
     
@@ -21,8 +22,28 @@ class SocialViewController: UIViewController {
     let followersTableViewDataSource = FollowersTableViewDataSource()
     let directMessagesTableViewDataSource = DirectMessagesTableViewDataSource()
     
+    var ref: FIRDatabaseReference!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ref = FIRDatabase.database().reference()
+        
+        let userRef = ref.child("users").child(userId)
+        let topicsRef = userRef.child("topics")
+        topicsRef.observe(.childAdded, with: {(snapshot) in
+            self.chatsTableViewDataSource.topicIds.append(snapshot.key)
+            self.tableView.reloadData()
+        })
+        topicsRef.observe(.childRemoved, with: {(snapshot) in
+            for i in 0..<self.chatsTableViewDataSource.topicIds.count {
+                if self.chatsTableViewDataSource.topicIds[i] == snapshot.key {
+                    self.chatsTableViewDataSource.topicIds.remove(at: i)
+                    self.tableView.reloadData()
+                    break
+                }
+            }
+        })
         
         tableView.dataSource = chatsTableViewDataSource
     }
@@ -50,12 +71,16 @@ class SocialViewController: UIViewController {
 
 class ChatsTableViewDataSource: NSObject, UITableViewDataSource {
     
+    var topicIds = [String]()
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return topicIds.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ChatTableViewCell") as! ChatTableViewCell
+        
+        return cell
     }
     
 }
