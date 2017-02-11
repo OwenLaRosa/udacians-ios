@@ -148,9 +148,31 @@ class ChatsTableViewDataSource: NSObject, UITableViewDataSource {
         } else {
             // chats come after enrollments so we need to offset the index by number of enrollments
             chat = topicIds[indexPath.row - enrollments.count]
+            let topicNameReference = ref.child("topics").child(chat).child("info").child("name")
+            topicNameReference.observe(.value, with: {(snapshot) in
+                cell.nameLabel.text = snapshot.value as? String ?? ""
+            })
+            let userBasicReference = ref.child("users").child(chat).child("basic")
+            let posterNameReference = userBasicReference.child("name")
+            posterNameReference.observe(.value, with: {(snapshot) in
+                cell.descriptionLabel.text = snapshot.value as? String ?? ""
+            })
+            let posterImageReference = userBasicReference.child("photo")
+            posterImageReference.observe(.value, with: {(snapshot) in
+                if let imageUrl = snapshot.value as? String {
+                    if let storedImage = WebImageCache.shared.image(with: chat) {
+                        cell.photoImageView.image = storedImage
+                    } else {
+                        cell.photoImageTask = WebImageCache.shared.downloadImage(at: imageUrl) {imageData in
+                            DispatchQueue.main.async {
+                                WebImageCache.shared.storeImage(image: imageData, withIdentifier: chat)
+                                cell.photoImageView.image = imageData
+                            }
+                        }
+                    }
+                }
+            })
         }
-        
-        
         return cell
     }
     
