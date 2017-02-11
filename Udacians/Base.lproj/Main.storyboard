@@ -94,13 +94,43 @@
                     <view key="view" contentMode="scaleToFill" id="1mg-fH-PVW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="LRv-dK-MuL">
+                                <rect key="frame" x="16" y="72" width="343" height="29"/>
+                                <segments>
+                                    <segment title="Chats"/>
+                                    <segment title="Connections"/>
+                                    <segment title="Followers"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentValueChanged:" destination="h33-qp-IaN" eventType="valueChanged" id="uoQ-Tq-OTK"/>
+                                </connections>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Xx0-Ln-l6P">
+                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Xx0-Ln-l6P" firstAttribute="leading" secondItem="1mg-fH-PVW" secondAttribute="leading" id="Bhm-8N-aDb"/>
+                            <constraint firstItem="Xx0-Ln-l6P" firstAttribute="bottom" secondItem="7UK-Rr-GPP" secondAttribute="top" id="ZSe-Hg-fea"/>
+                            <constraint firstItem="LRv-dK-MuL" firstAttribute="centerX" secondItem="Xx0-Ln-l6P" secondAttribute="centerX" id="cAq-Zl-WIO"/>
+                            <constraint firstItem="LRv-dK-MuL" firstAttribute="leading" secondItem="1mg-fH-PVW" secondAttribute="leadingMargin" id="haO-Ma-qgM"/>
+                            <constraint firstAttribute="trailing" secondItem="Xx0-Ln-l6P" secondAttribute="trailing" id="rOW-gm-q63"/>
+                            <constraint firstItem="LRv-dK-MuL" firstAttribute="top" secondItem="3pb-fW-amZ" secondAttribute="bottom" constant="8" symbolic="YES" id="u6V-fj-jQ7"/>
+                            <constraint firstItem="Xx0-Ln-l6P" firstAttribute="top" secondItem="LRv-dK-MuL" secondAttribute="bottom" constant="8" symbolic="YES" id="xyl-06-h5O"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Social" id="o5a-b7-0bL"/>
+                    <connections>
+                        <outlet property="segmentedControl" destination="LRv-dK-MuL" id="qLI-Jr-Cd6"/>
+                        <outlet property="tableView" destination="Xx0-Ln-l6P" id="Elg-pZ-AAM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SDv-PR-shh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="241" y="-922"/>
+            <point key="canvasLocation" x="240.80000000000001" y="-922.48875562218893"/>
         </scene>
         <!--Me-->
         <scene sceneID="HBd-Ir-xch">
@@ -200,7 +230,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pQt-Ae-GHY">
-                                                    <rect key="frame" x="8" y="8" width="359" height="50.5"/>
+                                                    <rect key="frame" x="8" y="8" width="359" height="51"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="udacity_logo" translatesAutoresizingMaskIntoConstraints="NO" id="F1u-5m-kl5">
                                                             <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
