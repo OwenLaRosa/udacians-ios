@@ -9,6 +9,13 @@
 import UIKit
 import Firebase
 
+public struct DirectDiscussion {
+    // id of the other user in the discussion
+    let user: String
+    // last time the other user sent a message
+    var timestamp: Int
+}
+
 class SocialViewController: UIViewController {
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -20,7 +27,7 @@ class SocialViewController: UIViewController {
     var chatsTableViewDataSource: ChatsTableViewDataSource!
     var followingTableViewDataSource: ConnectionsTableViewDataSource!
     var followersTableViewDataSource: ConnectionsTableViewDataSource!
-    var directMessagesTableViewDataSource: DirectMessagesTableViewDataSource!
+    var directMessagesTableViewDataSource: ConnectionsTableViewDataSource!
     
     var ref: FIRDatabaseReference!
     
@@ -33,7 +40,8 @@ class SocialViewController: UIViewController {
         chatsTableViewDataSource = ChatsTableViewDataSource()
         followingTableViewDataSource = ConnectionsTableViewDataSource()
         followersTableViewDataSource = ConnectionsTableViewDataSource()
-        directMessagesTableViewDataSource = DirectMessagesTableViewDataSource()
+        directMessagesTableViewDataSource = ConnectionsTableViewDataSource()
+        directMessagesTableViewDataSource.directMessages = true
         
         ref = FIRDatabase.database().reference()
         
@@ -81,6 +89,36 @@ class SocialViewController: UIViewController {
             if self.segmentedControl.selectedSegmentIndex == 2 {
                 self.tableView.reloadData()
             }
+        })
+        let directDiscussionsRef = userRef.child("direct_messages")
+        directDiscussionsRef.observe(.childAdded, with: {(snapshot) in
+            let userId = snapshot.key
+            let timestamp = snapshot.value as! Int
+            self.directMessagesTableViewDataSource.directDiscussions.append(DirectDiscussion(user: userId, timestamp: timestamp))
+            self.directMessagesTableViewDataSource.directDiscussions.sort(by: {$0.0.timestamp > $0.1.timestamp})
+            self.tableView.reloadData()
+        })
+        directDiscussionsRef.observe(.childRemoved, with: {(snapshot) in
+            let userId = snapshot.key
+            for i in 0..<self.directMessagesTableViewDataSource.directDiscussions.count {
+                if userId == self.directMessagesTableViewDataSource.directDiscussions[i].user {
+                    self.directMessagesTableViewDataSource.directDiscussions.remove(at: i)
+                    break
+                }
+            }
+            self.tableView.reloadData()
+        })
+        directDiscussionsRef.observe(.childChanged, with: {(snapshot) in
+            let userId = snapshot.key
+            let timestamp = snapshot.value as! Int
+            for i in 0..<self.directMessagesTableViewDataSource.directDiscussions.count {
+                if userId == self.directMessagesTableViewDataSource.directDiscussions[i].user {
+                    self.directMessagesTableViewDataSource.directDiscussions.remove(at: i)
+                    self.directMessagesTableViewDataSource.directDiscussions.insert(DirectDiscussion(user: userId, timestamp: timestamp), at: 0)
+                    break
+                }
+            }
+            self.tableView.reloadData()
         })
         
         tableView.dataSource = chatsTableViewDataSource
@@ -206,19 +244,31 @@ class ConnectionsTableViewDataSource: NSObject, UITableViewDataSource {
     var ref: FIRDatabaseReference!
     
     var connections = [String]()
+    var directDiscussions = [DirectDiscussion]()
+    
+    // whether or not this data source shows list of direct messages
+    var directMessages = false
     
     override init() {
         ref = FIRDatabase.database().reference()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if directMessages {
+            return directDiscussions.count
+        }
         return connections.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ConnectionTableViewCell") as! ConnectionTableViewCell
         
-        let connection = connections[indexPath.row]
+        var connection = ""
+        if directMessages {
+            connection = directDiscussions[indexPath.row].user
+        } else {
+            connection = connections[indexPath.row]
+        }
         
         cell.connection = connection
         let userBasicRef = ref.child("users").child(connection).child("basic")
@@ -253,18 +303,6 @@ class ConnectionsTableViewDataSource: NSObject, UITableViewDataSource {
         })
         
         return cell
-    }
-    
-}
-
-class DirectMessagesTableViewDataSource: NSObject, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
     }
     
 }
