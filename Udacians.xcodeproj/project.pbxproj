@@ -32,6 +32,7 @@
 		5A7CC8D11E4EC280001CEF72 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7CC8D01E4EC280001CEF72 /* ChatTableViewCell.swift */; };
 		5A8555CA1DC51BFA00D8BF46 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8555C91DC51BFA00D8BF46 /* SwiftyJSON.swift */; };
 		5A8555CC1DC51CBA00D8BF46 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8555CB1DC51CBA00D8BF46 /* UdacityClient.swift */; };
+		5A8F54C01E52AF52000F2B2C /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8F54BF1E52AF52000F2B2C /* MessageViewController.swift */; };
 		5AB6C3111E4FAF030033301F /* ConnectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB6C3101E4FAF030033301F /* ConnectionTableViewCell.swift */; };
 		5AE1EEDA1E09B22D00731775 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE1EED91E09B22D00731775 /* MainViewController.swift */; };
 		5AE1EEDC1E09B52800731775 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE1EEDB1E09B52800731775 /* MapViewController.swift */; };
@@ -102,6 +103,7 @@
 		5A7CC8D01E4EC280001CEF72 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		5A8555C91DC51BFA00D8BF46 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		5A8555CB1DC51CBA00D8BF46 /* UdacityClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
+		5A8F54BF1E52AF52000F2B2C /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		5AB6C3101E4FAF030033301F /* ConnectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionTableViewCell.swift; sourceTree = "<group>"; };
 		5AE1EED91E09B22D00731775 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5AE1EEDB1E09B52800731775 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				5A4FE8C11E4A444900896D79 /* FeedViewController.swift */,
 				5A76DF891E4A6B820032969E /* PostTableViewCell.swift */,
 				5A4F82F41E4D14520047869A /* PostWithImageTableViewCell.swift */,
+				5A8F54BF1E52AF52000F2B2C /* MessageViewController.swift */,
 				5A4FE8C31E4A445700896D79 /* SocialViewController.swift */,
 				5AB6C3101E4FAF030033301F /* ConnectionTableViewCell.swift */,
 				5A7CC8D01E4EC280001CEF72 /* ChatTableViewCell.swift */,
@@ -529,6 +532,7 @@
 				5A585C651DC2449B009647A0 /* AppDelegate.swift in Sources */,
 				5A4F82F51E4D14520047869A /* PostWithImageTableViewCell.swift in Sources */,
 				5A76DF8A1E4A6B820032969E /* PostTableViewCell.swift in Sources */,
+				5A8F54C01E52AF52000F2B2C /* MessageViewController.swift in Sources */,
 				5A4FE8C61E4A447700896D79 /* CommunityViewController.swift in Sources */,
 				5A48F3261DC8FB5900D49219 /* Account.swift in Sources */,
 				5AFD42A31E4BCF2000D15EAF /* Message.swift in Sources */,
