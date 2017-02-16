@@ -10,8 +10,16 @@ import UIKit
 
 class MessageViewController: UIViewController {
     
+    @IBOutlet weak var tableView: UITableView!
+    
+    var isDirect = false
+    var chatId = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 140
     }
     
 }
@@ -19,11 +27,15 @@ class MessageViewController: UIViewController {
 extension MessageViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell") as! PostTableViewCell
+        
+        cell.contentLabel.text = "lorem ipsum dolor sit amet"
+        
+        return cell
     }
     
 }

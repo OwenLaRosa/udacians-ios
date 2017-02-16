@@ -24,10 +24,10 @@ class SocialViewController: UIViewController {
     
     let userId = "3050228546"
     
-    var chatsTableViewDataSource: ChatsTableViewDataSource!
-    var followingTableViewDataSource: ConnectionsTableViewDataSource!
-    var followersTableViewDataSource: ConnectionsTableViewDataSource!
-    var directMessagesTableViewDataSource: ConnectionsTableViewDataSource!
+    var chatsTableViewProvider: ChatsTableViewProvider!
+    var followingTableViewProvider: ConnectionsTableViewProvider!
+    var followersTableViewProvider: ConnectionsTableViewProvider!
+    var directMessagesTableViewProvider: ConnectionsTableViewProvider!
     
     var ref: FIRDatabaseReference!
     
@@ -37,18 +37,18 @@ class SocialViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
         
-        chatsTableViewDataSource = ChatsTableViewDataSource()
-        followingTableViewDataSource = ConnectionsTableViewDataSource()
-        followersTableViewDataSource = ConnectionsTableViewDataSource()
-        directMessagesTableViewDataSource = ConnectionsTableViewDataSource()
-        directMessagesTableViewDataSource.directMessages = true
+        chatsTableViewProvider = ChatsTableViewProvider(owner: self)
+        followingTableViewProvider = ConnectionsTableViewProvider(owner: self)
+        followersTableViewProvider = ConnectionsTableViewProvider(owner: self)
+        directMessagesTableViewProvider = ConnectionsTableViewProvider(owner: self)
+        directMessagesTableViewProvider.directMessages = true
         
         ref = FIRDatabase.database().reference()
         
         let userRef = ref.child("users").child(userId)
         let enrollmentsRef = userRef.child("enrollments")
         enrollmentsRef.observe(.childAdded, with: {(snapshot) in
-            self.chatsTableViewDataSource.enrollments.append(snapshot.key)
+            self.chatsTableViewProvider.enrollments.append(snapshot.key)
             // only force a reload if this segment has been selected
             if self.segmentedControl.selectedSegmentIndex == 0 {
                 self.tableView.reloadData()
@@ -56,15 +56,15 @@ class SocialViewController: UIViewController {
         })
         let topicsRef = userRef.child("topics")
         topicsRef.observe(.childAdded, with: {(snapshot) in
-            self.chatsTableViewDataSource.topicIds.append(snapshot.key)
+            self.chatsTableViewProvider.topicIds.append(snapshot.key)
             if self.segmentedControl.selectedSegmentIndex == 0 {
                 self.tableView.reloadData()
             }
         })
         topicsRef.observe(.childRemoved, with: {(snapshot) in
-            for i in 0..<self.chatsTableViewDataSource.topicIds.count {
-                if self.chatsTableViewDataSource.topicIds[i] == snapshot.key {
-                    self.chatsTableViewDataSource.topicIds.remove(at: i)
+            for i in 0..<self.chatsTableViewProvider.topicIds.count {
+                if self.chatsTableViewProvider.topicIds[i] == snapshot.key {
+                    self.chatsTableViewProvider.topicIds.remove(at: i)
                     if self.segmentedControl.selectedSegmentIndex == 0 {
                         self.tableView.reloadData()
                     }
@@ -75,7 +75,7 @@ class SocialViewController: UIViewController {
         let followingRef = userRef.child("connections")
         followingRef.observe(.value, with: {(snapshot) in
             for i in snapshot.children.allObjects as! [FIRDataSnapshot]  {
-                self.followingTableViewDataSource.connections.append(i.key)
+                self.followingTableViewProvider.connections.append(i.key)
             }
             if self.segmentedControl.selectedSegmentIndex == 1 {
                 self.tableView.reloadData()
@@ -84,7 +84,7 @@ class SocialViewController: UIViewController {
         let followersRef = userRef.child("followers")
         followersRef.observe(.value, with: {(snapshot) in
             for i in snapshot.children.allObjects as! [FIRDataSnapshot] {
-                self.followersTableViewDataSource.connections.append(i.key)
+                self.followersTableViewProvider.connections.append(i.key)
             }
             if self.segmentedControl.selectedSegmentIndex == 2 {
                 self.tableView.reloadData()
@@ -94,15 +94,15 @@ class SocialViewController: UIViewController {
         directDiscussionsRef.observe(.childAdded, with: {(snapshot) in
             let userId = snapshot.key
             let timestamp = snapshot.value as! Int
-            self.directMessagesTableViewDataSource.directDiscussions.append(DirectDiscussion(user: userId, timestamp: timestamp))
-            self.directMessagesTableViewDataSource.directDiscussions.sort(by: {$0.0.timestamp > $0.1.timestamp})
+            self.directMessagesTableViewProvider.directDiscussions.append(DirectDiscussion(user: userId, timestamp: timestamp))
+            self.directMessagesTableViewProvider.directDiscussions.sort(by: {$0.0.timestamp > $0.1.timestamp})
             self.tableView.reloadData()
         })
         directDiscussionsRef.observe(.childRemoved, with: {(snapshot) in
             let userId = snapshot.key
-            for i in 0..<self.directMessagesTableViewDataSource.directDiscussions.count {
-                if userId == self.directMessagesTableViewDataSource.directDiscussions[i].user {
-                    self.directMessagesTableViewDataSource.directDiscussions.remove(at: i)
+            for i in 0..<self.directMessagesTableViewProvider.directDiscussions.count {
+                if userId == self.directMessagesTableViewProvider.directDiscussions[i].user {
+                    self.directMessagesTableViewProvider.directDiscussions.remove(at: i)
                     break
                 }
             }
@@ -111,32 +111,37 @@ class SocialViewController: UIViewController {
         directDiscussionsRef.observe(.childChanged, with: {(snapshot) in
             let userId = snapshot.key
             let timestamp = snapshot.value as! Int
-            for i in 0..<self.directMessagesTableViewDataSource.directDiscussions.count {
-                if userId == self.directMessagesTableViewDataSource.directDiscussions[i].user {
-                    self.directMessagesTableViewDataSource.directDiscussions.remove(at: i)
-                    self.directMessagesTableViewDataSource.directDiscussions.insert(DirectDiscussion(user: userId, timestamp: timestamp), at: 0)
+            for i in 0..<self.directMessagesTableViewProvider.directDiscussions.count {
+                if userId == self.directMessagesTableViewProvider.directDiscussions[i].user {
+                    self.directMessagesTableViewProvider.directDiscussions.remove(at: i)
+                    self.directMessagesTableViewProvider.directDiscussions.insert(DirectDiscussion(user: userId, timestamp: timestamp), at: 0)
                     break
                 }
             }
             self.tableView.reloadData()
         })
         
-        tableView.dataSource = chatsTableViewDataSource
+        tableView.dataSource = chatsTableViewProvider
+        tableView.delegate = chatsTableViewProvider
     }
     
     @IBAction func segmentValueChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0: // chats
-            tableView.dataSource = chatsTableViewDataSource
+            tableView.dataSource = chatsTableViewProvider
+            tableView.delegate = chatsTableViewProvider
             break
         case 1: // connections
-            tableView.dataSource = followingTableViewDataSource
+            tableView.dataSource = followingTableViewProvider
+            tableView.delegate = followingTableViewProvider
             break
         case 2: // followers
-            tableView.dataSource = followersTableViewDataSource
+            tableView.dataSource = followersTableViewProvider
+            tableView.delegate = followersTableViewProvider
             break
         case 3: // direct messages
-            tableView.dataSource = directMessagesTableViewDataSource
+            tableView.dataSource = directMessagesTableViewProvider
+            tableView.delegate = directMessagesTableViewProvider
             break
         default:
             return
@@ -146,14 +151,16 @@ class SocialViewController: UIViewController {
     
 }
 
-class ChatsTableViewDataSource: NSObject, UITableViewDataSource {
+class ChatsTableViewProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     
+    var owner: UIViewController
     var ref: FIRDatabaseReference!
     
     var topicIds = [String]()
     var enrollments = [String]()
     
-    override init() {
+    init(owner: UIViewController) {
+        self.owner = owner
         ref = FIRDatabase.database().reference()
     }
     
@@ -237,10 +244,22 @@ class ChatsTableViewDataSource: NSObject, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath:
+        IndexPath) {
+        let chatVC = owner.storyboard?.instantiateViewController(withIdentifier: "MessageViewController") as! MessageViewController
+        if indexPath.row <= enrollments.count - 1 {
+            chatVC.chatId = enrollments[indexPath.row]
+        } else {
+            chatVC.chatId = topicIds[indexPath.row - enrollments.count]
+        }
+        owner.show(chatVC, sender: nil)
+    }
+    
 }
 
-class ConnectionsTableViewDataSource: NSObject, UITableViewDataSource {
+class ConnectionsTableViewProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     
+    var owner: UIViewController!
     var ref: FIRDatabaseReference!
     
     var connections = [String]()
@@ -249,7 +268,8 @@ class ConnectionsTableViewDataSource: NSObject, UITableViewDataSource {
     // whether or not this data source shows list of direct messages
     var directMessages = false
     
-    override init() {
+    init(owner: UIViewController) {
+        self.owner = owner
         ref = FIRDatabase.database().reference()
     }
     
@@ -266,8 +286,15 @@ class ConnectionsTableViewDataSource: NSObject, UITableViewDataSource {
         var connection = ""
         if directMessages {
             connection = directDiscussions[indexPath.row].user
+            cell.messageButton.isHidden = true
         } else {
+            cell.messageButton.isHidden = false
             connection = connections[indexPath.row]
+            cell.calloutAction = {
+                let chatVC = self.owner.storyboard?.instantiateViewController(withIdentifier: "MessageViewController") as! MessageViewController
+                chatVC.chatId = connection
+                self.owner.show(chatVC, sender: nil)
+            }
         }
         
         cell.connection = connection
@@ -303,6 +330,16 @@ class ConnectionsTableViewDataSource: NSObject, UITableViewDataSource {
         })
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if directMessages {
+            let connection = directDiscussions[indexPath.row].user
+            let chatVC = self.owner.storyboard?.instantiateViewController(withIdentifier: "MessageViewController") as! MessageViewController
+            chatVC.chatId = connection
+            chatVC.isDirect = true
+            self.owner.show(chatVC, sender: nil)
+        }
     }
     
 }

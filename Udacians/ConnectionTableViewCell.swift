@@ -14,6 +14,9 @@ class ConnectionTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var messageButton: UIButton!
+    // code to be run when the message button is tapped
+    var calloutAction = {}
     
     var connection = ""
     
@@ -26,6 +29,7 @@ class ConnectionTableViewCell: UITableViewCell {
     }
     
     @IBAction func messgaeButtonTapped(_ sender: UIButton) {
+        calloutAction()
     }
     
     
