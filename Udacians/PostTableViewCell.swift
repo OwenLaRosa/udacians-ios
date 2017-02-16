@@ -9,9 +9,9 @@
 import UIKit
 import MarkupKit
 
-class PostTableViewCell: LMTableViewCell {
+class PostTableViewCell: UITableViewCell {
     
-    @IBOutlet var profileImageView: UIImageView!
+    @IBOutlet var profileImageButton: UIButton!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var contentLabel: UILabel!

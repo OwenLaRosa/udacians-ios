@@ -137,7 +137,7 @@ extension MessageViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell") as! PostTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as! PostTableViewCell
         
         cell.contentLabel.text = "lorem ipsum dolor sit amet"
         

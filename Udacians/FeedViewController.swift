@@ -85,17 +85,17 @@ class FeedViewController: UIViewController, UITableViewDataSource {
         profilePhotoRef.observeSingleEvent(of: .value, with: { (snapshot) in
             if let _ = URL(string: snapshot.value as? String ?? "") {
                 if let storedImage = WebImageCache.shared.image(with: post.sender) {
-                    cell.profileImageView.image = storedImage
+                    cell.profileImageButton.image = storedImage
                 } else {
                     cell.profileImageTask = WebImageCache.shared.downloadImage(at: snapshot.value as! String) {imageData in
                         DispatchQueue.main.async {
                             WebImageCache.shared.storeImage(image: imageData, withIdentifier: post.sender)
-                            cell.profileImageView.image = imageData
+                            cell.profileImageButton.image = imageData
                         }
                     }
                 }
             } else {
-                cell.profileImageView.image = nil
+                cell.profileImageButton.image = nil
             }
         })
         nameRef.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -108,7 +108,7 @@ class FeedViewController: UIViewController, UITableViewDataSource {
         if post.imageUrl != nil {
             if let storedImage = WebImageCache.shared.image(with: post.id) {
                 DispatchQueue.main.async {
-                    (cell as! PostWithImageTableViewCell).profileImageView.image = storedImage
+                    (cell as! PostWithImageTableViewCell).profileImageButton.image = storedImage
                 }
             } else {
                 (cell as! PostWithImageTableViewCell).contentImageTask = WebImageCache.shared.downloadImage(at: post.imageUrl) {imageData in
