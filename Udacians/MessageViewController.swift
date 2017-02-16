@@ -62,11 +62,59 @@ class MessageViewController: UIViewController {
                 }
             })
         }
+        
+        let tableViewTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tableViewTap.cancelsTouchesInView = false
+        tableView.addGestureRecognizer(tableViewTap)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        subscribeToKeyboardNotifications()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        unsubscribeToKeyboardNotifications()
+    }    
     
     @IBAction func sendButtonTapped(_ sender: UIButton) {
     }
     
+    // keyboard handling
+    
+    private func subscribeToKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_ :)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    private func unsubscribeToKeyboardNotifications() {
+        NotificationCenter.default.removeObserver( self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver( self, name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        view.frame.origin.y = -getKeyboardOffset(notification: notification)
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        view.frame.origin.y = 0
+    }
+    
+    @objc private func dismissKeyboard() {
+        textEntry.resignFirstResponder()
+    }
+    
+    /// Determine how far to move the view based on hgiehgt of keyboard and tab bar
+    private func getKeyboardOffset(notification: Notification) -> CGFloat {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        return keyboardSize.cgRectValue.height - (tabBarController?.tabBar.frame.height)!
+    }
+    
+    // MARK: - Helpers for messages
+    
+    /// Get the location of messages for a private chat
     private func getDirectChatReference(user1: String, user2: String) -> FIRDatabaseReference {
         let chatReference: FIRDatabaseReference
         let directMessagesReference = ref.child("direct_messages")
