@@ -68,6 +68,10 @@ class MessageViewController: UIViewController {
             if let messageData = snapshot.value as? [String: Any] {
                 self.messages.append(Message(id: snapshot.key, data: messageData))
                 self.tableView.reloadData()
+                // should automatically move to new messages
+                // referenced: http://stackoverflow.com/questions/38044691/scroll-table-view-to-bottom-when-using-dynamic-cell-height/38047639
+                let lastItem = IndexPath(item: self.messages.count - 1, section: 0)
+                self.tableView.scrollToRow(at: lastItem, at: .bottom, animated: false)
             }
         })
         
