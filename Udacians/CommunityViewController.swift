@@ -34,6 +34,8 @@ class CommunityViewController: UIViewController {
             }
         })
         
+        tableView.dataSource = articlesProvider
+        tableView.delegate = articlesProvider
         tableView.reloadData()
     }
     
