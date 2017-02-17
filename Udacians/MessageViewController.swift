@@ -26,6 +26,8 @@ class MessageViewController: UIViewController {
     var senderDirectMessageReference: FIRDatabaseReference!
     var recipientDirectMessageReference: FIRDatabaseReference!
     
+    var messages = [Message]()
+    
     var isDirect = false
     var chatId = ""
     
@@ -62,6 +64,12 @@ class MessageViewController: UIViewController {
                 }
             })
         }
+        messagesReference.queryLimited(toLast: 20).observe(.childAdded, with: {(snapshot) in
+            if let messageData = snapshot.value as? [String: Any] {
+                self.messages.append(Message(id: snapshot.key, data: messageData))
+                self.tableView.reloadData()
+            }
+        })
         
         let tableViewTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tableViewTap.cancelsTouchesInView = false
@@ -133,13 +141,51 @@ class MessageViewController: UIViewController {
 extension MessageViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return messages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as! PostTableViewCell
+        let message = messages[indexPath.row]
         
-        cell.contentLabel.text = "lorem ipsum dolor sit amet"
+        var cell: PostTableViewCell
+        if message.imageUrl == nil {
+            cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell") as! PostTableViewCell
+        } else {
+            cell = tableView.dequeueReusableCell(withIdentifier: "MessageWithImageTableViewCell") as! PostWithImageTableViewCell
+        }
+        
+        let nameReference = ref.child("users").child(message.sender).child("basic").child("name")
+        nameReference.observeSingleEvent(of: .value, with: {(snapshot) in
+            cell.nameLabel.text = snapshot.value as? String ?? ""
+        })
+        let photoReference = ref.child("users").child(message.sender).child("basic").child("photo")
+        photoReference.observeSingleEvent(of: .value, with: {(snapshot) in
+            if let storedImage = WebImageCache.shared.image(with: message.sender) {
+                cell.profileImageButton.image = storedImage
+            } else {
+                if let url = snapshot.value as? String {
+                    cell.profileImageTask = WebImageCache.shared.downloadImage(at: snapshot.value as! String) {imageData in
+                        DispatchQueue.main.async {
+                            WebImageCache.shared.storeImage(image: imageData, withIdentifier: message.sender)
+                            cell.profileImageButton.image = imageData
+                        }
+                    }
+                }
+            }
+        })
+        cell.contentLabel.text = message.content
+        if message.imageUrl != nil {
+            if let storedImage = WebImageCache.shared.image(with: message.sender) {
+                cell.profileImageButton.image = storedImage
+            } else {
+                cell.profileImageTask = WebImageCache.shared.downloadImage(at: message.imageUrl) {imageData in
+                    DispatchQueue.main.async {
+                        WebImageCache.shared.storeImage(image: imageData, withIdentifier: message.sender)
+                        (cell as! PostWithImageTableViewCell).contentImageView.image = imageData
+                    }
+                }
+            }
+        }
         
         return cell
     }
