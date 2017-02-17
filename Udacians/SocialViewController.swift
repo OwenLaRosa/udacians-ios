@@ -292,6 +292,7 @@ class ConnectionsTableViewProvider: NSObject, UITableViewDataSource, UITableView
             connection = connections[indexPath.row]
             cell.calloutAction = {
                 let chatVC = self.owner.storyboard?.instantiateViewController(withIdentifier: "MessageViewController") as! MessageViewController
+                chatVC.isDirect = true
                 chatVC.chatId = connection
                 self.owner.show(chatVC, sender: nil)
             }
