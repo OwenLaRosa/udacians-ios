@@ -43,7 +43,7 @@ class MessageViewController: UIViewController {
             messagesReference = getDirectChatReference(user1: userId, user2: chatId)
             senderDirectMessageReference = ref.child("users").child(userId).child("direct_messages").child(chatId)
             recipientDirectMessageReference = ref.child("users").child(chatId).child("direct_messages").child(userId)
-            chatTitleReference = ref.child("users").child(userId).child("basic").child("name")
+            chatTitleReference = ref.child("users").child(chatId).child("basic").child("name")
         } else {
             messagesReference = ref.child("topics").child(chatId).child("messages")
             if chatId.hasPrefix("nd") && !chatId.hasSuffix("beta") {
@@ -56,14 +56,14 @@ class MessageViewController: UIViewController {
                 // user posted discussion topic
                 chatTitleReference = ref.child("topics").child(chatId).child("info").child("name")
             }
-            chatTitleReference.observeSingleEvent(of: .value, with: { (snapshot) in
-                if let title = snapshot.value as? String {
-                    self.title = title
-                } else {
-                    self.title = "Course Discussion"
-                }
-            })
         }
+        chatTitleReference.observeSingleEvent(of: .value, with: { (snapshot) in
+            if let title = snapshot.value as? String {
+                self.title = title
+            } else {
+                self.title = "Course Discussion"
+            }
+        })
         messagesReference.queryLimited(toLast: 20).observe(.childAdded, with: {(snapshot) in
             if let messageData = snapshot.value as? [String: Any] {
                 self.messages.append(Message(id: snapshot.key, data: messageData))
