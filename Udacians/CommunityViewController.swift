@@ -27,7 +27,7 @@ class CommunityViewController: UIViewController {
         ref = FIRDatabase.database().reference()
         
         let articlesReference = ref.child("articles")
-        articlesReference.observe(.childAdded, with: {(snapshot) in
+        articlesReference.queryOrdered(byChild: "timestamp").queryLimited(toLast: 20).observe(.childAdded, with: {(snapshot) in
             if let data = snapshot.value as? [String: Any] {
                 self.articlesProvider.articles.append(Article(id: snapshot.key, data: data))
                 self.tableView.reloadData()
