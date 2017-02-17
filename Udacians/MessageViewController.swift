@@ -168,23 +168,25 @@ extension MessageViewController: UITableViewDataSource {
                 cell.profileImageButton.image = storedImage
             } else {
                 if let url = snapshot.value as? String {
-                    cell.profileImageTask = WebImageCache.shared.downloadImage(at: snapshot.value as! String) {imageData in
+                    cell.profileImageTask = WebImageCache.shared.downloadImage(at: url) {imageData in
                         DispatchQueue.main.async {
                             WebImageCache.shared.storeImage(image: imageData, withIdentifier: message.sender)
                             cell.profileImageButton.image = imageData
                         }
                     }
+                } else {
+                    cell.profileImageButton.image = UIImage(named: "Udacity_logo")
                 }
             }
         })
         cell.contentLabel.text = message.content
         if message.imageUrl != nil {
-            if let storedImage = WebImageCache.shared.image(with: message.sender) {
-                cell.profileImageButton.image = storedImage
+            if let storedImage = WebImageCache.shared.image(with: message.id) {
+                (cell as! PostWithImageTableViewCell).contentImageView.image = storedImage
             } else {
-                cell.profileImageTask = WebImageCache.shared.downloadImage(at: message.imageUrl) {imageData in
+                (cell as! PostWithImageTableViewCell).contentImageTask = WebImageCache.shared.downloadImage(at: message.imageUrl) {imageData in
                     DispatchQueue.main.async {
-                        WebImageCache.shared.storeImage(image: imageData, withIdentifier: message.sender)
+                        WebImageCache.shared.storeImage(image: imageData, withIdentifier: message.id)
                         (cell as! PostWithImageTableViewCell).contentImageView.image = imageData
                     }
                 }
