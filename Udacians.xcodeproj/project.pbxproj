@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1D00035168E6A2D0D0F0A899 /* Pods_Udacians.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 855C340DD5C2F0EFD58C9577 /* Pods_Udacians.framework */; };
 		5A059C2F1E56AD9800DF54BD /* ThreeTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A059C2E1E56AD9800DF54BD /* ThreeTitleTableViewCell.swift */; };
+		5A059C311E56B0B900DF54BD /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A059C301E56B0B900DF54BD /* Article.swift */; };
 		5A48F3221DC8F4F100D49219 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A48F3211DC8F4F100D49219 /* Profile.swift */; };
 		5A48F3241DC8FB4500D49219 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A48F3231DC8FB4500D49219 /* User.swift */; };
 		5A48F3261DC8FB5900D49219 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A48F3251DC8FB5900D49219 /* Account.swift */; };
@@ -76,6 +77,7 @@
 /* Begin PBXFileReference section */
 		03ABD6AEE36CA7AB8BCF27D5 /* Pods-UdaciansUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UdaciansUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UdaciansUITests/Pods-UdaciansUITests.release.xcconfig"; sourceTree = "<group>"; };
 		5A059C2E1E56AD9800DF54BD /* ThreeTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeTitleTableViewCell.swift; sourceTree = "<group>"; };
+		5A059C301E56B0B900DF54BD /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		5A48F3211DC8F4F100D49219 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		5A48F3231DC8FB4500D49219 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5A48F3251DC8FB5900D49219 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				5A8555C91DC51BFA00D8BF46 /* SwiftyJSON.swift */,
 				5A4F82F21E4CCC520047869A /* WebImageCache.swift */,
 				5AFD42A21E4BCF2000D15EAF /* Message.swift */,
+				5A059C301E56B0B900DF54BD /* Article.swift */,
 				5A585C641DC2449B009647A0 /* AppDelegate.swift */,
 				5A585C661DC2449B009647A0 /* LoginViewController.swift */,
 				5A585C991DC24C07009647A0 /* LoginViewController.xml */,
@@ -521,6 +524,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A059C311E56B0B900DF54BD /* Article.swift in Sources */,
 				5A4FE8C81E4A448900896D79 /* MeViewController.swift in Sources */,
 				5A8555CC1DC51CBA00D8BF46 /* UdacityClient.swift in Sources */,
 				5A059C2F1E56AD9800DF54BD /* ThreeTitleTableViewCell.swift in Sources */,
