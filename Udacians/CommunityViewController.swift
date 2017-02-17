@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class CommunityViewController: UIViewController {
     
@@ -16,10 +17,22 @@ class CommunityViewController: UIViewController {
     var articlesProvider: ArticlesTableViewProvider!
     var eventsProvider: EventsTableViewProvider!
     
+    var ref: FIRDatabaseReference!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         articlesProvider = ArticlesTableViewProvider()
         eventsProvider = EventsTableViewProvider()
+        
+        ref = FIRDatabase.database().reference()
+        
+        let articlesReference = ref.child("articles")
+        articlesReference.observe(.childAdded, with: {(snapshot) in
+            if let data = snapshot.value as? [String: Any] {
+                self.articlesProvider.articles.append(Article(id: snapshot.key, data: data))
+                self.tableView.reloadData()
+            }
+        })
         
         tableView.reloadData()
     }
@@ -42,7 +55,7 @@ class CommunityViewController: UIViewController {
 
 class ArticlesTableViewProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
     
-    var articles = [String]()
+    var articles = [Article]()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles.count
