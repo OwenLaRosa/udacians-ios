@@ -57,12 +57,47 @@ class ArticlesTableViewProvider: NSObject, UITableViewDataSource, UITableViewDel
     
     var articles = [Article]()
     
+    var ref: FIRDatabaseReference
+    
+    override init() {
+        ref = FIRDatabase.database().reference()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let article = articles[indexPath.row]
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "ThreeTitleTableViewCell") as! ThreeTitleTableViewCell
+        
+        cell.titleLabel.text = article.title
+        let userBasicReference = ref.child("users").child(article.id).child("basic")
+        let nameReference = userBasicReference.child("name")
+        nameReference.observeSingleEvent(of: .value, with: {(snapshot) in
+            if let posterName = snapshot.value as? String {
+                cell.secondTitleLabel.text = "Shared by: \(posterName)"
+            } else {
+                cell.secondTitleLabel.text = "Unknown Poster"
+            }
+        })
+        cell.thirdTitleLabel.text = article.url
+        let photoReference = userBasicReference.child("photo")
+        photoReference.observeSingleEvent(of: .value, with: {(snapshot) in
+            if let url = snapshot.value as? String {
+                if let storedImage = WebImageCache.shared.image(with: article.id) {
+                    cell.photoImageButton.image = storedImage
+                } else {
+                    cell.photoImageTask = WebImageCache.shared.downloadImage(at: url) {imageData in
+                        DispatchQueue.main.async {
+                            WebImageCache.shared.storeImage(image: imageData, withIdentifier: article.id)
+                            cell.photoImageButton.image = imageData
+                        }
+                    }
+                }
+            }
+        })
         
         return cell
     }
