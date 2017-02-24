@@ -33,6 +33,16 @@ class CommunityViewController: UIViewController {
                 self.tableView.reloadData()
             }
         })
+        let myEventsReference = ref.child("events")
+        myEventsReference.observe(.childAdded, with: {(snapshot) in
+            self.eventsProvider.myEvents.append(snapshot.key)
+            self.tableView.reloadData()
+        })
+        let allEventsReference = ref.child("event_locations")
+        allEventsReference.queryOrdered(byChild: "timestamp").queryLimited(toLast: 20).observe(.childAdded, with: {(snapshot) in
+            self.eventsProvider.allEvents.append(snapshot.key)
+            self.tableView.reloadData()
+        })
         
         tableView.dataSource = articlesProvider
         tableView.delegate = articlesProvider
@@ -111,8 +121,22 @@ class EventsTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
     var myEvents = [String]()
     var allEvents = [String]()
     
+    var ref: FIRDatabaseReference
+    
+    override init() {
+        ref = FIRDatabase.database().reference()
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "My Events"
+        } else {
+            return "All Events"
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -126,6 +150,41 @@ class EventsTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ThreeTitleTableViewCell") as! ThreeTitleTableViewCell
+        var eventId: String
+        if indexPath.section == 0 {
+            eventId = myEvents[indexPath.row]
+        } else {
+            eventId = allEvents[indexPath.row]
+        }
+        
+        let eventInfoReference = ref.child("events").child(eventId).child("info")
+        let nameReference = eventInfoReference.child("name")
+        nameReference.observe(.value, with: {(snapshot) in
+            cell.titleLabel.text = snapshot.value as? String ?? ""
+        })
+        let eventAboutReference = eventInfoReference.child("about")
+        eventAboutReference.observe(.value, with: {(snapshot) in
+            cell.secondTitleLabel.text = snapshot.value as? String ?? ""
+        })
+        let eventPlaceReference = eventInfoReference.child("place")
+        eventPlaceReference.observe(.value, with: {(snapshot) in
+            cell.thirdTitleLabel.text = snapshot.value as? String ?? ""
+        })
+        let photoReference = ref.child("users").child(eventId).child("basic").child("photo")
+        photoReference.observeSingleEvent(of: .value, with: {(snapshot) in
+            if let url = snapshot.value as? String {
+                if let storedImage = WebImageCache.shared.image(with: eventId) {
+                    cell.photoImageButton.image = storedImage
+                } else {
+                    cell.photoImageTask = WebImageCache.shared.downloadImage(at: url) {imageData in
+                        DispatchQueue.main.async {
+                            WebImageCache.shared.storeImage(image: imageData, withIdentifier: eventId)
+                            cell.photoImageButton.image = imageData
+                        }
+                    }
+                }
+            }
+        })
         
         return cell
     }
