@@ -31,6 +31,8 @@ class MessageViewController: UIViewController {
     var senderDirectMessageReference: FIRDatabaseReference!
     var recipientDirectMessageReference: FIRDatabaseReference!
     
+    var storageRef: FIRStorageReference!
+    
     var messages = [Message]()
     
     var isDirect = false
@@ -43,6 +45,8 @@ class MessageViewController: UIViewController {
         tableView.estimatedRowHeight = 140
         
         ref = FIRDatabase.database().reference()
+        storageRef = FIRStorage.storage().reference()
+        
         var chatTitleReference: FIRDatabaseReference
         if isDirect {
             messagesReference = getDirectChatReference(user1: userId, user2: chatId)
@@ -96,7 +100,7 @@ class MessageViewController: UIViewController {
     
     @IBAction func sendButtonTapped(_ sender: UIButton) {
         // TODO: allow empty messages if there's an image
-        if textEntry.text == "" {
+        if textEntry.text == "" && imagePreview.image == nil {
             return
         }
         var messageContents = [String: Any]()
@@ -104,17 +108,36 @@ class MessageViewController: UIViewController {
         messageContents["date"] = FIRServerValue.timestamp()
         messageContents["content"] = textEntry.text
         
-        // clear text and image for next message
-        textEntry.text = ""
-        
-        // TODO: upload image and add URL to message body
-        
-        messagesReference.childByAutoId().setValue(messageContents)
-        // TODO: direct messages update last sent time
-        if isDirect {
-            recipientDirectMessageReference.setValue(FIRServerValue.timestamp())
-            senderDirectMessageReference.setValue(FIRServerValue.timestamp())
+        if imagePreview.image != nil {
+            let imageContents = imagePreview.image!
+            self.clearChatEntry()
+            let imagesReference = storageRef.child(userId).child("public").child("images")
+            Utils.uploadImage(image: imageContents, toReference: imagesReference) { (url) in
+                if url != nil {
+                    messageContents["imageUrl"] = url!
+                    self.messagesReference.childByAutoId().setValue(messageContents)
+                    if self.isDirect {
+                        self.recipientDirectMessageReference.setValue(FIRServerValue.timestamp())
+                        self.senderDirectMessageReference.setValue(FIRServerValue.timestamp())
+                    }
+                }
+            }
+        } else {
+            self.clearChatEntry()
+            messagesReference.childByAutoId().setValue(messageContents)
+            // TODO: direct messages update last sent time
+            if isDirect {
+                recipientDirectMessageReference.setValue(FIRServerValue.timestamp())
+                senderDirectMessageReference.setValue(FIRServerValue.timestamp())
+            }
         }
+    }
+    
+    /// Resets text and image contents of chat entry area
+    private func clearChatEntry() {
+        textEntry.text = ""
+        imagePreview.image = nil
+        imagePreviewHeight.constant = 0
     }
     
     // keyboard handling

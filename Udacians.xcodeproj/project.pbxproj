@@ -10,6 +10,7 @@
 		1D00035168E6A2D0D0F0A899 /* Pods_Udacians.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 855C340DD5C2F0EFD58C9577 /* Pods_Udacians.framework */; };
 		5A059C2F1E56AD9800DF54BD /* ThreeTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A059C2E1E56AD9800DF54BD /* ThreeTitleTableViewCell.swift */; };
 		5A059C311E56B0B900DF54BD /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A059C301E56B0B900DF54BD /* Article.swift */; };
+		5A29A8111E60D9EF00171486 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29A8101E60D9EF00171486 /* Utils.swift */; };
 		5A48F3221DC8F4F100D49219 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A48F3211DC8F4F100D49219 /* Profile.swift */; };
 		5A48F3241DC8FB4500D49219 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A48F3231DC8FB4500D49219 /* User.swift */; };
 		5A48F3261DC8FB5900D49219 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A48F3251DC8FB5900D49219 /* Account.swift */; };
@@ -78,6 +79,7 @@
 		03ABD6AEE36CA7AB8BCF27D5 /* Pods-UdaciansUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UdaciansUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UdaciansUITests/Pods-UdaciansUITests.release.xcconfig"; sourceTree = "<group>"; };
 		5A059C2E1E56AD9800DF54BD /* ThreeTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeTitleTableViewCell.swift; sourceTree = "<group>"; };
 		5A059C301E56B0B900DF54BD /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		5A29A8101E60D9EF00171486 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		5A48F3211DC8F4F100D49219 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		5A48F3231DC8FB4500D49219 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5A48F3251DC8FB5900D49219 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				5A4FE8C51E4A447700896D79 /* CommunityViewController.swift */,
 				5A4FE8C71E4A448900896D79 /* MeViewController.swift */,
 				5AE1EEDB1E09B52800731775 /* MapViewController.swift */,
+				5A29A8101E60D9EF00171486 /* Utils.swift */,
 			);
 			path = Udacians;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 				5A48F3261DC8FB5900D49219 /* Account.swift in Sources */,
 				5AFD42A31E4BCF2000D15EAF /* Message.swift in Sources */,
 				5AE1EEDA1E09B22D00731775 /* MainViewController.swift in Sources */,
+				5A29A8111E60D9EF00171486 /* Utils.swift in Sources */,
 				5A4FE8C41E4A445700896D79 /* SocialViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
