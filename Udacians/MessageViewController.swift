@@ -23,6 +23,11 @@ class MessageViewController: UIViewController {
     
     // constraint for the preview image view's height
     @IBOutlet weak var imagePreviewHeight: NSLayoutConstraint!
+    // height of the text content
+    @IBOutlet weak var textEntryHeight: NSLayoutConstraint!
+    // starting height of the text view
+    // this also serves to calculate the minimum allowed height when resizing
+    var defaultTextEntryHeight: CGFloat = 0
     
     var userId = "3050228546"
     
@@ -40,6 +45,8 @@ class MessageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        textEntry.delegate = self
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
@@ -96,6 +103,11 @@ class MessageViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeToKeyboardNotifications()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        defaultTextEntryHeight = textEntry.contentSize.height
     }
     
     @IBAction func sendButtonTapped(_ sender: UIButton) {
@@ -193,6 +205,22 @@ class MessageViewController: UIViewController {
         if messages.count == 0 { return }
         let lastItem = IndexPath(item: messages.count - 1, section: 0)
         tableView.scrollToRow(at: lastItem, at: .bottom, animated: false)
+    }
+    
+}
+
+extension MessageViewController: UITextViewDelegate {
+    
+    func textViewDidChange(_ textView: UITextView) {
+        let maxHeight: CGFloat = 100
+        let contentSize = textEntry.contentSize
+        if contentSize.height < defaultTextEntryHeight {
+            textEntryHeight.constant = contentSize.height
+        } else if contentSize.height > maxHeight {
+            textEntryHeight.constant = maxHeight
+        } else {
+            textEntryHeight.constant = contentSize.height
+        }
     }
     
 }
