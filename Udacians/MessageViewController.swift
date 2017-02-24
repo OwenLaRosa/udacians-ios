@@ -91,6 +91,24 @@ class MessageViewController: UIViewController {
     }    
     
     @IBAction func sendButtonTapped(_ sender: UIButton) {
+        // TODO: allow empty messages if there's an image
+        if textEntry.text == "" {
+            return
+        }
+        var messageContents = [String: Any]()
+        messageContents["sender"] = userId
+        messageContents["date"] = FIRServerValue.timestamp()
+        messageContents["content"] = textEntry.text
+        
+        // clear text and image for next message
+        textEntry.text = ""
+        
+        // TODO: upload image and add URL to message body
+        
+        messagesReference.childByAutoId().setValue(messageContents)
+        // TODO: direct messages update last sent time
+        
+        
     }
     
     // keyboard handling
