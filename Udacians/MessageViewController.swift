@@ -17,7 +17,12 @@ class MessageViewController: UIViewController {
     
     @IBOutlet weak var textEntry: UITextView!
     
+    @IBOutlet weak var imagePreview: UIImageView!
+    
     @IBOutlet weak var sendButton: UIButton!
+    
+    // constraint for the preview image view's height
+    @IBOutlet weak var imagePreviewHeight: NSLayoutConstraint!
     
     var userId = "3050228546"
     
@@ -70,8 +75,7 @@ class MessageViewController: UIViewController {
                 self.tableView.reloadData()
                 // should automatically move to new messages
                 // referenced: http://stackoverflow.com/questions/38044691/scroll-table-view-to-bottom-when-using-dynamic-cell-height/38047639
-                let lastItem = IndexPath(item: self.messages.count - 1, section: 0)
-                self.tableView.scrollToRow(at: lastItem, at: .bottom, animated: false)
+                self.scrollToBottom()
             }
         })
         
@@ -88,7 +92,7 @@ class MessageViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeToKeyboardNotifications()
-    }    
+    }
     
     @IBAction func sendButtonTapped(_ sender: UIButton) {
         // TODO: allow empty messages if there's an image
@@ -159,6 +163,61 @@ class MessageViewController: UIViewController {
         }
         return chatReference
      }
+    
+    // helpers for table view
+    
+    func scrollToBottom() {
+        if messages.count == 0 { return }
+        let lastItem = IndexPath(item: messages.count - 1, section: 0)
+        tableView.scrollToRow(at: lastItem, at: .bottom, animated: false)
+    }
+    
+}
+
+extension MessageViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    // navigation controller delegate is also required for image picker controller delegate
+    
+    @IBAction func imageButtonTapped(_ sender: UIButton) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        // if only the image picker is available and there's no image to be removed, go right to the image picker
+        if !UIImagePickerController.isSourceTypeAvailable(.camera) && imagePreview.image == nil {
+            imagePicker.sourceType = .photoLibrary
+            present(imagePicker, animated: true, completion: nil)
+            return
+        }
+        // otherwise, display an alert with options for photo library, camera (if available), and removing the current image (if applicable)
+        let imagePickingAlert = UIAlertController(title: "Choose image", message: nil, preferredStyle: .actionSheet)
+        imagePickingAlert.title = "Choose image"
+        imagePickingAlert.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: {(alertAction) in
+            imagePicker.sourceType = .photoLibrary
+            self.present(imagePicker, animated: true, completion: nil)
+        }))
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            imagePickingAlert.addAction(UIAlertAction(title: "Camera", style: .default, handler: {(alertAction) in
+                imagePicker.sourceType = .camera
+                self.present(imagePicker, animated: true, completion: nil)
+            }))
+        }
+        if imagePreview.image != nil {
+            imagePickingAlert.addAction(UIAlertAction(title: "Remove Image", style: .default, handler: {(alertAction) in
+                self.imagePreview.image = nil
+                self.imagePreviewHeight.constant = 0
+            }))
+        }
+        imagePickingAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(imagePickingAlert, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            imagePreviewHeight.constant = 100
+            imagePreview.image = image
+        }
+        dismiss(animated: true, completion: {
+            self.scrollToBottom()
+        })
+    }
     
 }
 
