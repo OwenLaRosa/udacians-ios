@@ -107,8 +107,10 @@ class MessageViewController: UIViewController {
         
         messagesReference.childByAutoId().setValue(messageContents)
         // TODO: direct messages update last sent time
-        
-        
+        if isDirect {
+            recipientDirectMessageReference.setValue(FIRServerValue.timestamp())
+            senderDirectMessageReference.setValue(FIRServerValue.timestamp())
+        }
     }
     
     // keyboard handling
