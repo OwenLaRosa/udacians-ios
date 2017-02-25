@@ -28,6 +28,11 @@ class MessageViewController: UIViewController {
     // starting height of the text view
     // this also serves to calculate the minimum allowed height when resizing
     var defaultTextEntryHeight: CGFloat = 0
+    // space root stack view is located from the bottom
+    // modified when the keyboard is shown/hidden
+    @IBOutlet weak var rootStackViewBottomSpace: NSLayoutConstraint!
+    // initial constant value of root stack view bottom space constraint
+    var defaultRootBottomSpace: CGFloat = 0
     
     var userId = "3050228546"
     
@@ -108,6 +113,7 @@ class MessageViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         defaultTextEntryHeight = textEntry.contentSize.height
+        defaultRootBottomSpace = rootStackViewBottomSpace.constant
     }
     
     @IBAction func sendButtonTapped(_ sender: UIButton) {
@@ -156,20 +162,27 @@ class MessageViewController: UIViewController {
     
     private func subscribeToKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_ :)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(_:)), name: .UIKeyboardDidShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
     }
     
     private func unsubscribeToKeyboardNotifications() {
-        NotificationCenter.default.removeObserver( self, name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver( self, name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
-        view.frame.origin.y = -getKeyboardOffset(notification: notification)
+        rootStackViewBottomSpace.constant = defaultRootBottomSpace + getKeyboardOffset(notification: notification)
+    }
+    
+    @objc private func keyboardDidShow(_ notification: Notification) {
+        scrollToBottom()
     }
     
     @objc private func keyboardWillHide(_ notification: Notification) {
         view.frame.origin.y = 0
+        rootStackViewBottomSpace.constant = defaultRootBottomSpace
     }
     
     @objc private func dismissKeyboard() {
