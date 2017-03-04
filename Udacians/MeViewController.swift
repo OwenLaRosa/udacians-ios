@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class MeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -24,6 +24,8 @@ class MeViewController: UIViewController, UITableViewDataSource, UITableViewDele
     @IBOutlet weak var aboutMeLabel: UILabel!
     
     @IBOutlet weak var followButton: UIButton!
+    
+    @IBOutlet weak var collectionView: UICollectionView!
     
     var ref: FIRDatabaseReference!
     let userId = "3050228546"
@@ -81,7 +83,7 @@ class MeViewController: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     func updateTableHeaderHeight() {
-        tableView.tableHeaderView?.frame.size.height = aboutMeLabel.frame.origin.y + aboutMeLabel.intrinsicContentSize.height + 8
+        tableView.tableHeaderView?.frame.size.height = collectionView.frame.origin.y + collectionView.frame.size.height + 8
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -90,6 +92,14 @@ class MeViewController: UIViewController, UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return UITableViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return UICollectionViewCell()
     }
     
 }
