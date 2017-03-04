@@ -14,9 +14,11 @@ class PostFeedTableViewDataSource: NSObject, UITableViewDataSource {
     var posts = [Message]()
     var ref: FIRDatabaseReference
     var tableView: UITableView
+    let isThisUser: Bool
     
-    init(tableView: UITableView) {
+    init(tableView: UITableView, isThisUser: Bool = false) {
         self.tableView = tableView
+        self.isThisUser = isThisUser
         ref = FIRDatabase.database().reference()
     }
     
@@ -35,6 +37,13 @@ class PostFeedTableViewDataSource: NSObject, UITableViewDataSource {
             cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell") as! PostTableViewCell
         } else {
             cell = tableView.dequeueReusableCell(withIdentifier: "PostWithImageTableViewCell") as! PostWithImageTableViewCell
+        }
+        
+        // user should not be able to click profile image if it's on their profile
+        if isThisUser {
+            cell.profileImageButton.isUserInteractionEnabled = false
+        } else {
+            cell.profileImageButton.isUserInteractionEnabled = true
         }
         
         let nameRef = ref.child("users").child(post.sender).child("basic").child("name")

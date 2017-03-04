@@ -34,7 +34,7 @@ class MeViewController: UIViewController, UITableViewDelegate, UICollectionViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableViewDataSource = PostFeedTableViewDataSource(tableView: tableView)
+        tableViewDataSource = PostFeedTableViewDataSource(tableView: tableView, isThisUser: true)
         tableView.dataSource = tableViewDataSource
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
