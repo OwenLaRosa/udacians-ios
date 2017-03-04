@@ -9,9 +9,10 @@
 import UIKit
 import Firebase
 
-class MeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class MeViewController: UIViewController, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var tableView: UITableView!
+    var tableViewDataSource: PostFeedTableViewDataSource!
     
     @IBOutlet weak var profileImageView: UIImageView!
     
@@ -32,6 +33,11 @@ class MeViewController: UIViewController, UITableViewDataSource, UITableViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableViewDataSource = PostFeedTableViewDataSource(tableView: tableView)
+        tableView.dataSource = tableViewDataSource
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 140
         
         ref = FIRDatabase.database().reference()
         updateTableHeaderHeight()
@@ -76,6 +82,20 @@ class MeViewController: UIViewController, UITableViewDataSource, UITableViewDele
             self.followersCountLabel.text = "\(followers) Follower\(followers != 1 ? "s": "")"
             self.updateTableHeaderHeight()
         })
+        
+        let postLinksRef = ref.child("users").child(userId).child("posts")
+        postLinksRef.queryLimited(toLast: 10).observe(.childAdded, with: {(snapshot) in
+            let postId = snapshot.key
+            let postReference = self.ref.child("posts").child(postId)
+            postReference.observe(.value, with: {(snapshot) in
+                if let data = snapshot.value as? [String: Any] {
+                    let post = Message(id: postId, data: data)
+                    self.tableViewDataSource.posts.append(post)
+                    self.tableView.reloadData()
+                }
+            })
+        })
+        
     }
     
     @IBAction func followButtonTapped(_ sender: UIButton) {
@@ -84,14 +104,6 @@ class MeViewController: UIViewController, UITableViewDataSource, UITableViewDele
     
     func updateTableHeaderHeight() {
         tableView.tableHeaderView?.frame.size.height = collectionView.frame.origin.y + collectionView.frame.size.height + 8
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

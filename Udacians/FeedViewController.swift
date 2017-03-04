@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class FeedViewController: UIViewController, UITableViewDataSource {
+class FeedViewController: UIViewController {
     
     @IBOutlet var feedTableView: UITableView!
     
@@ -20,10 +20,13 @@ class FeedViewController: UIViewController, UITableViewDataSource {
     private var userId = "3050228546"
     
     var ref: FIRDatabaseReference!
+    var dataSource: PostFeedTableViewDataSource!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        dataSource = PostFeedTableViewDataSource(tableView: feedTableView)
+        feedTableView.dataSource = dataSource
         feedTableView.rowHeight = UITableViewAutomaticDimension
         feedTableView.estimatedRowHeight = 140
         
@@ -55,81 +58,12 @@ class FeedViewController: UIViewController, UITableViewDataSource {
                 let postRef = self.ref.child("posts").child(snapshot.key)
                 postRef.observe(.value, with: { (snapshot) in
                     let post = Message(id: snapshot.key, data: snapshot.value as! [String: AnyObject])
-                    self.posts.append(post)
-                    self.posts.sort(by: {$0.0.id > $0.1.id})
+                    self.dataSource.posts.append(post)
+                    self.dataSource.posts.sort(by: {$0.0.id > $0.1.id})
                     self.feedTableView.reloadData()
                 })
             })
         }
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: PostTableViewCell!
-        
-        // appending to the end of the array is more efficient, but this means more recent posts are at the end
-        // getting the index like this ensures they're shown in reverse order
-        let post = posts[posts.count - indexPath.row - 1]
-        
-        if post.imageUrl == nil {
-            cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell") as! PostTableViewCell
-        } else {
-            cell = tableView.dequeueReusableCell(withIdentifier: "PostWithImageTableViewCell") as! PostWithImageTableViewCell
-        }
-        
-        let nameRef = ref.child("users").child(post.sender).child("basic").child("name")
-        let profilePhotoRef = ref.child("users").child(post.sender).child("basic").child("photo")
-        profilePhotoRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            if let _ = URL(string: snapshot.value as? String ?? "") {
-                if let storedImage = WebImageCache.shared.image(with: post.sender) {
-                    cell.profileImageButton.image = storedImage
-                } else {
-                    cell.profileImageTask = WebImageCache.shared.downloadImage(at: snapshot.value as! String) {imageData in
-                        DispatchQueue.main.async {
-                            WebImageCache.shared.storeImage(image: imageData, withIdentifier: post.sender)
-                            cell.profileImageButton.image = imageData
-                        }
-                    }
-                }
-            } else {
-                cell.profileImageButton.image = nil
-            }
-        })
-        nameRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            if self.indexPathIsVisible(tableView: self.feedTableView, indexPath: indexPath) {
-                cell.nameLabel.text = snapshot.value as? String ?? ""
-            }
-        })
-        cell.contentLabel.text = post.content
-        
-        if post.imageUrl != nil {
-            if let storedImage = WebImageCache.shared.image(with: post.id) {
-                DispatchQueue.main.async {
-                    (cell as! PostWithImageTableViewCell).profileImageButton.image = storedImage
-                }
-            } else {
-                (cell as! PostWithImageTableViewCell).contentImageTask = WebImageCache.shared.downloadImage(at: post.imageUrl) {imageData in
-                    DispatchQueue.main.async {
-                        WebImageCache.shared.storeImage(image: imageData, withIdentifier: post.id)
-                        (cell as! PostWithImageTableViewCell).contentImageView.image = imageData
-                    }
-                }
-            }
-        }
-        
-        return cell
-    }
-    
-    private func indexPathIsVisible(tableView: UITableView, indexPath: IndexPath) -> Bool {
-        for i in tableView.indexPathsForVisibleRows! {
-            if i.row == indexPath.row {
-                return true
-            }
-        }
-        return false
     }
     
 }
