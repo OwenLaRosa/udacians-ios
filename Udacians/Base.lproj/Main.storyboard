@@ -920,7 +920,7 @@
                                         </button>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iL6-2R-NHI">
                                             <rect key="frame" x="8" y="135" width="359" height="48"/>
-                                            <color key="backgroundColor" red="0.72628045080000003" green="0.72629773620000004" blue="0.72628843779999996" alpha="1" colorSpace="deviceRGB"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="48" id="Wud-ft-l0i"/>
                                             </constraints>
@@ -931,8 +931,8 @@
                                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             </collectionViewFlowLayout>
                                             <cells>
-                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="liL-jM-3Tt">
-                                                    <rect key="frame" x="0.0" y="5" width="43" height="39"/>
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProfileLinkCollectionViewCell" id="liL-jM-3Tt" customClass="ProfileLinkCollectionViewCell" customModule="Udacians" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="4.5" width="43" height="39"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                         <rect key="frame" x="0.0" y="0.0" width="43" height="39"/>
@@ -940,6 +940,7 @@
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AJd-cW-5Lk">
                                                                 <rect key="frame" x="0.0" y="0.0" width="43" height="39"/>
+                                                                <color key="backgroundColor" red="0.50588235290000005" green="0.83137254900000002" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                                             </imageView>
                                                         </subviews>
                                                     </view>
@@ -949,6 +950,9 @@
                                                         <constraint firstItem="AJd-cW-5Lk" firstAttribute="leading" secondItem="liL-jM-3Tt" secondAttribute="leading" id="sOB-zc-j70"/>
                                                         <constraint firstAttribute="bottom" secondItem="AJd-cW-5Lk" secondAttribute="bottom" id="yA6-wu-I1b"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <outlet property="imageView" destination="AJd-cW-5Lk" id="E9I-lR-lXA"/>
+                                                    </connections>
                                                 </collectionViewCell>
                                             </cells>
                                             <connections>
