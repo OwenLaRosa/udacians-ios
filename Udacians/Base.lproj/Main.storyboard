@@ -853,6 +853,38 @@
             </objects>
             <point key="canvasLocation" x="240.80000000000001" y="-235.23238380809596"/>
         </scene>
+        <!--Edit Profile-->
+        <scene sceneID="exA-Jl-zlp">
+            <objects>
+                <viewController id="BDf-Ul-ZV3" customClass="EditProfileViewController" customModule="Udacians" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FLI-H5-jtX"/>
+                        <viewControllerLayoutGuide type="bottom" id="mbj-m9-7Q1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BhC-s8-qak">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Edit Profile" id="9Gc-Lp-2MB">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="LE7-dF-koJ">
+                            <color key="tintColor" red="1" green="0.56862745100000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="BDf-Ul-ZV3" id="AU3-Ky-AmE"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Ibf-ZO-1Sb">
+                            <color key="tintColor" red="1" green="0.56862745100000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="BDf-Ul-ZV3" id="G2a-nJ-rnt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HID-xT-9bT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2090" y="503"/>
+        </scene>
         <!--My Profile-->
         <scene sceneID="G3b-81-qUp">
             <objects>
@@ -1007,13 +1039,13 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="303" height="24"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="First Last" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZF-y4-LL9">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="256" height="24"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="256.5" height="24"/>
                                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                                             <color key="textColor" red="0.0039215686269999999" green="0.3411764706" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="12:30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9at-BO-HZF">
-                                                                            <rect key="frame" x="264" y="6" width="39" height="18"/>
+                                                                            <rect key="frame" x="264.5" y="6" width="38.5" height="18"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -1071,13 +1103,13 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="303" height="23"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="First Last" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSj-8m-RO0">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="256" height="23"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="256.5" height="23"/>
                                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                                             <color key="textColor" red="0.0039215686269999999" green="0.3411764706" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="12:30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbw-hN-93b">
-                                                                            <rect key="frame" x="264" y="5" width="39" height="18"/>
+                                                                            <rect key="frame" x="264.5" y="5" width="38.5" height="18"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -1131,7 +1163,17 @@
                             <constraint firstItem="ns8-33-DBH" firstAttribute="bottom" secondItem="PTn-ei-ANa" secondAttribute="top" id="yWa-GO-K30"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="My Profile" id="t2Y-3n-XAm"/>
+                    <navigationItem key="navigationItem" title="My Profile" id="t2Y-3n-XAm">
+                        <barButtonItem key="leftBarButtonItem" image="settings" id="0gx-w1-Yzl">
+                            <color key="tintColor" red="1" green="0.56862745100000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="lKl-U1-XN8" kind="presentation" modalTransitionStyle="coverVertical" id="2QG-W9-39B"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="Bai-P4-hVx">
+                            <color key="tintColor" red="1" green="0.56862745100000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="aboutMeLabel" destination="egE-oI-DTi" id="0ed-Xu-ePi"/>
                         <outlet property="collectionView" destination="iL6-2R-NHI" id="vdW-os-jYI"/>
@@ -1145,12 +1187,31 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TaO-ef-bTQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1266.4000000000001" y="432.23388305847078"/>
+            <point key="canvasLocation" x="-1266" y="502"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="txS-6C-8os">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lKl-U1-XN8" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ul3-yb-PXX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BDf-Ul-ZV3" kind="relationship" relationship="rootViewController" id="w7W-EH-d30"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qdt-x2-tfT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2090" y="-235"/>
         </scene>
     </scenes>
     <resources>
         <image name="camera" width="30" height="30"/>
         <image name="message" width="30" height="30"/>
+        <image name="settings" width="30" height="30"/>
         <image name="udacity_logo" width="256" height="256"/>
     </resources>
 </document>
