@@ -27,6 +27,8 @@ class MeViewController: UIViewController, UITableViewDelegate, UICollectionViewD
     @IBOutlet weak var followButton: UIButton!
     
     @IBOutlet weak var collectionView: UICollectionView!
+    enum ProfileLink { case personal, blog, linkedin, twitter }
+    var profileLinks = [(type: ProfileLink, url: String)]()
     
     var ref: FIRDatabaseReference!
     let userId = "3050228546"
@@ -83,6 +85,32 @@ class MeViewController: UIViewController, UITableViewDelegate, UICollectionViewD
             self.updateTableHeaderHeight()
         })
         
+        let profileLinksRef = ref.child("users").child(userId).child("profile")
+        profileLinksRef.observeSingleEvent(of: .value, with: {(snapshot) in
+            var hasLinks = false
+            let value = snapshot.value as! [String: AnyObject]
+            if let site = value["site"] as? String, site != "" {
+                hasLinks = true
+                self.profileLinks.append((type: .personal, url: site))
+            }
+            if let blog = value["blog"] as? String, blog != "" {
+                hasLinks = true
+                self.profileLinks.append((type: .blog, url: blog))
+            }
+            if let linkedin = value["linkedin"] as? String, linkedin != "" {
+                hasLinks = true
+                self.profileLinks.append((type: .linkedin, url: linkedin))
+            }
+            if let twitter = value["twitter"] as? String, twitter != "" {
+                hasLinks = true
+                self.profileLinks.append((type: .twitter, url: twitter))
+            }
+            if !hasLinks {
+                // TODO: handle case where user has no profile links
+            }
+            self.collectionView.reloadData()
+        })
+        
         let postLinksRef = ref.child("users").child(userId).child("posts")
         postLinksRef.queryLimited(toLast: 10).observe(.childAdded, with: {(snapshot) in
             let postId = snapshot.key
@@ -95,7 +123,6 @@ class MeViewController: UIViewController, UITableViewDelegate, UICollectionViewD
                 }
             })
         })
-        
     }
     
     @IBAction func followButtonTapped(_ sender: UIButton) {
@@ -107,13 +134,31 @@ class MeViewController: UIViewController, UITableViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return profileLinks.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileLinkCollectionViewCell", for: indexPath) as! ProfileLinkCollectionViewCell
+        let link = profileLinks[indexPath.row]
+        switch link.type {
+        case .personal:
+            cell.imageView.image = UIImage(named: "site")
+        case .blog:
+            cell.imageView.image = UIImage(named: "blog")
+        case .linkedin:
+            cell.imageView.image = UIImage(named: "linkedin")
+        case .twitter:
+            cell.imageView.image = UIImage(named: "twitter")
+        }
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let link = profileLinks[indexPath.row]
+        if let url = URL(string: link.url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
