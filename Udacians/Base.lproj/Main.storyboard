@@ -853,7 +853,7 @@
             </objects>
             <point key="canvasLocation" x="240.80000000000001" y="-235.23238380809596"/>
         </scene>
-        <!--User Name-->
+        <!--My Profile-->
         <scene sceneID="G3b-81-qUp">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="zAS-AK-Ypf" customClass="MeViewController" customModule="Udacians" customModuleProvider="target" sceneMemberID="viewController">
@@ -873,8 +873,8 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9NE-Ri-txp">
-                                            <rect key="frame" x="80" y="34" width="287" height="21"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <rect key="frame" x="80" y="31" width="287" height="24"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                             <color key="textColor" red="0.0039215686269999999" green="0.3411764706" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -910,6 +910,7 @@
                                                 <constraint firstAttribute="width" constant="80" id="Lib-d3-gWT"/>
                                                 <constraint firstAttribute="height" constant="16" id="OLi-MA-Nd8"/>
                                             </constraints>
+                                            <color key="tintColor" red="1" green="0.56862745100000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" title="Follow"/>
                                             <connections>
                                                 <action selector="followButtonTapped:" destination="zAS-AK-Ypf" eventType="touchUpInside" id="536-wp-Wqo"/>
@@ -1006,13 +1007,13 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="303" height="24"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="First Last" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZF-y4-LL9">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="256.5" height="24"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="256" height="24"/>
                                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                                             <color key="textColor" red="0.0039215686269999999" green="0.3411764706" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="12:30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9at-BO-HZF">
-                                                                            <rect key="frame" x="264.5" y="6" width="38.5" height="18"/>
+                                                                            <rect key="frame" x="264" y="6" width="39" height="18"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -1070,13 +1071,13 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="303" height="23"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="First Last" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSj-8m-RO0">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="256.5" height="23"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="256" height="23"/>
                                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                                             <color key="textColor" red="0.0039215686269999999" green="0.3411764706" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="12:30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbw-hN-93b">
-                                                                            <rect key="frame" x="264.5" y="5" width="38.5" height="18"/>
+                                                                            <rect key="frame" x="264" y="5" width="39" height="18"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -1130,7 +1131,7 @@
                             <constraint firstItem="ns8-33-DBH" firstAttribute="bottom" secondItem="PTn-ei-ANa" secondAttribute="top" id="yWa-GO-K30"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="User Name" id="t2Y-3n-XAm"/>
+                    <navigationItem key="navigationItem" title="My Profile" id="t2Y-3n-XAm"/>
                     <connections>
                         <outlet property="aboutMeLabel" destination="egE-oI-DTi" id="0ed-Xu-ePi"/>
                         <outlet property="collectionView" destination="iL6-2R-NHI" id="vdW-os-jYI"/>
