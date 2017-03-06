@@ -30,4 +30,16 @@ class Utils {
         }
     }
     
+    /// Determine if a URL is valid with or without prefixing http://
+    /// Many users leave out this prefix so function attempts to "fix" the url
+    /// if invalid in either case, return nil
+    class func validateUrl(url: String) -> String? {
+        let pattern = "^(https?:\\/\\/)([a-zA-Z0-9_\\-~]+\\.)+[a-zA-Z0-9_\\-~\\/\\.]+$"
+        if let _ = url.range(of: pattern, options: .regularExpression) {
+            return url
+        } else if let _ = ("http://" + url).range(of: pattern, options: .regularExpression) {
+            return "http://" + url
+        }
+        return nil
+    }
 }
