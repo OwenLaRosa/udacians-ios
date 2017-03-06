@@ -15,6 +15,7 @@ class WritePostViewController: UIViewController, UIImagePickerControllerDelegate
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var contentImageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    @IBOutlet weak var toolbarBottomSpace: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,7 @@ class WritePostViewController: UIViewController, UIImagePickerControllerDelegate
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         subscribeToKeyboardNotifications()
+        contentTextView.becomeFirstResponder()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -73,11 +75,11 @@ class WritePostViewController: UIViewController, UIImagePickerControllerDelegate
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
-        view.frame.origin.y = -getKeyboardOffset(notification: notification)
+        toolbarBottomSpace.constant = -getKeyboardOffset(notification: notification)
     }
     
     @objc private func keyboardWillHide(_ notification: Notification) {
-        view.frame.origin.y = 0
+        toolbarBottomSpace.constant = 0
     }
     
     /// Determine how far to move the view based on hgiehgt of keyboard and tab bar
