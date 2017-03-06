@@ -169,6 +169,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             newImage = image
             profilePictureButton.image = image
         }
+        dismiss(animated: true, completion: nil)
     }
     
 }
