@@ -1343,6 +1343,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="Bai-P4-hVx">
                             <color key="tintColor" red="1" green="0.56862745100000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="He6-VG-ZEc" kind="presentation" modalTransitionStyle="coverVertical" id="45k-73-SZu"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -1359,6 +1362,91 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TaO-ef-bTQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1266" y="502"/>
+        </scene>
+        <!--Write Post-->
+        <scene sceneID="EQH-R9-tE6">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="mWh-8o-sQ4" customClass="WritePostViewController" customModule="Udacians" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="njH-Sb-8th"/>
+                        <viewControllerLayoutGuide type="bottom" id="2do-B8-Qpn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZpO-49-cSi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ip1-SN-LvU">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem title="Item" systemItem="camera" id="pfy-GI-siC">
+                                        <color key="tintColor" red="1" green="0.56862745100000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="takeImage:" destination="mWh-8o-sQ4" id="nqy-dw-amm"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem image="album" id="ptt-l6-t36">
+                                        <color key="tintColor" red="1" green="0.56862745100000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="pickImage:" destination="mWh-8o-sQ4" id="mQm-Un-hyv"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                                <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </toolbar>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0hU-9N-OWh">
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dlO-dF-B7X">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="459"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bLO-HR-a4K">
+                                        <rect key="frame" x="0.0" y="459" width="375" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="xVh-2q-fEY"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ip1-SN-LvU" firstAttribute="leading" secondItem="ZpO-49-cSi" secondAttribute="leading" id="6D5-Ju-rU8"/>
+                            <constraint firstItem="0hU-9N-OWh" firstAttribute="trailing" secondItem="ip1-SN-LvU" secondAttribute="trailing" id="7uf-Ib-RYi"/>
+                            <constraint firstItem="ip1-SN-LvU" firstAttribute="bottom" secondItem="2do-B8-Qpn" secondAttribute="top" id="EGJ-RC-Haj"/>
+                            <constraint firstItem="0hU-9N-OWh" firstAttribute="leading" secondItem="ip1-SN-LvU" secondAttribute="leading" id="HCo-2F-fSd"/>
+                            <constraint firstItem="0hU-9N-OWh" firstAttribute="top" secondItem="njH-Sb-8th" secondAttribute="bottom" id="edA-mv-ur6"/>
+                            <constraint firstAttribute="trailing" secondItem="0hU-9N-OWh" secondAttribute="trailing" id="frC-GR-Cep"/>
+                            <constraint firstItem="0hU-9N-OWh" firstAttribute="bottom" secondItem="ip1-SN-LvU" secondAttribute="top" id="x3c-OS-eFn"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Write Post" id="6Ot-wM-gUr">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Nf2-hM-Z8P">
+                            <color key="tintColor" red="1" green="0.56862745100000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="mWh-8o-sQ4" id="3x8-LB-Z1D"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Post" id="cfE-0h-VHe">
+                            <color key="tintColor" red="1" green="0.56862745100000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="postButtonTapped:" destination="mWh-8o-sQ4" id="k60-UA-JMl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="cameraButton" destination="pfy-GI-siC" id="k5v-ah-02n"/>
+                        <outlet property="contentImageView" destination="bLO-HR-a4K" id="qn0-8h-DBm"/>
+                        <outlet property="contentTextView" destination="dlO-dF-B7X" id="NEv-Zq-Yah"/>
+                        <outlet property="stackView" destination="0hU-9N-OWh" id="xsD-vI-l13"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TyQ-yc-cxX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="240.80000000000001" y="500.59970014992507"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="txS-6C-8os">
@@ -1378,8 +1466,27 @@
             </objects>
             <point key="canvasLocation" x="-2090" y="-235"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="lKI-xt-uc0">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="He6-VG-ZEc" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="25d-tP-eB9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="mWh-8o-sQ4" kind="relationship" relationship="rootViewController" id="fH8-OD-t3g"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ez0-Jf-P95" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-492" y="501.49925037481262"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="album" width="30" height="30"/>
         <image name="camera" width="30" height="30"/>
         <image name="message" width="30" height="30"/>
         <image name="settings" width="30" height="30"/>
