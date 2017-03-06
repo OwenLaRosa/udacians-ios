@@ -1390,6 +1390,13 @@
                                             <action selector="pickImage:" destination="mWh-8o-sQ4" id="mQm-Un-hyv"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="RXi-0i-XfN"/>
+                                    <barButtonItem enabled="NO" image="clear" id="bMT-6K-mxG">
+                                        <color key="tintColor" red="1" green="0.56862745100000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="clearImage:" destination="mWh-8o-sQ4" id="1Ae-Qc-lHj"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                                 <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
@@ -1397,15 +1404,15 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dlO-dF-B7X">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="459"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bLO-HR-a4K">
-                                        <rect key="frame" x="0.0" y="459" width="375" height="100"/>
+                                        <rect key="frame" x="0.0" y="559" width="375" height="0.0"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="xVh-2q-fEY"/>
+                                            <constraint firstAttribute="height" id="xVh-2q-fEY"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -1438,6 +1445,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="cameraButton" destination="pfy-GI-siC" id="k5v-ah-02n"/>
+                        <outlet property="clearImageButton" destination="bMT-6K-mxG" id="SeG-zG-eRH"/>
+                        <outlet property="contentImageHeight" destination="xVh-2q-fEY" id="cTt-ms-Agb"/>
                         <outlet property="contentImageView" destination="bLO-HR-a4K" id="qn0-8h-DBm"/>
                         <outlet property="contentTextView" destination="dlO-dF-B7X" id="NEv-Zq-Yah"/>
                         <outlet property="stackView" destination="0hU-9N-OWh" id="xsD-vI-l13"/>
@@ -1488,6 +1497,7 @@
     <resources>
         <image name="album" width="30" height="30"/>
         <image name="camera" width="30" height="30"/>
+        <image name="clear" width="30" height="30"/>
         <image name="message" width="30" height="30"/>
         <image name="settings" width="30" height="30"/>
         <image name="udacity_logo" width="256" height="256"/>

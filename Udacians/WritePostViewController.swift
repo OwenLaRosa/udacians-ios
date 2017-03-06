@@ -15,7 +15,9 @@ class WritePostViewController: UIViewController, UIImagePickerControllerDelegate
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var contentImageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    @IBOutlet weak var clearImageButton: UIBarButtonItem!
     @IBOutlet weak var toolbarBottomSpace: NSLayoutConstraint!
+    @IBOutlet weak var contentImageHeight: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +52,12 @@ class WritePostViewController: UIViewController, UIImagePickerControllerDelegate
         chooseImage(with: .camera)
     }
     
+    @IBAction func clearImage(_ sender: UIBarButtonItem) {
+        contentImageView.image = nil
+        clearImageButton.isEnabled = false
+        contentImageHeight.constant = 0
+    }
+    
     func chooseImage(with sourceType: UIImagePickerControllerSourceType) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -60,6 +68,8 @@ class WritePostViewController: UIViewController, UIImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             contentImageView.image = image
+            clearImageButton.isEnabled = true
+            contentImageHeight.constant = 100
         }
         dismiss(animated: true, completion: nil)
     }
@@ -82,7 +92,6 @@ class WritePostViewController: UIViewController, UIImagePickerControllerDelegate
         toolbarBottomSpace.constant = 0
     }
     
-    /// Determine how far to move the view based on hgiehgt of keyboard and tab bar
     private func getKeyboardOffset(notification: Notification) -> CGFloat {
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
