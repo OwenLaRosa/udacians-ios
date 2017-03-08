@@ -115,7 +115,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="71"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KbI-PN-ckM" id="fPr-Jh-A08">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="70.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="brK-qK-daF">
@@ -166,7 +166,7 @@
                                         <rect key="frame" x="0.0" y="99" width="375" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="727-XW-zEr" id="whR-Zh-yjx">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="83.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="83"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="s59-g4-e8R">
@@ -294,6 +294,9 @@
                                                                         <constraint firstAttribute="width" constant="48" id="k9G-4Y-xos"/>
                                                                     </constraints>
                                                                     <state key="normal" image="udacity_logo"/>
+                                                                    <connections>
+                                                                        <action selector="profileButtonTapped:" destination="fd2-KN-x6h" eventType="touchUpInside" id="1hm-aU-Iqa"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="R3o-Xn-Tya">
                                                                     <rect key="frame" x="56" y="0.0" width="303" height="162"/>
@@ -365,6 +368,9 @@
                                                                         <constraint firstAttribute="height" constant="48" id="m0X-iV-ztV"/>
                                                                     </constraints>
                                                                     <state key="normal" image="udacity_logo"/>
+                                                                    <connections>
+                                                                        <action selector="profileButtonTapped:" destination="pTg-4l-H4S" eventType="touchUpInside" id="ZlD-ex-lMb"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="nES-5Y-TJd">
                                                                     <rect key="frame" x="56" y="0.0" width="303" height="28"/>
@@ -592,7 +598,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="178"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ft2-Q8-6da" id="xkz-Kr-DQK">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="177.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="177"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="12s-Ai-MlT">
@@ -663,7 +669,7 @@
                                         <rect key="frame" x="0.0" y="206" width="375" height="67"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pdv-O8-XJp" id="Yge-IU-KeW">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="66.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="KPF-8g-9Ki">
@@ -773,7 +779,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="84"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b6m-rt-Jeh" id="QMI-7m-ExV">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="83.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="83"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Uuh-JR-6gk">
@@ -787,6 +793,9 @@
                                                                 <constraint firstAttribute="height" constant="48" id="fRh-vD-Npn"/>
                                                             </constraints>
                                                             <state key="normal" image="udacity_logo"/>
+                                                            <connections>
+                                                                <action selector="photoButtonTapped:" destination="b6m-rt-Jeh" eventType="touchUpInside" id="Vy1-zZ-3U7"/>
+                                                            </connections>
                                                         </button>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="A9g-RF-XeI">
                                                             <rect key="frame" x="56" y="0.0" width="303" height="67"/>
@@ -1059,7 +1068,7 @@
         <!--My Profile-->
         <scene sceneID="G3b-81-qUp">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="zAS-AK-Ypf" customClass="MeViewController" customModule="Udacians" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserViewController" automaticallyAdjustsScrollViewInsets="NO" id="zAS-AK-Ypf" customClass="UserViewController" customModule="Udacians" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QSQ-ON-HAU"/>
                         <viewControllerLayoutGuide type="bottom" id="PTn-ei-ANa"/>
@@ -1133,7 +1142,7 @@
                                             </collectionViewFlowLayout>
                                             <cells>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProfileLinkCollectionViewCell" id="liL-jM-3Tt" customClass="ProfileLinkCollectionViewCell" customModule="Udacians" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="4.5" width="43" height="39"/>
+                                                    <rect key="frame" x="0.0" y="5" width="43" height="39"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                         <rect key="frame" x="0.0" y="0.0" width="43" height="39"/>
@@ -1188,7 +1197,7 @@
                                         <rect key="frame" x="0.0" y="255" width="375" height="67"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WqF-IH-kbI" id="c3J-aM-dhZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="66.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="afI-fh-tdo">
@@ -1252,7 +1261,7 @@
                                         <rect key="frame" x="0.0" y="322" width="375" height="178"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7VJ-iI-H2l" id="KY4-bs-lvM">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="177.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="177"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="82W-Ma-3TU">
@@ -1351,12 +1360,14 @@
                     <connections>
                         <outlet property="aboutMeLabel" destination="egE-oI-DTi" id="0ed-Xu-ePi"/>
                         <outlet property="collectionView" destination="iL6-2R-NHI" id="vdW-os-jYI"/>
+                        <outlet property="editProfileButton" destination="0gx-w1-Yzl" id="7Qg-Is-dFc"/>
                         <outlet property="followButton" destination="fia-3t-ws1" id="tlR-Jp-Qkx"/>
                         <outlet property="followersCountLabel" destination="f83-AY-qCg" id="k7h-mz-SrB"/>
                         <outlet property="profileImageView" destination="AEg-5u-D0i" id="BM0-NB-u89"/>
                         <outlet property="tableView" destination="ns8-33-DBH" id="Sh6-KS-foc"/>
                         <outlet property="titleLabel" destination="pEg-IS-gZg" id="49y-cZ-qDw"/>
                         <outlet property="usernameLabel" destination="9NE-Ri-txp" id="Gqz-0R-8vn"/>
+                        <outlet property="writePostButton" destination="Bai-P4-hVx" id="Uot-Nq-79n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TaO-ef-bTQ" userLabel="First Responder" sceneMemberID="firstResponder"/>

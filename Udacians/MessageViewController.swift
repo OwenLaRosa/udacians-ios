@@ -337,6 +337,12 @@ extension MessageViewController: UITableViewDataSource {
             }
         }
         
+        cell.profileButtonCallback = {
+            let profileVC = self.storyboard?.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+            profileVC.thisUser = message.sender
+            self.show(profileVC, sender: nil)
+        }
+        
         return cell
     }
     

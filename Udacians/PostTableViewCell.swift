@@ -16,6 +16,8 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var contentLabel: UILabel!
     
+    public var profileButtonCallback = {}
+    
     // download tasks assigned to the cell for profile and content images
     var profileImageTask: URLSessionDataTask? {
         didSet {
@@ -23,6 +25,10 @@ class PostTableViewCell: UITableViewCell {
                 taskToCancel.cancel()
             }
         }
+    }
+    
+    @IBAction func profileButtonTapped(_ sender: UIButton) {
+        profileButtonCallback()
     }
     
 }

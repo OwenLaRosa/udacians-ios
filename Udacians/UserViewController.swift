@@ -1,5 +1,5 @@
 //
-//  MeViewController.swift
+//  UserViewController.swift
 //  Udacians
 //
 //  Created by Owen LaRosa on 2/7/17.
@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class MeViewController: UIViewController, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class UserViewController: UIViewController, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var tableView: UITableView!
     var tableViewDataSource: PostFeedTableViewDataSource!
@@ -30,8 +30,13 @@ class MeViewController: UIViewController, UITableViewDelegate, UICollectionViewD
     enum ProfileLink { case personal, blog, linkedin, twitter }
     var profileLinks = [(type: ProfileLink, url: String)]()
     
+    @IBOutlet weak var editProfileButton: UIBarButtonItem!
+    
+    @IBOutlet weak var writePostButton: UIBarButtonItem!
+    
     var ref: FIRDatabaseReference!
     let userId = "3050228546"
+    var thisUser: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,11 +49,33 @@ class MeViewController: UIViewController, UITableViewDelegate, UICollectionViewD
         ref = FIRDatabase.database().reference()
         updateTableHeaderHeight()
         
-        let userRef = ref.child("users").child(userId)
+        let isMeVC = thisUser == nil
+        if isMeVC {
+            // profile is displayed from the "Me" tab
+            followButton.isHidden = true
+            title = "My Profile"
+            thisUser = userId
+        } else {
+            // user should not be able to follow themselves either on the "Me" tab or their profile prsented with navigation
+            if thisUser == userId {
+                followButton.isHidden = true
+            }
+            // no need for edit profile button or writing posts for others' profiles
+            editProfileButton = nil
+            writePostButton = nil
+            navigationItem.leftBarButtonItem = nil
+            navigationItem.rightBarButtonItem = nil
+        }
+        
+        let userRef = ref.child("users").child(thisUser)
         let userBasicRef = userRef.child("basic")
         let nameRef = userBasicRef.child("name")
         nameRef.observeSingleEvent(of: .value, with: {(snapshot) in
-            self.usernameLabel.text = snapshot.value as? String ?? ""
+            let name = snapshot.value as? String ?? ""
+            self.usernameLabel.text = name
+            if !isMeVC {
+                self.title = name
+            }
             self.updateTableHeaderHeight()
         })
         let titleRef = userBasicRef.child("title")
@@ -59,13 +86,13 @@ class MeViewController: UIViewController, UITableViewDelegate, UICollectionViewD
         let photoRef = userBasicRef.child("photo")
         photoRef.observeSingleEvent(of: .value, with: {(snapshot) in
             if let url = snapshot.value as? String {
-                if let storedImage = WebImageCache.shared.image(with: self.userId) {
+                if let storedImage = WebImageCache.shared.image(with: self.thisUser) {
                     self.profileImageView.image = storedImage
                     self.updateTableHeaderHeight()
                 } else {
                     _ = WebImageCache.shared.downloadImage(at: url) {imageData in
                         DispatchQueue.main.async {
-                            WebImageCache.shared.storeImage(image: imageData, withIdentifier: self.userId)
+                            WebImageCache.shared.storeImage(image: imageData, withIdentifier: self.thisUser)
                             self.profileImageView.image = imageData
                             self.updateTableHeaderHeight()
                         }
@@ -85,25 +112,26 @@ class MeViewController: UIViewController, UITableViewDelegate, UICollectionViewD
             self.updateTableHeaderHeight()
         })
         
-        let profileLinksRef = ref.child("users").child(userId).child("profile")
+        let profileLinksRef = ref.child("users").child(thisUser).child("profile")
         profileLinksRef.observeSingleEvent(of: .value, with: {(snapshot) in
             var hasLinks = false
-            let value = snapshot.value as! [String: AnyObject]
-            if let site = value["site"] as? String, site != "" {
-                hasLinks = true
-                self.profileLinks.append((type: .personal, url: site))
-            }
-            if let blog = value["blog"] as? String, blog != "" {
-                hasLinks = true
-                self.profileLinks.append((type: .blog, url: blog))
-            }
-            if let linkedin = value["linkedin"] as? String, linkedin != "" {
-                hasLinks = true
-                self.profileLinks.append((type: .linkedin, url: linkedin))
-            }
-            if let twitter = value["twitter"] as? String, twitter != "" {
-                hasLinks = true
-                self.profileLinks.append((type: .twitter, url: twitter))
+            if let value = snapshot.value as? [String: AnyObject] {
+                if let site = value["site"] as? String, site != "" {
+                    hasLinks = true
+                    self.profileLinks.append((type: .personal, url: site))
+                }
+                if let blog = value["blog"] as? String, blog != "" {
+                    hasLinks = true
+                    self.profileLinks.append((type: .blog, url: blog))
+                }
+                if let linkedin = value["linkedin"] as? String, linkedin != "" {
+                    hasLinks = true
+                    self.profileLinks.append((type: .linkedin, url: linkedin))
+                }
+                if let twitter = value["twitter"] as? String, twitter != "" {
+                    hasLinks = true
+                    self.profileLinks.append((type: .twitter, url: twitter))
+                }
             }
             if !hasLinks {
                 // TODO: handle case where user has no profile links
@@ -111,7 +139,7 @@ class MeViewController: UIViewController, UITableViewDelegate, UICollectionViewD
             self.collectionView.reloadData()
         })
         
-        let postLinksRef = ref.child("users").child(userId).child("posts")
+        let postLinksRef = ref.child("users").child(thisUser).child("posts")
         postLinksRef.queryLimited(toLast: 10).observe(.childAdded, with: {(snapshot) in
             let postId = snapshot.key
             let postReference = self.ref.child("posts").child(postId)

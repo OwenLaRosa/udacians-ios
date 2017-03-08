@@ -345,6 +345,11 @@ class ConnectionsTableViewProvider: NSObject, UITableViewDataSource, UITableView
             chatVC.chatId = connection
             chatVC.isDirect = true
             self.owner.show(chatVC, sender: nil)
+        } else {
+            let connection = connections[indexPath.row]
+            let profileVC = self.owner.storyboard?.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+            profileVC.thisUser = connection
+            self.owner.show(profileVC, sender: nil)
         }
     }
     

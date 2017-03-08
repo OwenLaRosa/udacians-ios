@@ -14,6 +14,8 @@ class ThreeTitleTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var secondTitleLabel: UILabel!
     @IBOutlet weak var thirdTitleLabel: UILabel!
+    
+    var photoButtonCallback = {}
 
     var photoImageTask: URLSessionDataTask? {
         didSet {
@@ -21,6 +23,10 @@ class ThreeTitleTableViewCell: UITableViewCell {
                 taskToCancel.cancel()
             }
         }
+    }
+    
+    @IBAction func photoButtonTapped(_ sender: UIButton) {
+        photoButtonCallback()
     }
     
 }

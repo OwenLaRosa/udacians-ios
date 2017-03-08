@@ -21,8 +21,8 @@ class CommunityViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        articlesProvider = ArticlesTableViewProvider()
-        eventsProvider = EventsTableViewProvider()
+        articlesProvider = ArticlesTableViewProvider(owner: self)
+        eventsProvider = EventsTableViewProvider(owner: self)
         
         ref = FIRDatabase.database().reference()
         
@@ -75,8 +75,10 @@ class ArticlesTableViewProvider: NSObject, UITableViewDataSource, UITableViewDel
     var articles = [Article]()
     
     var ref: FIRDatabaseReference
+    var owner: UIViewController!
     
-    override init() {
+    init(owner: UIViewController) {
+        self.owner = owner
         ref = FIRDatabase.database().reference()
     }
     
@@ -116,6 +118,12 @@ class ArticlesTableViewProvider: NSObject, UITableViewDataSource, UITableViewDel
             }
         })
         
+        cell.photoButtonCallback = {
+            let profileVC = self.owner.storyboard?.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+            profileVC.thisUser = article.id
+            self.owner.show(profileVC, sender: nil)
+        }
+        
         return cell
     }
     
@@ -127,8 +135,10 @@ class EventsTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
     var allEvents = [String]()
     
     var ref: FIRDatabaseReference
+    var owner: UIViewController
     
-    override init() {
+    init(owner: UIViewController) {
+        self.owner = owner
         ref = FIRDatabase.database().reference()
     }
     
@@ -190,6 +200,12 @@ class EventsTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
                 }
             }
         })
+        
+        cell.photoButtonCallback = {
+            let profileVC = self.owner.storyboard?.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+            profileVC.thisUser = eventId
+            self.owner.show(profileVC, sender: nil)
+        }
         
         return cell
     }

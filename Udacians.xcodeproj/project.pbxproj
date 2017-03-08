@@ -19,7 +19,7 @@
 		5A4FE8C21E4A444900896D79 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4FE8C11E4A444900896D79 /* FeedViewController.swift */; };
 		5A4FE8C41E4A445700896D79 /* SocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4FE8C31E4A445700896D79 /* SocialViewController.swift */; };
 		5A4FE8C61E4A447700896D79 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4FE8C51E4A447700896D79 /* CommunityViewController.swift */; };
-		5A4FE8C81E4A448900896D79 /* MeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4FE8C71E4A448900896D79 /* MeViewController.swift */; };
+		5A4FE8C81E4A448900896D79 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4FE8C71E4A448900896D79 /* UserViewController.swift */; };
 		5A585C651DC2449B009647A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A585C641DC2449B009647A0 /* AppDelegate.swift */; };
 		5A585C671DC2449B009647A0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A585C661DC2449B009647A0 /* LoginViewController.swift */; };
 		5A585C6A1DC2449B009647A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A585C681DC2449B009647A0 /* Main.storyboard */; };
@@ -92,7 +92,7 @@
 		5A4FE8C11E4A444900896D79 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		5A4FE8C31E4A445700896D79 /* SocialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
 		5A4FE8C51E4A447700896D79 /* CommunityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
-		5A4FE8C71E4A448900896D79 /* MeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeViewController.swift; sourceTree = "<group>"; };
+		5A4FE8C71E4A448900896D79 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		5A585C611DC2449A009647A0 /* Udacians.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Udacians.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A585C641DC2449B009647A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A585C661DC2449B009647A0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -227,7 +227,7 @@
 				5A059C2E1E56AD9800DF54BD /* ThreeTitleTableViewCell.swift */,
 				5A4FE8C51E4A447700896D79 /* CommunityViewController.swift */,
 				5ADCF38E1E6A56D200C4F313 /* ProfileLinkCollectionViewCell.swift */,
-				5A4FE8C71E4A448900896D79 /* MeViewController.swift */,
+				5A4FE8C71E4A448900896D79 /* UserViewController.swift */,
 				5AE9CAB21E6D109000E1E279 /* WritePostViewController.swift */,
 				5AE9CAB01E6CA9D700E1E279 /* EditProfileViewController.swift */,
 				5AE1EEDB1E09B52800731775 /* MapViewController.swift */,
@@ -541,7 +541,7 @@
 			files = (
 				5AE9CAB11E6CA9D700E1E279 /* EditProfileViewController.swift in Sources */,
 				5A059C311E56B0B900DF54BD /* Article.swift in Sources */,
-				5A4FE8C81E4A448900896D79 /* MeViewController.swift in Sources */,
+				5A4FE8C81E4A448900896D79 /* UserViewController.swift in Sources */,
 				5A8555CC1DC51CBA00D8BF46 /* UdacityClient.swift in Sources */,
 				5A059C2F1E56AD9800DF54BD /* ThreeTitleTableViewCell.swift in Sources */,
 				5ADCF3911E6A5AFE00C4F313 /* PostFeedTableViewDataSource.swift in Sources */,
