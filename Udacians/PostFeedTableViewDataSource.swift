@@ -73,6 +73,7 @@ class PostFeedTableViewDataSource: NSObject, UITableViewDataSource {
         cell.contentLabel.text = post.content
         
         if post.imageUrl != nil {
+            (cell as! PostWithImageTableViewCell).contentImageView.image = nil
             if let storedImage = WebImageCache.shared.image(with: post.id) {
                 DispatchQueue.main.async {
                     (cell as! PostWithImageTableViewCell).contentImageView.image = storedImage
