@@ -18,9 +18,32 @@ class WritePostViewController: UIViewController, UIImagePickerControllerDelegate
     @IBOutlet weak var clearImageButton: UIBarButtonItem!
     @IBOutlet weak var toolbarBottomSpace: NSLayoutConstraint!
     @IBOutlet weak var contentImageHeight: NSLayoutConstraint!
+    @IBOutlet weak var postButton: UIBarButtonItem!
+    
+    let userId = "3050228546"
+    // true if posts are for user profile, false if for events
+    var isUserPosts = true
+    var eventId: String!
+    
+    var ref: FIRDatabaseReference!
+    var postsRef: FIRDatabaseReference!
+    var postLinksRef: FIRDatabaseReference!
+    
+    var storageRef: FIRStorageReference!
+    var imageStorageRef: FIRStorageReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ref = FIRDatabase.database().reference()
+        if isUserPosts {
+            postsRef = ref.child("posts")
+            postLinksRef = ref.child("users").child(userId).child("posts")
+        } else {
+            postsRef = ref.child("events").child(eventId).child("posts")
+        }
+        storageRef = FIRStorage.storage().reference()
+        imageStorageRef = storageRef.child(userId).child("public").child("images")
         
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
     }
@@ -37,6 +60,35 @@ class WritePostViewController: UIViewController, UIImagePickerControllerDelegate
     }
     
     @IBAction func postButtonTapped(_ sender: UIBarButtonItem) {
+        if contentTextView.text == "" && contentImageView.image == nil {
+            return
+        }
+        var postContents = [String: Any]()
+        postContents["sender"] = userId
+        postContents["content"] = contentTextView.text
+        if !isUserPosts {
+            postContents["date"] = FIRServerValue.timestamp()
+        }
+        if let image = contentImageView.image {
+            Utils.uploadImage(image: image, toReference: imageStorageRef, completionHandler: {(url) in
+                if url != nil {
+                    postContents["imageUrl"] = url!
+                }
+                self.uploadPost(contents: postContents)
+            })
+        } else {
+            self.uploadPost(contents: postContents)
+        }
+    }
+    
+    func uploadPost(contents: [String: Any]) {
+        if isUserPosts {
+            let pushPostRef = postsRef.childByAutoId()
+            pushPostRef.setValue(contents)
+            postLinksRef.child(pushPostRef.key).setValue(FIRServerValue.timestamp())
+        } else {
+            postsRef.childByAutoId().setValue(contents)
+        }
         dismiss(animated: true, completion: nil)
     }
     
