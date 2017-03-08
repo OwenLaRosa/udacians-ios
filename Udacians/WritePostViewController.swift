@@ -15,6 +15,7 @@ class WritePostViewController: UIViewController, UIImagePickerControllerDelegate
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var contentImageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    @IBOutlet weak var photoAlbumButton: UIBarButtonItem!
     @IBOutlet weak var clearImageButton: UIBarButtonItem!
     @IBOutlet weak var toolbarBottomSpace: NSLayoutConstraint!
     @IBOutlet weak var contentImageHeight: NSLayoutConstraint!
@@ -70,6 +71,7 @@ class WritePostViewController: UIViewController, UIImagePickerControllerDelegate
             postContents["date"] = FIRServerValue.timestamp()
         }
         if let image = contentImageView.image {
+            configureUI(enabled: false)
             Utils.uploadImage(image: image, toReference: imageStorageRef, completionHandler: {(url) in
                 if url != nil {
                     postContents["imageUrl"] = url!
@@ -148,6 +150,24 @@ class WritePostViewController: UIViewController, UIImagePickerControllerDelegate
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
         return keyboardSize.cgRectValue.height
+    }
+    
+    private func configureUI(enabled: Bool) {
+        contentTextView.isEditable = enabled
+        contentTextView.isSelectable = enabled
+        contentTextView.isScrollEnabled = enabled
+        postButton.isEnabled = enabled
+        photoAlbumButton.isEnabled = enabled
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            cameraButton.isEnabled = enabled
+        } else {
+            cameraButton.isEnabled = false
+        }
+        if contentImageView.image != nil {
+            clearImageButton.isEnabled = enabled
+        } else {
+            clearImageButton.isEnabled = false
+        }
     }
     
 }
