@@ -15,6 +15,7 @@ class PostFeedTableViewDataSource: NSObject, UITableViewDataSource {
     var ref: FIRDatabaseReference
     var tableView: UITableView
     let isThisUser: Bool
+    var userId = "3050228546"
     
     init(tableView: UITableView, isThisUser: Bool = false) {
         self.tableView = tableView
@@ -87,6 +88,21 @@ class PostFeedTableViewDataSource: NSObject, UITableViewDataSource {
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let index = posts.count - indexPath.row - 1
+            let post = posts[index]
+            posts.remove(at: index)
+            ref.child("posts").child(post.id).removeValue()
+            ref.child("users").child(userId).child("posts").child(post.id).removeValue()
+            tableView.reloadData()
+        }
     }
     
     private func indexPathIsVisible(tableView: UITableView, indexPath: IndexPath) -> Bool {
