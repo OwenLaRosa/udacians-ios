@@ -80,7 +80,11 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
         })
         let titleRef = userBasicRef.child("title")
         titleRef.observeSingleEvent(of: .value, with: {(snapshot) in
-            self.titleLabel.text = snapshot.value as? String ?? ""
+            if let title = snapshot.value as? String, title != "" {
+                self.titleLabel.text = title
+            } else {
+                self.titleLabel.text = "Udacian"
+            }
             self.updateTableHeaderHeight()
         })
         let photoRef = userBasicRef.child("photo")
@@ -102,7 +106,11 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
         })
         let aboutRef = userBasicRef.child("about")
         aboutRef.observeSingleEvent(of: .value, with: {(snapshot) in
-            self.aboutMeLabel.text = snapshot.value as? String ?? ""
+            if let about = snapshot.value as? String, about != "" {
+                self.aboutMeLabel.text = about
+            } else {
+                self.aboutMeLabel.text = "I'm a Udacian!"
+            }
             self.updateTableHeaderHeight()
         })
         let followerCountRef = userRef.child("follower_count")
