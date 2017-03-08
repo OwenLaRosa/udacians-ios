@@ -1111,7 +1111,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About User" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egE-oI-DTi">
-                                            <rect key="frame" x="8" y="110" width="359" height="20.5"/>
+                                            <rect key="frame" x="8" y="110" width="359" height="21"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -1129,7 +1129,7 @@
                                             </connections>
                                         </button>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iL6-2R-NHI">
-                                            <rect key="frame" x="8" y="146.5" width="359" height="48"/>
+                                            <rect key="frame" x="8" y="147" width="359" height="48"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="48" id="Wud-ft-l0i"/>
@@ -1360,6 +1360,7 @@
                     <connections>
                         <outlet property="aboutMeLabel" destination="egE-oI-DTi" id="0ed-Xu-ePi"/>
                         <outlet property="collectionView" destination="iL6-2R-NHI" id="vdW-os-jYI"/>
+                        <outlet property="collectionViewHeight" destination="Wud-ft-l0i" id="3xs-7E-0F7"/>
                         <outlet property="editProfileButton" destination="0gx-w1-Yzl" id="7Qg-Is-dFc"/>
                         <outlet property="followButton" destination="fia-3t-ws1" id="tlR-Jp-Qkx"/>
                         <outlet property="followersCountLabel" destination="f83-AY-qCg" id="k7h-mz-SrB"/>

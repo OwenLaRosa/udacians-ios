@@ -27,6 +27,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
     @IBOutlet weak var followButton: UIButton!
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     enum ProfileLink { case personal, blog, linkedin, twitter }
     var profileLinks = [(type: ProfileLink, url: String)]()
     
@@ -142,7 +143,8 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
                 }
             }
             if !hasLinks {
-                // TODO: handle case where user has no profile links
+                self.collectionViewHeight.constant = 0
+                self.updateTableHeaderHeight()
             }
             self.collectionView.reloadData()
         })
@@ -166,7 +168,13 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
     }
     
     func updateTableHeaderHeight() {
-        tableView.tableHeaderView?.frame.size.height = collectionView.frame.origin.y + collectionView.frame.size.height + 8
+        if collectionViewHeight.constant == 0 {
+            // we don't need the extra 8 points of padding if collection view is visible
+            tableView.tableHeaderView?.frame.size.height = collectionView.frame.origin.y - 8
+        } else {
+            // bottom of the collection view with 8 points of padding
+            tableView.tableHeaderView?.frame.size.height = collectionView.frame.origin.y + collectionViewHeight.constant + 8
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
