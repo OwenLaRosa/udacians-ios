@@ -75,7 +75,7 @@ class PostFeedTableViewDataSource: NSObject, UITableViewDataSource {
         if post.imageUrl != nil {
             if let storedImage = WebImageCache.shared.image(with: post.id) {
                 DispatchQueue.main.async {
-                    (cell as! PostWithImageTableViewCell).profileImageButton.image = storedImage
+                    (cell as! PostWithImageTableViewCell).contentImageView.image = storedImage
                 }
             } else {
                 (cell as! PostWithImageTableViewCell).contentImageTask = WebImageCache.shared.downloadImage(at: post.imageUrl) {imageData in
