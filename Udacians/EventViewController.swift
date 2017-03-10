@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class EventViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class EventViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var timeAndPlaceLabel: UILabel!
@@ -96,5 +96,12 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
         show(userVC, sender: nil)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 48, height: 48)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
+    }
     
 }
