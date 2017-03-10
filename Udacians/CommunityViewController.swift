@@ -165,12 +165,7 @@ class EventsTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ThreeTitleTableViewCell") as! ThreeTitleTableViewCell
-        var eventId: String
-        if indexPath.section == 0 {
-            eventId = myEvents[indexPath.row]
-        } else {
-            eventId = allEvents[indexPath.row]
-        }
+        let eventId = getEvent(at: indexPath)
         
         let eventInfoReference = ref.child("events").child(eventId).child("info")
         let nameReference = eventInfoReference.child("name")
@@ -208,6 +203,21 @@ class EventsTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let eventId = getEvent(at: indexPath)
+        let eventVC = owner.storyboard?.instantiateViewController(withIdentifier: "EventViewController") as! EventViewController
+        eventVC.eventId = eventId
+        owner.show(eventVC, sender: nil)
+    }
+    
+    private func getEvent(at indexPath: IndexPath) -> String {
+        if indexPath.section == 0 {
+            return myEvents[indexPath.row]
+        } else {
+            return allEvents[indexPath.row]
+        }
     }
     
 }

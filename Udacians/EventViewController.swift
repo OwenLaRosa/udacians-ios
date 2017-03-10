@@ -16,6 +16,14 @@ class EventViewController: UIViewController {
     @IBOutlet weak var interactButton: UIButton!
     @IBOutlet weak var aboutLabel: UILabel!
     
+    var eventId: String!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        title = eventId
+    }
+    
     @IBAction func interactButtonTapped(_ sender: UIButton) {
         
     }

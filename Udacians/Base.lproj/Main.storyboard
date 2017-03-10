@@ -866,7 +866,7 @@
         <!--Event-->
         <scene sceneID="34t-sO-bAP">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="YZP-Vm-eOI" customClass="EventViewController" customModule="Udacians" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EventViewController" automaticallyAdjustsScrollViewInsets="NO" id="YZP-Vm-eOI" customClass="EventViewController" customModule="Udacians" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="orl-Fn-m2s"/>
                         <viewControllerLayoutGuide type="bottom" id="I1u-ls-xZM"/>
