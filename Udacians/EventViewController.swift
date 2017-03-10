@@ -90,7 +90,10 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let attendee = attendees[indexPath.row]
+        let userVC = storyboard?.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+        userVC.thisUser = attendee
+        show(userVC, sender: nil)
     }
     
     
