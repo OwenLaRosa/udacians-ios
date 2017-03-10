@@ -924,7 +924,30 @@
                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             </collectionViewFlowLayout>
-                                            <cells/>
+                                            <cells>
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProfileLinkCollectionViewCell" id="zBN-pk-cEb" customClass="ProfileLinkCollectionViewCell" customModule="Udacians" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="-1" width="50" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u57-JQ-qCQ">
+                                                                <rect key="frame" x="0.0" y="0.0" width="43" height="39"/>
+                                                            </imageView>
+                                                        </subviews>
+                                                    </view>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="u57-JQ-qCQ" secondAttribute="trailing" id="TTq-sT-kb2"/>
+                                                        <constraint firstAttribute="bottom" secondItem="u57-JQ-qCQ" secondAttribute="bottom" id="VoU-2q-892"/>
+                                                        <constraint firstItem="u57-JQ-qCQ" firstAttribute="top" secondItem="zBN-pk-cEb" secondAttribute="top" id="gJ1-ht-pML"/>
+                                                        <constraint firstItem="u57-JQ-qCQ" firstAttribute="leading" secondItem="zBN-pk-cEb" secondAttribute="leading" id="iBM-JW-YgW"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <outlet property="imageView" destination="u57-JQ-qCQ" id="kwy-KC-UcW"/>
+                                                    </connections>
+                                                </collectionViewCell>
+                                            </cells>
                                             <connections>
                                                 <outlet property="dataSource" destination="YZP-Vm-eOI" id="Mfs-2a-hcA"/>
                                                 <outlet property="delegate" destination="YZP-Vm-eOI" id="KhR-8W-dP8"/>
