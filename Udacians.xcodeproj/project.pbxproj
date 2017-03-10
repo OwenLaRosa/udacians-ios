@@ -11,6 +11,7 @@
 		5A059C2F1E56AD9800DF54BD /* ThreeTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A059C2E1E56AD9800DF54BD /* ThreeTitleTableViewCell.swift */; };
 		5A059C311E56B0B900DF54BD /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A059C301E56B0B900DF54BD /* Article.swift */; };
 		5A29A8111E60D9EF00171486 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29A8101E60D9EF00171486 /* Utils.swift */; };
+		5A3B88E01E733BA2000FEC96 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3B88DF1E733BA2000FEC96 /* EventViewController.swift */; };
 		5A48F3221DC8F4F100D49219 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A48F3211DC8F4F100D49219 /* Profile.swift */; };
 		5A48F3241DC8FB4500D49219 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A48F3231DC8FB4500D49219 /* User.swift */; };
 		5A48F3261DC8FB5900D49219 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A48F3251DC8FB5900D49219 /* Account.swift */; };
@@ -84,6 +85,7 @@
 		5A059C2E1E56AD9800DF54BD /* ThreeTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeTitleTableViewCell.swift; sourceTree = "<group>"; };
 		5A059C301E56B0B900DF54BD /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		5A29A8101E60D9EF00171486 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		5A3B88DF1E733BA2000FEC96 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		5A48F3211DC8F4F100D49219 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		5A48F3231DC8FB4500D49219 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5A48F3251DC8FB5900D49219 /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				5A4FE8C71E4A448900896D79 /* UserViewController.swift */,
 				5AE9CAB21E6D109000E1E279 /* WritePostViewController.swift */,
 				5AE9CAB01E6CA9D700E1E279 /* EditProfileViewController.swift */,
+				5A3B88DF1E733BA2000FEC96 /* EventViewController.swift */,
 				5AE1EEDB1E09B52800731775 /* MapViewController.swift */,
 				5A29A8101E60D9EF00171486 /* Utils.swift */,
 			);
@@ -548,6 +551,7 @@
 				5ADCF38F1E6A56D200C4F313 /* ProfileLinkCollectionViewCell.swift in Sources */,
 				5AB6C3111E4FAF030033301F /* ConnectionTableViewCell.swift in Sources */,
 				5A4F82F31E4CCC520047869A /* WebImageCache.swift in Sources */,
+				5A3B88E01E733BA2000FEC96 /* EventViewController.swift in Sources */,
 				5A7CC8D11E4EC280001CEF72 /* ChatTableViewCell.swift in Sources */,
 				5A8555CA1DC51BFA00D8BF46 /* SwiftyJSON.swift in Sources */,
 				5A4FE8C21E4A444900896D79 /* FeedViewController.swift in Sources */,
