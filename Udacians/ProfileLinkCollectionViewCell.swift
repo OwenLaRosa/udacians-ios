@@ -12,4 +12,14 @@ class ProfileLinkCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     
+    // used for profile pictures of event attendees
+    // not used for profile links as these images are stored locally
+    var profileImageTask: URLSessionDataTask? {
+        didSet {
+            if let taskToCancel = oldValue {
+                taskToCancel.cancel()
+            }
+        }
+    }
+    
 }

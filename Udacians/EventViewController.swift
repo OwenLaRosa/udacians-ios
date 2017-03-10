@@ -67,6 +67,25 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileLinkCollectionViewCell", for: indexPath) as! ProfileLinkCollectionViewCell
         
+        let attendee = attendees[indexPath.row]
+        let photoReference = ref.child("users").child(attendee).child("basic").child("photo")
+        photoReference.observeSingleEvent(of: .value, with: {(snapshot) in
+            if let storedImage = WebImageCache.shared.image(with: attendee) {
+                cell.imageView.image = storedImage
+            } else {
+                if let url = snapshot.value as? String {
+                    cell.profileImageTask = WebImageCache.shared.downloadImage(at: url) {imageData in
+                        DispatchQueue.main.async {
+                            WebImageCache.shared.storeImage(image: imageData, withIdentifier: attendee)
+                            cell.imageView.image = imageData
+                        }
+                    }
+                } else {
+                    cell.imageView.image = UIImage(named: "Udacity_logo")
+                }
+            }
+        })
+        
         return cell
     }
     
