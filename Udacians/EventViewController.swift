@@ -9,17 +9,20 @@
 import UIKit
 import Firebase
 
-class EventViewController: UIViewController {
+class EventViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var timeAndPlaceLabel: UILabel!
     @IBOutlet weak var attendeeCountLabel: UILabel!
     @IBOutlet weak var interactButton: UIButton!
+    @IBOutlet weak var attendeesCollectionView: UICollectionView!
     @IBOutlet weak var aboutLabel: UILabel!
     
     var eventId: String!
     var ref: FIRDatabaseReference!
     var eventRef: FIRDatabaseReference!
+    
+    var attendees = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +41,18 @@ class EventViewController: UIViewController {
     }
     
     @IBAction func interactButtonTapped(_ sender: UIButton) {
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return attendees.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return ProfileLinkCollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
     }
     

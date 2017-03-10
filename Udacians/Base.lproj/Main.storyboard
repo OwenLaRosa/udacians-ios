@@ -912,8 +912,26 @@
                                                 <action selector="interactButtonTapped:" destination="YZP-Vm-eOI" eventType="touchUpInside" id="Nee-qa-vW0"/>
                                             </connections>
                                         </button>
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="an5-1d-4ne">
+                                            <rect key="frame" x="8" y="96" width="359" height="48"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="48" id="bNk-Bm-lzD"/>
+                                            </constraints>
+                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="F2n-Fr-XMS">
+                                                <size key="itemSize" width="50" height="50"/>
+                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            </collectionViewFlowLayout>
+                                            <cells/>
+                                            <connections>
+                                                <outlet property="dataSource" destination="YZP-Vm-eOI" id="Mfs-2a-hcA"/>
+                                                <outlet property="delegate" destination="YZP-Vm-eOI" id="KhR-8W-dP8"/>
+                                            </connections>
+                                        </collectionView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About Event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zxs-rZ-YU5">
-                                            <rect key="frame" x="8" y="96" width="359" height="21"/>
+                                            <rect key="frame" x="8" y="152" width="359" height="21"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -921,19 +939,22 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
+                                        <constraint firstItem="an5-1d-4ne" firstAttribute="top" secondItem="Dqg-Zb-9ZR" secondAttribute="bottom" constant="8" id="8ec-cN-Y3c"/>
+                                        <constraint firstAttribute="trailing" secondItem="an5-1d-4ne" secondAttribute="trailing" constant="8" id="9Hr-Wh-aWF"/>
                                         <constraint firstAttribute="trailing" secondItem="Ga0-E2-h8U" secondAttribute="trailing" constant="8" id="C9V-aU-WNE"/>
-                                        <constraint firstItem="zxs-rZ-YU5" firstAttribute="top" secondItem="Dqg-Zb-9ZR" secondAttribute="bottom" constant="8" id="Cqy-Rq-iUw"/>
+                                        <constraint firstItem="zxs-rZ-YU5" firstAttribute="leading" secondItem="KIp-1p-oEq" secondAttribute="leading" constant="8" id="DWr-m8-9yd"/>
+                                        <constraint firstItem="an5-1d-4ne" firstAttribute="leading" secondItem="KIp-1p-oEq" secondAttribute="leading" constant="8" id="J8m-he-LNp"/>
                                         <constraint firstItem="Uca-Aw-rSA" firstAttribute="top" secondItem="Ga0-E2-h8U" secondAttribute="bottom" constant="8" id="KxJ-8p-u0d"/>
                                         <constraint firstItem="Uca-Aw-rSA" firstAttribute="leading" secondItem="KIp-1p-oEq" secondAttribute="leading" constant="8" id="KzU-dT-hjo"/>
                                         <constraint firstItem="A6Z-7K-j9f" firstAttribute="baseline" secondItem="Dqg-Zb-9ZR" secondAttribute="baseline" id="Lyt-Nd-Px0"/>
                                         <constraint firstItem="Ga0-E2-h8U" firstAttribute="top" secondItem="KIp-1p-oEq" secondAttribute="top" constant="8" id="OfA-YS-mdk"/>
+                                        <constraint firstItem="zxs-rZ-YU5" firstAttribute="top" secondItem="an5-1d-4ne" secondAttribute="bottom" constant="8" id="VMm-Wz-5Ca"/>
                                         <constraint firstItem="Dqg-Zb-9ZR" firstAttribute="leading" secondItem="KIp-1p-oEq" secondAttribute="leading" constant="8" id="VPP-qR-sth"/>
                                         <constraint firstItem="Dqg-Zb-9ZR" firstAttribute="top" secondItem="Uca-Aw-rSA" secondAttribute="bottom" constant="12" id="ZXj-di-4kh"/>
                                         <constraint firstAttribute="trailing" secondItem="A6Z-7K-j9f" secondAttribute="trailing" constant="8" id="Zhy-F5-tr0"/>
                                         <constraint firstItem="Ga0-E2-h8U" firstAttribute="leading" secondItem="KIp-1p-oEq" secondAttribute="leading" constant="8" id="b3M-cw-BnS"/>
-                                        <constraint firstItem="zxs-rZ-YU5" firstAttribute="leading" secondItem="KIp-1p-oEq" secondAttribute="leading" constant="8" id="cZW-gj-7qZ"/>
-                                        <constraint firstAttribute="trailing" secondItem="zxs-rZ-YU5" secondAttribute="trailing" constant="8" id="mbF-Jv-17N"/>
                                         <constraint firstAttribute="trailing" secondItem="Uca-Aw-rSA" secondAttribute="trailing" constant="8" id="siY-bv-6pE"/>
+                                        <constraint firstAttribute="trailing" secondItem="zxs-rZ-YU5" secondAttribute="trailing" constant="8" id="wMW-yT-LbQ"/>
                                     </constraints>
                                 </view>
                             </tableView>
@@ -950,6 +971,7 @@
                     <connections>
                         <outlet property="aboutLabel" destination="zxs-rZ-YU5" id="aRn-13-Vaz"/>
                         <outlet property="attendeeCountLabel" destination="Dqg-Zb-9ZR" id="c9w-O3-YMX"/>
+                        <outlet property="attendeesCollectionView" destination="an5-1d-4ne" id="ohV-U0-VvD"/>
                         <outlet property="interactButton" destination="A6Z-7K-j9f" id="780-Oz-fQn"/>
                         <outlet property="nameLabel" destination="Ga0-E2-h8U" id="R8V-Cy-HOz"/>
                         <outlet property="timeAndPlaceLabel" destination="Uca-Aw-rSA" id="GpU-dj-FqC"/>
