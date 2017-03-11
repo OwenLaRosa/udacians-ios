@@ -16,10 +16,12 @@ class PostFeedTableViewDataSource: NSObject, UITableViewDataSource {
     var tableView: UITableView
     let isThisUser: Bool
     var userId = "3050228546"
+    var eventId: String!
     
-    init(tableView: UITableView, isThisUser: Bool = false) {
+    init(tableView: UITableView, isThisUser: Bool = false, eventId: String? = nil) {
         self.tableView = tableView
         self.isThisUser = isThisUser
+        self.eventId = eventId
         ref = FIRDatabase.database().reference()
     }
     
@@ -92,16 +94,25 @@ class PostFeedTableViewDataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        if eventId != nil {
+            // users can delete their own posts
+            return eventId == userId
+        } else {
+            return isThisUser
+        }
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let index = posts.count - indexPath.row - 1
-            let post = posts[index]
-            posts.remove(at: index)
-            ref.child("posts").child(post.id).removeValue()
-            ref.child("users").child(userId).child("posts").child(post.id).removeValue()
+                let index = posts.count - indexPath.row - 1
+                let post = posts[index]
+                posts.remove(at: index)
+            if eventId != nil {
+                ref.child("events").child(eventId).child("posts").child(post.id).removeValue()
+            } else {
+                ref.child("posts").child(post.id).removeValue()
+                ref.child("users").child(userId).child("posts").child(post.id).removeValue()
+            }
             tableView.reloadData()
         }
     }

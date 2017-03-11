@@ -31,7 +31,7 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dataSource = PostFeedTableViewDataSource(tableView: tableView)
+        dataSource = PostFeedTableViewDataSource(tableView: tableView, eventId: eventId)
         tableView.dataSource = dataSource
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
