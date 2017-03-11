@@ -136,4 +136,13 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
         return 8
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "WritePost" {
+            // destination is a navigation controller, it's single direct child is a post authoring VC
+            let destinationVC = segue.destination.childViewControllers[0] as! WritePostViewController
+            destinationVC.isUserPosts = false
+            destinationVC.eventId = eventId
+        }
+    }
+    
 }

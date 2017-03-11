@@ -1126,7 +1126,14 @@
                             <constraint firstItem="bSC-PJ-bcK" firstAttribute="top" secondItem="orl-Fn-m2s" secondAttribute="bottom" id="xn5-xd-TFN"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Event" id="nwT-cT-VtW"/>
+                    <navigationItem key="navigationItem" title="Event" id="nwT-cT-VtW">
+                        <barButtonItem key="rightBarButtonItem" title="Item" systemItem="compose" id="1tb-6f-JKQ">
+                            <color key="tintColor" red="1" green="0.56862745100000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="He6-VG-ZEc" kind="presentation" identifier="WritePost" modalTransitionStyle="coverVertical" id="45S-vK-j91"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="aboutLabel" destination="89v-MR-pbI" id="rU3-eb-qOp"/>
                         <outlet property="attendeeCountLabel" destination="HkY-vE-B6f" id="j2B-s5-ahC"/>
@@ -1796,4 +1803,7 @@
         <image name="settings" width="30" height="30"/>
         <image name="udacity_logo" width="256" height="256"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="45S-vK-j91"/>
+    </inferredMetricsTieBreakers>
 </document>
