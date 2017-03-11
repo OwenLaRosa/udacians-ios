@@ -11,12 +11,14 @@ import Firebase
 
 class EventViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var timeAndPlaceLabel: UILabel!
     @IBOutlet weak var attendeeCountLabel: UILabel!
     @IBOutlet weak var interactButton: UIButton!
     @IBOutlet weak var attendeesCollectionView: UICollectionView!
     @IBOutlet weak var aboutLabel: UILabel!
+    @IBOutlet weak var tableViewHeader: UIView!
     
     let userId = "3050228546"
     var eventId: String!
@@ -36,6 +38,7 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
             self.nameLabel.text = value["name"] as? String ?? ""
             self.timeAndPlaceLabel.text = value["place"] as? String ?? ""
             self.aboutLabel.text = value["about"] as? String ?? ""
+            self.updateTableHeaderHeight()
         })
         let attendeesRef = eventRef.child("members")
         attendeesRef.observe(.childAdded, with: {(snapshot) in
@@ -60,6 +63,11 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
     
     @IBAction func interactButtonTapped(_ sender: UIButton) {
         
+    }
+    
+    func updateTableHeaderHeight() {
+        // variable height of the label with some additional margin at the bottom
+        tableViewHeader.frame.size.height = aboutLabel.frame.origin.y + aboutLabel.intrinsicContentSize.height + 8
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
