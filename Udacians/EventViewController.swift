@@ -24,11 +24,17 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
     var eventId: String!
     var ref: FIRDatabaseReference!
     var eventRef: FIRDatabaseReference!
+    var dataSource: PostFeedTableViewDataSource!
     
     var attendees = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        dataSource = PostFeedTableViewDataSource(tableView: tableView)
+        tableView.dataSource = dataSource
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 140
         
         ref = FIRDatabase.database().reference()
         eventRef = ref.child("events").child(eventId)
@@ -58,6 +64,22 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
             }
             self.attendeeCountLabel.text = "\(self.attendees.count) Member\(self.attendees.count != 1 ? "s": "")"
             self.attendeesCollectionView.reloadData()
+        })
+        let postsRef = eventRef.child("posts")
+        postsRef.observe(.childAdded, with: {(snapshot) in
+            guard let data = snapshot.value as? [String: Any] else { return }
+            self.dataSource.posts.append(Message(id: snapshot.key, data: data))
+            self.tableView.reloadData()
+        })
+        postsRef.observe(.childRemoved, with: {(snapshot) in
+            let key = snapshot.key
+            for i in 0..<self.dataSource.posts.count {
+                if self.dataSource.posts[i].id == key {
+                    self.dataSource.posts.remove(at: i)
+                    break
+                }
+            }
+            self.tableView.reloadData()
         })
     }
     
