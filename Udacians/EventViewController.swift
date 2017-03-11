@@ -45,6 +45,7 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
             } else {
                 self.attendees.append(user)
             }
+            self.attendeeCountLabel.text = "\(self.attendees.count) Member\(self.attendees.count != 1 ? "s": "")"
             self.attendeesCollectionView.reloadData()
         })
         attendeesRef.observe(.childRemoved, with: {(snapshot) in
@@ -52,6 +53,7 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
             if let index = self.attendees.index(of: user) {
                 self.attendees.remove(at: index)
             }
+            self.attendeeCountLabel.text = "\(self.attendees.count) Member\(self.attendees.count != 1 ? "s": "")"
             self.attendeesCollectionView.reloadData()
         })
     }
