@@ -24,7 +24,9 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
     var eventId: String!
     var ref: FIRDatabaseReference!
     var eventRef: FIRDatabaseReference!
+    var isMemberReference: FIRDatabaseReference!
     var dataSource: PostFeedTableViewDataSource!
+    var isAttending = false
     
     var attendees = [String]()
     
@@ -81,10 +83,25 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
             }
             self.tableView.reloadData()
         })
+        isMemberReference = eventRef.child("members").child(userId)
+        isMemberReference.observe(.value, with: {(snapshot) in
+            if let flag = snapshot.value as? Bool, flag {
+                self.isAttending = true
+                self.interactButton.title = "Not Going"
+            } else {
+                self.isAttending = false
+                self.interactButton.title = "Attend"
+            }
+        })
     }
     
     @IBAction func interactButtonTapped(_ sender: UIButton) {
-        
+        if isAttending {
+            isMemberReference.removeValue()
+            ref.child("users").child(userId).child("events").child(eventId).removeValue()
+        } else {
+            isMemberReference.setValue(true)
+        }
     }
     
     func updateTableHeaderHeight() {
