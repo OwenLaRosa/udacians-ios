@@ -44,7 +44,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
         
         // if the VC was launched from the "Me" tab thisUser should be nil and user can delete posts
         // in all other cases, the user is viewing profiles and should not be able to delete posts
-        tableViewDataSource = PostFeedTableViewDataSource(tableView: tableView, isThisUser: thisUser == nil)
+        tableViewDataSource = PostFeedTableViewDataSource(owner: self, tableView: tableView, isThisUser: thisUser == nil)
         tableView.dataSource = tableViewDataSource
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140

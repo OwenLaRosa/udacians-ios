@@ -25,7 +25,7 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dataSource = PostFeedTableViewDataSource(tableView: feedTableView)
+        dataSource = PostFeedTableViewDataSource(owner: self, tableView: feedTableView)
         feedTableView.dataSource = dataSource
         feedTableView.rowHeight = UITableViewAutomaticDimension
         feedTableView.estimatedRowHeight = 140

@@ -11,6 +11,7 @@ import Firebase
 
 class PostFeedTableViewDataSource: NSObject, UITableViewDataSource {
     
+    var owner: UIViewController
     var posts = [Message]()
     var ref: FIRDatabaseReference
     var tableView: UITableView
@@ -18,7 +19,8 @@ class PostFeedTableViewDataSource: NSObject, UITableViewDataSource {
     var userId = "3050228546"
     var eventId: String!
     
-    init(tableView: UITableView, isThisUser: Bool = false, eventId: String? = nil) {
+    init(owner: UIViewController, tableView: UITableView, isThisUser: Bool = false, eventId: String? = nil) {
+        self.owner = owner
         self.tableView = tableView
         self.isThisUser = isThisUser
         self.eventId = eventId
@@ -42,11 +44,15 @@ class PostFeedTableViewDataSource: NSObject, UITableViewDataSource {
             cell = tableView.dequeueReusableCell(withIdentifier: "PostWithImageTableViewCell") as! PostWithImageTableViewCell
         }
         
-        // user should not be able to click profile image if it's on their profile
-        if isThisUser {
-            cell.profileImageButton.isUserInteractionEnabled = false
-        } else {
+        if eventId != nil {
             cell.profileImageButton.isUserInteractionEnabled = true
+            cell.profileButtonCallback = {
+                let userVC = self.owner.storyboard?.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+                userVC.thisUser = post.sender
+                self.owner.show(userVC, sender: nil)
+            }
+        } else {
+            cell.profileImageButton.isUserInteractionEnabled = false
         }
         
         let nameRef = ref.child("users").child(post.sender).child("basic").child("name")
@@ -104,9 +110,9 @@ class PostFeedTableViewDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-                let index = posts.count - indexPath.row - 1
-                let post = posts[index]
-                posts.remove(at: index)
+            let index = posts.count - indexPath.row - 1
+            let post = posts[index]
+            posts.remove(at: index)
             if eventId != nil {
                 ref.child("events").child(eventId).child("posts").child(post.id).removeValue()
             } else {
