@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import MessageUI
 
 class EventViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
@@ -83,25 +84,64 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
             }
             self.tableView.reloadData()
         })
-        isMemberReference = eventRef.child("members").child(userId)
-        isMemberReference.observe(.value, with: {(snapshot) in
-            if let flag = snapshot.value as? Bool, flag {
-                self.isAttending = true
-                self.interactButton.title = "Not Going"
-            } else {
-                self.isAttending = false
-                self.interactButton.title = "Attend"
-            }
-        })
+        if userId == eventId {
+            // the user that posted the event can email all members
+            interactButton.title = "Email"
+        } else {
+            isMemberReference = eventRef.child("members").child(userId)
+            isMemberReference.observe(.value, with: {(snapshot) in
+                if let flag = snapshot.value as? Bool, flag {
+                    self.isAttending = true
+                    self.interactButton.title = "Not Going"
+                } else {
+                    self.isAttending = false
+                    self.interactButton.title = "Attend"
+                }
+            })
+        }
     }
     
     @IBAction func interactButtonTapped(_ sender: UIButton) {
-        if isAttending {
-            isMemberReference.removeValue()
-            ref.child("users").child(userId).child("events").child(eventId).removeValue()
+        if userId == eventId {
+            var memberEmails = [String]()
+            // number of emails we've downloaded so far
+            var count = 0
+            // total number of emails to be downloaded
+            var totalEmails = attendees.count
+            // it's possible a user may be removed while downloading email addresses
+            // copying the arrays will ensure changes to "attendees" will not cause race conditions
+            let users = attendees
+            for i in users {
+                ref.child("users").child(i).child("email")
+                ref.observeSingleEvent(of: .value, with: {(snapshot) in
+                    count += 1
+                    if let email = snapshot.value as? String {
+                        memberEmails.append(email)
+                    }
+                    if count == totalEmails {
+                        self.showMailVC(addresses: memberEmails)
+                    }
+                })
+            }
         } else {
-            isMemberReference.setValue(true)
+            if isAttending {
+                isMemberReference.removeValue()
+                ref.child("users").child(userId).child("events").child(eventId).removeValue()
+            } else {
+                isMemberReference.setValue(true)
+            }
         }
+    }
+    
+    func showMailVC(addresses: [String]) {
+        if !MFMailComposeViewController.canSendMail() {
+            // TODO: Show alert if mail service unavailable
+            showAlert(title: "Mail Unavailable", message: "Mail service is unavailable on your device.")
+            return
+        }
+        let mailComposeVC = MFMailComposeViewController()
+        mailComposeVC.setToRecipients(addresses)
+        show(mailComposeVC, sender: nil)
     }
     
     func updateTableHeaderHeight() {
