@@ -46,7 +46,9 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         userLocationsRef.queryLimited(toLast: 100).queryOrdered(byChild: "timestamp").observe(.childAdded, with: {(snapshot) in
             if let data = snapshot.value as? [String: Any] {
                 if let location = UserLocation(data: data) {
-                    let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+                    let marker = UdaciansMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+                    marker.pinType = .person
+                    marker.key = snapshot.key
                     marker.icon = #imageLiteral(resourceName: "user_pin")
                     self.idToUserMarker[snapshot.key] = marker
                     marker.map = self.mapView
@@ -60,7 +62,9 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         userLocationsRef.observe(.childChanged, with: {(snapshot) in
             if let data = snapshot.value as? [String: Any] {
                 if let location = UserLocation(data: data) {
-                    let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+                    let marker = UdaciansMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+                    marker.pinType = .person
+                    marker.key = snapshot.key
                     marker.icon = #imageLiteral(resourceName: "user_pin")
                     self.idToUserMarker[snapshot.key]?.map = nil
                     self.idToUserMarker[snapshot.key] = marker
@@ -68,6 +72,17 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
                 }
             }
         })
+    }
+    
+    private enum PinType: Int {
+        case person = 0, event, topic, article
+    }
+    
+    private class UdaciansMarker: GMSMarker {
+        /// type of content marker is associated with
+        var pinType: PinType!
+        /// content associated with the marker (e.g. user, topic, event, article ID)
+        var key: String!
     }
     
     private class UserLocation {
@@ -86,6 +101,32 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             self.location = location
             self.timeStamp = timestamp
         }
+    }
+    
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        guard let udaciansMarker = marker as? UdaciansMarker else { return false }
+        switch udaciansMarker.pinType.rawValue {
+        case 0: // person
+            let userNameRef = ref.child("users").child(udaciansMarker.key).child("basic").child("name")
+            userNameRef.observeSingleEvent(of: .value, with: {(snapshot) in
+                udaciansMarker.title = snapshot.value as? String ?? ""
+            })
+            let userTitleRef = ref.child("users").child(udaciansMarker.key).child("basic").child("title")
+            userTitleRef.observeSingleEvent(of: .value, with: {(snapshot) in
+                udaciansMarker.snippet = snapshot.value as? String ?? "Udacian"
+            })
+            mapView.selectedMarker = udaciansMarker
+            break
+        case 1: // event
+            break
+        case 2: // topic
+            break
+        case 3: // article
+            break
+        default:
+            return false
+        }
+        return true
     }
     
 }
