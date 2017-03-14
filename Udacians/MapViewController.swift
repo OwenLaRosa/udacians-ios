@@ -45,7 +45,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     func loadMapData() {
         userLocationsRef.queryLimited(toLast: 100).queryOrdered(byChild: "timestamp").observe(.childAdded, with: {(snapshot) in
             if let data = snapshot.value as? [String: Any] {
-                if let location = UserLocation(data: data) {
+                if let location = UdaciansLocation(data: data) {
                     let marker = UdaciansMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
                     marker.pinType = .person
                     marker.key = snapshot.key
@@ -61,7 +61,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         })
         userLocationsRef.observe(.childChanged, with: {(snapshot) in
             if let data = snapshot.value as? [String: Any] {
-                if let location = UserLocation(data: data) {
+                if let location = UdaciansLocation(data: data) {
                     let marker = UdaciansMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
                     marker.pinType = .person
                     marker.key = snapshot.key
@@ -71,6 +71,22 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
                     marker.map = self.mapView
                 }
             }
+        })
+        eventLocationsRef.queryLimited(toLast: 20).queryOrdered(byChild: "timestamp").observe(.childAdded, with: {(snapshot) in
+            if let data = snapshot.value as? [String: Any] {
+                if let location = UdaciansLocation(data: data) {
+                    let marker = UdaciansMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+                    marker.pinType = .event
+                    marker.key = snapshot.key
+                    marker.icon = #imageLiteral(resourceName: "event_pin")
+                    self.idToEventMarker[snapshot.key] = marker
+                    marker.map = self.mapView
+                }
+            }
+        })
+        eventLocationsRef.observe(.childRemoved, with: {(snapshot) in
+            self.idToEventMarker[snapshot.key]?.map = nil
+            self.idToEventMarker.removeValue(forKey: snapshot.key)
         })
     }
     
@@ -83,23 +99,41 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         var pinType: PinType!
         /// content associated with the marker (e.g. user, topic, event, article ID)
         var key: String!
+        
+        func loadInfoWindowData(titleRef: FIRDatabaseReference, snippetRef: FIRDatabaseReference, defaultTitle: String!, defaultSnippet: String!) {
+            titleRef.observeSingleEvent(of: .value, with: {(snapshot) in
+                self.title = snapshot.value as? String ?? defaultTitle
+            })
+            snippetRef.observeSingleEvent(of: .value, with: {(snapshot) in
+                self.snippet = snapshot.value as? String ?? defaultSnippet
+            })
+        }
     }
     
-    private class UserLocation {
+    private class UdaciansLocation {
         let latitude: Double
         let longitude: Double
-        let location: String
         let timeStamp: Int
+        
+        // for user locations
+        let location: String!
+        
+        // for article locations
+        let title: String!
+        let url: String!
         
         init?(data: [String: Any]) {
             guard let latitude = data["latitude"] as? Double, latitude >= -90 && latitude <= 90 else { return nil }
             guard let longitude = data["longitude"] as? Double, longitude >= -180 && longitude <= 180 else { return nil }
-            guard let location = data["location"] as? String  else { return nil }
             guard let timestamp = data["timestamp"] as? Int else { return nil }
             self.latitude = latitude
             self.longitude = longitude
-            self.location = location
             self.timeStamp = timestamp
+            
+            self.location = data["location"] as? String
+            
+            self.title = data["title"] as? String
+            self.url = data["url"] as? String
         }
     }
     
@@ -108,16 +142,15 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         switch udaciansMarker.pinType.rawValue {
         case 0: // person
             let userNameRef = ref.child("users").child(udaciansMarker.key).child("basic").child("name")
-            userNameRef.observeSingleEvent(of: .value, with: {(snapshot) in
-                udaciansMarker.title = snapshot.value as? String ?? ""
-            })
             let userTitleRef = ref.child("users").child(udaciansMarker.key).child("basic").child("title")
-            userTitleRef.observeSingleEvent(of: .value, with: {(snapshot) in
-                udaciansMarker.snippet = snapshot.value as? String ?? "Udacian"
-            })
+            udaciansMarker.loadInfoWindowData(titleRef: userNameRef, snippetRef: userTitleRef, defaultTitle: nil, defaultSnippet: "Udacian")
             mapView.selectedMarker = udaciansMarker
             break
         case 1: // event
+            let eventNameRef = ref.child("events").child(udaciansMarker.key).child("info").child("name")
+            let eventPlaceRef = ref.child("events").child(udaciansMarker.key).child("info").child("place")
+            udaciansMarker.loadInfoWindowData(titleRef: eventNameRef, snippetRef: eventPlaceRef, defaultTitle: nil, defaultSnippet: nil)
+            mapView.selectedMarker = udaciansMarker
             break
         case 2: // topic
             break
@@ -138,6 +171,9 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             show(userVC, sender: nil)
             break
         case 1:
+            let eventVC = storyboard?.instantiateViewController(withIdentifier: "EventViewController") as! EventViewController
+            eventVC.eventId = udaciansMarker.key
+            show(eventVC, sender: nil)
             break
         case 2:
             break
