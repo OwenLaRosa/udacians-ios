@@ -26,6 +26,7 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         
         dataSource = PostFeedTableViewDataSource(owner: self, tableView: feedTableView)
+        dataSource.isMainFeed = true
         feedTableView.dataSource = dataSource
         feedTableView.rowHeight = UITableViewAutomaticDimension
         feedTableView.estimatedRowHeight = 140

@@ -612,6 +612,9 @@
                                                                 <constraint firstAttribute="height" constant="48" id="wmu-zU-tVM"/>
                                                             </constraints>
                                                             <state key="normal" image="udacity_logo"/>
+                                                            <connections>
+                                                                <action selector="profileButtonTapped:" destination="Ft2-Q8-6da" eventType="touchUpInside" id="Oj3-JC-IFX"/>
+                                                            </connections>
                                                         </button>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="6tz-WN-6l3">
                                                             <rect key="frame" x="56" y="0.0" width="303" height="161"/>
@@ -683,6 +686,9 @@
                                                                 <constraint firstAttribute="height" constant="48" id="qkh-1T-Spw"/>
                                                             </constraints>
                                                             <state key="normal" image="udacity_logo"/>
+                                                            <connections>
+                                                                <action selector="profileButtonTapped:" destination="Pdv-O8-XJp" eventType="touchUpInside" id="HpE-Aq-cOg"/>
+                                                            </connections>
                                                         </button>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="rl6-Qw-bjC">
                                                             <rect key="frame" x="56" y="0.0" width="303" height="28"/>

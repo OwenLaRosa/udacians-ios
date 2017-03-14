@@ -18,6 +18,8 @@ class PostFeedTableViewDataSource: NSObject, UITableViewDataSource {
     let isThisUser: Bool
     var userId = "3050228546"
     var eventId: String!
+    // is this the list of all posts from users we're following, accessed from the "Feed" tab?
+    var isMainFeed = false
     
     init(owner: UIViewController, tableView: UITableView, isThisUser: Bool = false, eventId: String? = nil) {
         self.owner = owner
@@ -44,7 +46,7 @@ class PostFeedTableViewDataSource: NSObject, UITableViewDataSource {
             cell = tableView.dequeueReusableCell(withIdentifier: "PostWithImageTableViewCell") as! PostWithImageTableViewCell
         }
         
-        if eventId != nil {
+        if eventId != nil || isMainFeed {
             cell.profileImageButton.isUserInteractionEnabled = true
             cell.profileButtonCallback = {
                 let userVC = self.owner.storyboard?.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
