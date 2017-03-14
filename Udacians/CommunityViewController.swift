@@ -127,6 +127,16 @@ class ArticlesTableViewProvider: NSObject, UITableViewDataSource, UITableViewDel
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let article = articles[indexPath.row]
+        if let url = URL(string: article.url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            owner.showAlert(title: "Cannot open URL", message: "URL is not in the correct format")
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
 }
 
 class EventsTableViewProvider: NSObject, UITableViewDataSource, UITableViewDelegate {
