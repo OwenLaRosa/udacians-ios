@@ -589,6 +589,96 @@
             </objects>
             <point key="canvasLocation" x="-1266.4000000000001" y="-2282.608695652174"/>
         </scene>
+        <!--Multiple Input View Controller-->
+        <scene sceneID="ZXc-kT-fVJ">
+            <objects>
+                <viewController id="YQt-Nh-b4p" customClass="MultipleInputViewController" customModule="Udacians" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wz2-aM-yXc"/>
+                        <viewControllerLayoutGuide type="bottom" id="Hhf-QH-X61"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="c1m-o6-qOC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jw4-Hs-U5V">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YiX-fK-yHW">
+                                        <rect key="frame" x="8" y="609" width="48" height="30"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" red="1" green="0.56862745100000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="negativeButtonTapped:" destination="YQt-Nh-b4p" eventType="touchUpInside" id="hxd-Gx-cTi"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="flg-9h-Wk3">
+                                        <rect key="frame" x="318" y="609" width="49" height="30"/>
+                                        <state key="normal" title="Submit">
+                                            <color key="titleColor" red="1" green="0.56862745100000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="positiveButtonTapped:" destination="YQt-Nh-b4p" eventType="touchUpInside" id="E7v-Ae-jqM"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add New... " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Rg-zc-nfe">
+                                        <rect key="frame" x="8" y="0.0" width="359" height="27"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                        <color key="textColor" red="0.0039215686269999999" green="0.3411764706" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instruction for text to enter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xrc-fS-Yes">
+                                        <rect key="frame" x="8" y="34.5" width="359" height="21"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OA6-Fp-aMW">
+                                        <rect key="frame" x="8" y="67.5" width="359" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="7Rg-zc-nfe" firstAttribute="top" secondItem="Jw4-Hs-U5V" secondAttribute="top" id="6qw-mq-b0C"/>
+                                    <constraint firstItem="Xrc-fS-Yes" firstAttribute="top" secondItem="7Rg-zc-nfe" secondAttribute="bottom" constant="8" id="CTv-TE-fp5"/>
+                                    <constraint firstItem="OA6-Fp-aMW" firstAttribute="top" secondItem="Xrc-fS-Yes" secondAttribute="bottom" constant="12" id="ESQ-qg-pc9"/>
+                                    <constraint firstAttribute="trailing" secondItem="Xrc-fS-Yes" secondAttribute="trailing" constant="8" id="PT4-nR-zLR"/>
+                                    <constraint firstAttribute="bottom" secondItem="flg-9h-Wk3" secondAttribute="bottom" constant="8" id="QYT-Un-74U"/>
+                                    <constraint firstItem="YiX-fK-yHW" firstAttribute="leading" secondItem="Jw4-Hs-U5V" secondAttribute="leading" constant="8" id="ZKt-g5-Crn"/>
+                                    <constraint firstAttribute="bottom" secondItem="YiX-fK-yHW" secondAttribute="bottom" constant="8" id="ZTp-yW-80c"/>
+                                    <constraint firstItem="Xrc-fS-Yes" firstAttribute="leading" secondItem="Jw4-Hs-U5V" secondAttribute="leading" constant="8" id="cur-cc-zBd"/>
+                                    <constraint firstAttribute="trailing" secondItem="flg-9h-Wk3" secondAttribute="trailing" constant="8" id="gdM-YS-Lhu"/>
+                                    <constraint firstItem="7Rg-zc-nfe" firstAttribute="leading" secondItem="Jw4-Hs-U5V" secondAttribute="leading" constant="8" id="h9i-rf-oWc"/>
+                                    <constraint firstAttribute="trailing" secondItem="OA6-Fp-aMW" secondAttribute="trailing" constant="8" id="jIY-rP-izD"/>
+                                    <constraint firstItem="OA6-Fp-aMW" firstAttribute="leading" secondItem="Jw4-Hs-U5V" secondAttribute="leading" constant="8" id="k8D-9H-uwj"/>
+                                    <constraint firstAttribute="trailing" secondItem="7Rg-zc-nfe" secondAttribute="trailing" constant="8" id="vOJ-DR-HvV"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Jw4-Hs-U5V" firstAttribute="leading" secondItem="c1m-o6-qOC" secondAttribute="leading" id="WYT-Dq-e2w"/>
+                            <constraint firstItem="Jw4-Hs-U5V" firstAttribute="bottom" secondItem="Hhf-QH-X61" secondAttribute="top" id="cLe-6r-qeA"/>
+                            <constraint firstItem="Jw4-Hs-U5V" firstAttribute="top" secondItem="wz2-aM-yXc" secondAttribute="bottom" id="rLN-D0-gsg"/>
+                            <constraint firstAttribute="trailing" secondItem="Jw4-Hs-U5V" secondAttribute="trailing" id="vFs-Y5-vhb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="inputTextField" destination="OA6-Fp-aMW" id="IRL-qv-gkO"/>
+                        <outlet property="instructionLabel" destination="Xrc-fS-Yes" id="57d-Sx-OhO"/>
+                        <outlet property="negativeButton" destination="YiX-fK-yHW" id="Rjo-hz-r58"/>
+                        <outlet property="positiveButton" destination="flg-9h-Wk3" id="ajX-E8-zs4"/>
+                        <outlet property="titleLabel" destination="7Rg-zc-nfe" id="PmR-w9-riE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XEp-iL-8oL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-492" y="-2283.5082458770617"/>
+        </scene>
         <!--Feed-->
         <scene sceneID="ltU-Hl-hBn">
             <objects>
