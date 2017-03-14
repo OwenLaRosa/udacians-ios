@@ -104,6 +104,24 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             self.idToTopicMarker[snapshot.key]?.map = nil
             self.idToTopicMarker.removeValue(forKey: snapshot.key)
         })
+        articlesRef.queryLimited(toLast: 20).queryOrdered(byChild: "timestamp").observe(.childAdded, with: {(snapshot) in
+            if let data = snapshot.value as? [String: Any] {
+                if let location = UdaciansLocation(data: data) {
+                    let marker = UdaciansMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+                    marker.pinType = .article
+                    marker.key = location.url
+                    marker.icon = #imageLiteral(resourceName: "article_pin")
+                    marker.title = location.title
+                    marker.snippet = location.url
+                    self.idToArticleMarker[snapshot.key] = marker
+                    marker.map = self.mapView
+                }
+            }
+        })
+        articlesRef.observe(.childRemoved, with: {(snapshot) in
+            self.idToArticleMarker[snapshot.key]?.map = nil
+            self.idToArticleMarker.removeValue(forKey: snapshot.key)
+        })
     }
     
     private enum PinType: Int {
@@ -113,7 +131,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     private class UdaciansMarker: GMSMarker {
         /// type of content marker is associated with
         var pinType: PinType!
-        /// content associated with the marker (e.g. user, topic, event, article ID)
+        /// content associated with the marker (e.g. user, topic, event ID, or the article URL)
         var key: String!
         
         func loadInfoWindowData(titleRef: FIRDatabaseReference, snippetRef: FIRDatabaseReference, defaultTitle: String!, defaultSnippet: String!) {
@@ -175,6 +193,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             mapView.selectedMarker = udaciansMarker
             break
         case 3: // article
+            // title and snippet are already set when the marker is created
+            mapView.selectedMarker = udaciansMarker
             break
         default:
             return false
@@ -201,6 +221,9 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             show(topicVC, sender: nil)
             break
         case 3:
+            if let url = URL(string: udaciansMarker.key) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
             break
         default:
             break
