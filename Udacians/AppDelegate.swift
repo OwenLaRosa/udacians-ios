@@ -24,7 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRDatabase.database().persistenceEnabled = true
         
         // set up Google Maps
-        GMSServices.provideAPIKey("AIzaSyDd4YX1xiy9u0uHcloSlmefAiv2svg1WFo")
+        //GMSServices.provideAPIKey("AIzaSyDd4YX1xiy9u0uHcloSlmefAiv2svg1WFo")
+        GMSServices.provideAPIKey("AIzaSyCwxxASjGvziAJ5lm7x0OkVwbpXJW5HPyc")
         
         return true
     }
