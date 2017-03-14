@@ -47,6 +47,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             if let data = snapshot.value as? [String: Any] {
                 if let location = UserLocation(data: data) {
                     let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+                    marker.icon = #imageLiteral(resourceName: "user_pin")
                     self.idToUserMarker[snapshot.key] = marker
                     marker.map = self.mapView
                 }
@@ -60,6 +61,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             if let data = snapshot.value as? [String: Any] {
                 if let location = UserLocation(data: data) {
                     let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+                    marker.icon = #imageLiteral(resourceName: "user_pin")
                     self.idToUserMarker[snapshot.key]?.map = nil
                     self.idToUserMarker[snapshot.key] = marker
                     marker.map = self.mapView
