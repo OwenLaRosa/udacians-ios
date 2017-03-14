@@ -88,6 +88,22 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             self.idToEventMarker[snapshot.key]?.map = nil
             self.idToEventMarker.removeValue(forKey: snapshot.key)
         })
+        topicLocationsRef.queryLimited(toLast: 20).queryOrdered(byChild: "timestamp").observe(.childAdded, with: {(snapshot) in
+            if let data = snapshot.value as? [String: Any] {
+                if let location = UdaciansLocation(data: data) {
+                    let marker = UdaciansMarker(position: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+                    marker.pinType = .topic
+                    marker.key = snapshot.key
+                    marker.icon = #imageLiteral(resourceName: "topic_pin")
+                    self.idToTopicMarker[snapshot.key] = marker
+                    marker.map = self.mapView
+                }
+            }
+        })
+        topicLocationsRef.observe(.childRemoved, with: {(snapshot) in
+            self.idToTopicMarker[snapshot.key]?.map = nil
+            self.idToTopicMarker.removeValue(forKey: snapshot.key)
+        })
     }
     
     private enum PinType: Int {
@@ -153,6 +169,10 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             mapView.selectedMarker = udaciansMarker
             break
         case 2: // topic
+            let topicNameRef = ref.child("topics").child(udaciansMarker.key).child("info").child("name")
+            let posterNameRef = ref.child("users").child(udaciansMarker.key).child("basic").child("name")
+            udaciansMarker.loadInfoWindowData(titleRef: topicNameRef, snippetRef: posterNameRef, defaultTitle: "Unnamed Topic", defaultSnippet: "Unknown Poster")
+            mapView.selectedMarker = udaciansMarker
             break
         case 3: // article
             break
@@ -176,6 +196,9 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             show(eventVC, sender: nil)
             break
         case 2:
+            let topicVC = storyboard?.instantiateViewController(withIdentifier: "MessageViewController") as! MessageViewController
+            topicVC.chatId = udaciansMarker.key
+            show(topicVC, sender: nil)
             break
         case 3:
             break
