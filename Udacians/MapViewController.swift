@@ -129,4 +129,23 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         return true
     }
     
+    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+        guard let udaciansMarker = marker as? UdaciansMarker else { return }
+        switch udaciansMarker.pinType.rawValue {
+        case 0:
+            let userVC = storyboard?.instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
+            userVC.thisUser = udaciansMarker.key
+            show(userVC, sender: nil)
+            break
+        case 1:
+            break
+        case 2:
+            break
+        case 3:
+            break
+        default:
+            break
+        }
+    }
+    
 }
