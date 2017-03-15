@@ -10,6 +10,11 @@ import UIKit
 import GoogleMaps
 import Firebase
 
+// data to be passed to the multiple input VC
+// consists of the type of content (event, topic, article)
+// and the map coordinates where the user long-pressed
+typealias InputData = (type: MultipleInputViewController.ContentType, coordinate: CLLocationCoordinate2D)
+
 class MapViewController: UIViewController, GMSMapViewDelegate {
     
     @IBOutlet weak var mapView: GMSMapView!
@@ -227,6 +232,32 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
             break
         default:
             break
+        }
+    }
+    
+    func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
+        let inputVC = storyboard?.instantiateViewController(withIdentifier: "MultipleInputViewController") as! MultipleInputViewController
+        inputVC.coordinate = coordinate
+        let addNewMenu = UIAlertController(title: "Add New", message: "What type of content would you like to add?\nThis will overwrite previously added content of the same type.", preferredStyle: .actionSheet)
+        addNewMenu.addAction(UIAlertAction(title: "Topic", style: .default, handler: {(alert: UIAlertAction?) -> Void in
+            self.performSegue(withIdentifier: "ShowInputView", sender: InputData(type: .topic, coordinate: coordinate))
+        }))
+        addNewMenu.addAction(UIAlertAction(title: "Article", style: .default, handler: {(alert: UIAlertAction?) -> Void in
+            self.performSegue(withIdentifier: "ShowInputView", sender: InputData(type: .article, coordinate: coordinate))
+        }))
+        addNewMenu.addAction(UIAlertAction(title: "Event", style: .default, handler: {(alert: UIAlertAction?) -> Void in
+            self.performSegue(withIdentifier: "ShowInputView", sender: InputData(type: .event, coordinate: coordinate))
+        }))
+        addNewMenu.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(addNewMenu, animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowInputView" {
+            let inputVC = segue.destination as! MultipleInputViewController
+            let data = sender as! InputData
+            inputVC.contentType = data.type
+            inputVC.coordinate = data.coordinate
         }
     }
     

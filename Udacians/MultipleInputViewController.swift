@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class MultipleInputViewController: UIViewController {
     
@@ -15,6 +16,13 @@ class MultipleInputViewController: UIViewController {
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var negativeButton: UIButton!
     @IBOutlet weak var positiveButton: UIButton!
+    
+    var contentType: ContentType!
+    var coordinate: CLLocationCoordinate2D!
+    
+    public enum ContentType: Int {
+        case topic = 0, article, event
+    }
 
     @IBAction func negativeButtonTapped(_ sender: UIButton) {
         
