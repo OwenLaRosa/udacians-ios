@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import Firebase
 
 class MultipleInputViewController: UIViewController {
     
@@ -43,7 +44,11 @@ class MultipleInputViewController: UIViewController {
     var coordinate: CLLocationCoordinate2D!
     var currentPage = 1
     var currentKey = ""
-    var contents = [String: String]()
+    var contents = [String: Any]()
+    
+    let userId = "3050228546"
+    
+    var ref: FIRDatabaseReference!
     
     public enum ContentType: Int {
         case topic = 0, article, event
@@ -56,7 +61,19 @@ class MultipleInputViewController: UIViewController {
             self.dismiss(animated: true, completion: nil)
         }
         submitAction = {
-            
+            self.contents[self.currentKey] = self.inputTextField.text!
+            switch self.contentType.rawValue {
+            case 0:
+                self.addNewTopic()
+                break
+            case 1:
+                break
+            case 2:
+                break
+            default:
+                self.dismiss(animated: true, completion: nil)
+                break
+            }
         }
         nextAction = {
             self.contents[self.currentKey] = self.inputTextField.text!
@@ -68,6 +85,8 @@ class MultipleInputViewController: UIViewController {
             self.currentPage -= 1
             self.configureUI()
         }
+        
+        ref = FIRDatabase.database().reference()
         
         configureUI()
     }
@@ -144,7 +163,33 @@ class MultipleInputViewController: UIViewController {
         default:
             break
         }
-        inputTextField.text = contents[currentKey] ?? ""
+        inputTextField.text = contents[currentKey] as? String ?? ""
+    }
+    
+    func addNewTopic() {
+        // add info for identifying the location and querying
+        contents[InfoKeys.LONGITUDE] = coordinate.longitude
+        contents[InfoKeys.LATITUDE] = coordinate.latitude
+        contents[InfoKeys.TIMESTAMP] = FIRServerValue.timestamp()
+        
+        let name = contents[InfoKeys.NAME] as! String
+        contents.removeValue(forKey: InfoKeys.NAME)
+        
+        let topicLocationRef = ref.child("topic_locations").child(userId)
+        topicLocationRef.removeValue()
+        topicLocationRef.setValue(contents)
+        
+        let topicRef = ref.child("topics").child(userId)
+        let topicNameRef = topicRef.child("info").child("name")
+        topicNameRef.setValue(name)
+        
+        // clear messages from old topic
+        let messagesRef = topicRef.child("messages")
+        messagesRef.removeValue()
+        
+        // make this topic visible on the user's profile
+        let userTopicRef = ref.child("users").child(userId).child("topics").child(userId)
+        userTopicRef.setValue(true)
     }
     
 }
