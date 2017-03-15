@@ -69,6 +69,8 @@ class MultipleInputViewController: UIViewController {
         switch contentType.rawValue {
         case 0: // topic
             titleLabel.text = "Add New Topic"
+            instructionLabel.text = "What would you like to discuss with other students?"
+            inputTextField.placeholder = "Discussion prompt"
             // topics only have one page
             negativeButton.title = MultipleInputViewController.BUTTON_CANCEL
             negativeAction = dismissAction
@@ -78,11 +80,15 @@ class MultipleInputViewController: UIViewController {
         case 1: // article
             titleLabel.text = "Add New Article"
             if currentPage == 1 {
+                instructionLabel.text = "What is the title of the article?"
+                inputTextField.placeholder = "E.g. How to Code Like Jon Skeet"
                 negativeButton.title = MultipleInputViewController.BUTTON_CANCEL
                 negativeAction = dismissAction
                 positiveButton.title = MultipleInputViewController.BUTTON_NEXT
                 positiveAction = nextAction
             } else { // page 2
+                instructionLabel.text = "What is the URL of the article?"
+                inputTextField.placeholder = "http://google.com"
                 negativeButton.title = MultipleInputViewController.BUTTON_BACK
                 negativeAction = backAction
                 positiveButton.title = MultipleInputViewController.BUTTON_SUBMIT
@@ -92,16 +98,22 @@ class MultipleInputViewController: UIViewController {
         case 2: // event
             titleLabel.text = "Add New Event"
             if currentPage == 1 {
+                instructionLabel.text = "What is the name of the event?"
+                inputTextField.placeholder = "iOS Developers meetup"
                 negativeButton.title = MultipleInputViewController.BUTTON_CANCEL
                 negativeAction = dismissAction
                 positiveButton.title = MultipleInputViewController.BUTTON_NEXT
                 positiveAction = nextAction
             } else if currentPage == 2 {
+                instructionLabel.text = "Where is this event?"
+                inputTextField.placeholder = "E.g. Microsoft NERD Center. Cambridge, MA"
                 negativeButton.title = MultipleInputViewController.BUTTON_BACK
                 negativeAction = backAction
                 positiveButton.title = MultipleInputViewController.BUTTON_NEXT
                 positiveAction = nextAction
             } else { // page 3
+                instructionLabel.text = "Event Details"
+                inputTextField.placeholder = "Competitive Hackathon, Saturday at 1:00 PM"
                 negativeButton.title = MultipleInputViewController.BUTTON_BACK
                 negativeAction = backAction
                 positiveButton.title = MultipleInputViewController.BUTTON_SUBMIT
