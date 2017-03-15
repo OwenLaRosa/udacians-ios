@@ -29,19 +29,30 @@ class MultipleInputViewController: UIViewController {
     public enum ContentType: Int {
         case topic = 0, article, event
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureUI()
+    }
 
     @IBAction func negativeButtonTapped(_ sender: UIButton) {
         
     }
     
     @IBAction func positiveButtonTapped(_ sender: UIButton) {
+        
+    }
+    
+    func configureUI() {
         switch contentType.rawValue {
-        case 0:
+        case 0: // topic
+            titleLabel.text = "Add New Topic"
             // topics only have one page
             negativeButton.title = MultipleInputViewController.BUTTON_CANCEL
             positiveButton.title = MultipleInputViewController.BUTTON_SUBMIT
             break
-        case 1:
+        case 1: // article
+            titleLabel.text = "Add New Article"
             if currentPage == 1 {
                 negativeButton.title = MultipleInputViewController.BUTTON_CANCEL
                 positiveButton.title = MultipleInputViewController.BUTTON_NEXT
@@ -50,7 +61,8 @@ class MultipleInputViewController: UIViewController {
                 positiveButton.title = MultipleInputViewController.BUTTON_SUBMIT
             }
             break
-        case 2:
+        case 2: // event
+            titleLabel.text = "Add New Event"
             if currentPage == 1 {
                 negativeButton.title = MultipleInputViewController.BUTTON_CANCEL
                 positiveButton.title = MultipleInputViewController.BUTTON_NEXT
