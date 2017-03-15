@@ -70,6 +70,7 @@ class MultipleInputViewController: UIViewController {
                 self.addNewArticle()
                 break
             case 2:
+                self.addNewEvent()
                 break
             default:
                 self.dismiss(animated: true, completion: nil)
@@ -198,6 +199,39 @@ class MultipleInputViewController: UIViewController {
         let articleRef = ref.child("articles").child(userId)
         articleRef.removeValue()
         articleRef.setValue(contents)
+    }
+    
+    func addNewEvent() {
+        var eventLocation = [String: Any]()
+        eventLocation[InfoKeys.LONGITUDE] = coordinate.longitude
+        eventLocation[InfoKeys.LATITUDE] = coordinate.latitude
+        eventLocation[InfoKeys.TIMESTAMP] = FIRServerValue.timestamp()
+        
+        let eventLocationRef = ref.child("event_locations").child(userId)
+        eventLocationRef.removeValue()
+        eventLocationRef.setValue(eventLocation)
+        
+        let eventRef = ref.child("events").child(userId)
+        let eventInfoRef = eventRef.child("info")
+        eventInfoRef.setValue(contents)
+        
+        let eventPostsRef = eventRef.child("posts")
+        eventPostsRef.removeValue()
+        
+        let eventMembersRef = eventRef.child("members")
+        eventMembersRef.observe(.childAdded, with: {(snapshot) in
+            let memberId = snapshot.key
+            if memberId == self.userId {
+                return
+            }
+            let memberEventReference = self.ref.child("users").child(memberId).child("events").child(self.userId)
+            memberEventReference.removeValue()
+            eventMembersRef.child(memberId).removeValue()
+        })
+        
+        let thisUserEventReference = ref.child("users").child(userId).child("events").child(userId)
+        thisUserEventReference.setValue(true)
+        eventMembersRef.child(userId).setValue(true)
     }
     
     func addCoordinatesAndTimestamp() {
