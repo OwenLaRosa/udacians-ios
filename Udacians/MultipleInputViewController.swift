@@ -11,6 +11,17 @@ import CoreLocation
 
 class MultipleInputViewController: UIViewController {
     
+    private struct InfoKeys {
+        static let NAME = "name"
+        static let TITLE = "title"
+        static let URL = "url"
+        static let PLACE = "place"
+        static let ABOUT = "about"
+        static let LONGITUDE = "longitude"
+        static let LATITUDE = "latitude"
+        static let TIMESTAMP = "timestamp"
+    }
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var instructionLabel: UILabel!
     @IBOutlet weak var inputTextField: UITextField!
@@ -31,6 +42,8 @@ class MultipleInputViewController: UIViewController {
     var contentType: ContentType!
     var coordinate: CLLocationCoordinate2D!
     var currentPage = 1
+    var currentKey = ""
+    var contents = [String: String]()
     
     public enum ContentType: Int {
         case topic = 0, article, event
@@ -46,10 +59,12 @@ class MultipleInputViewController: UIViewController {
             
         }
         nextAction = {
+            self.contents[self.currentKey] = self.inputTextField.text!
             self.currentPage += 1
             self.configureUI()
         }
         backAction = {
+            self.contents[self.currentKey] = self.inputTextField.text!
             self.currentPage -= 1
             self.configureUI()
         }
@@ -68,6 +83,7 @@ class MultipleInputViewController: UIViewController {
     func configureUI() {
         switch contentType.rawValue {
         case 0: // topic
+            currentKey = InfoKeys.NAME
             titleLabel.text = "Add New Topic"
             instructionLabel.text = "What would you like to discuss with other students?"
             inputTextField.placeholder = "Discussion prompt"
@@ -80,6 +96,7 @@ class MultipleInputViewController: UIViewController {
         case 1: // article
             titleLabel.text = "Add New Article"
             if currentPage == 1 {
+                currentKey = InfoKeys.TITLE
                 instructionLabel.text = "What is the title of the article?"
                 inputTextField.placeholder = "E.g. How to Code Like Jon Skeet"
                 negativeButton.title = MultipleInputViewController.BUTTON_CANCEL
@@ -87,6 +104,7 @@ class MultipleInputViewController: UIViewController {
                 positiveButton.title = MultipleInputViewController.BUTTON_NEXT
                 positiveAction = nextAction
             } else { // page 2
+                currentKey = InfoKeys.URL
                 instructionLabel.text = "What is the URL of the article?"
                 inputTextField.placeholder = "http://google.com"
                 negativeButton.title = MultipleInputViewController.BUTTON_BACK
@@ -98,6 +116,7 @@ class MultipleInputViewController: UIViewController {
         case 2: // event
             titleLabel.text = "Add New Event"
             if currentPage == 1 {
+                currentKey = InfoKeys.NAME
                 instructionLabel.text = "What is the name of the event?"
                 inputTextField.placeholder = "iOS Developers meetup"
                 negativeButton.title = MultipleInputViewController.BUTTON_CANCEL
@@ -105,6 +124,7 @@ class MultipleInputViewController: UIViewController {
                 positiveButton.title = MultipleInputViewController.BUTTON_NEXT
                 positiveAction = nextAction
             } else if currentPage == 2 {
+                currentKey = InfoKeys.PLACE
                 instructionLabel.text = "Where is this event?"
                 inputTextField.placeholder = "E.g. Microsoft NERD Center. Cambridge, MA"
                 negativeButton.title = MultipleInputViewController.BUTTON_BACK
@@ -112,6 +132,7 @@ class MultipleInputViewController: UIViewController {
                 positiveButton.title = MultipleInputViewController.BUTTON_NEXT
                 positiveAction = nextAction
             } else { // page 3
+                currentKey = InfoKeys.ABOUT
                 instructionLabel.text = "Event Details"
                 inputTextField.placeholder = "Competitive Hackathon, Saturday at 1:00 PM"
                 negativeButton.title = MultipleInputViewController.BUTTON_BACK
@@ -123,6 +144,7 @@ class MultipleInputViewController: UIViewController {
         default:
             break
         }
+        inputTextField.text = contents[currentKey] ?? ""
     }
     
 }
