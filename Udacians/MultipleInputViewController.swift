@@ -67,6 +67,7 @@ class MultipleInputViewController: UIViewController {
                 self.addNewTopic()
                 break
             case 1:
+                self.addNewArticle()
                 break
             case 2:
                 break
@@ -168,9 +169,7 @@ class MultipleInputViewController: UIViewController {
     
     func addNewTopic() {
         // add info for identifying the location and querying
-        contents[InfoKeys.LONGITUDE] = coordinate.longitude
-        contents[InfoKeys.LATITUDE] = coordinate.latitude
-        contents[InfoKeys.TIMESTAMP] = FIRServerValue.timestamp()
+        addCoordinatesAndTimestamp()
         
         let name = contents[InfoKeys.NAME] as! String
         contents.removeValue(forKey: InfoKeys.NAME)
@@ -190,6 +189,21 @@ class MultipleInputViewController: UIViewController {
         // make this topic visible on the user's profile
         let userTopicRef = ref.child("users").child(userId).child("topics").child(userId)
         userTopicRef.setValue(true)
+    }
+    
+    func addNewArticle() {
+        guard let url = Utils.validateUrl(url: inputTextField.text!) else { return }
+        contents[InfoKeys.URL] = url
+        addCoordinatesAndTimestamp()
+        let articleRef = ref.child("articles").child(userId)
+        articleRef.removeValue()
+        articleRef.setValue(contents)
+    }
+    
+    func addCoordinatesAndTimestamp() {
+        contents[InfoKeys.LONGITUDE] = coordinate.longitude
+        contents[InfoKeys.LATITUDE] = coordinate.latitude
+        contents[InfoKeys.TIMESTAMP] = FIRServerValue.timestamp()
     }
     
 }
