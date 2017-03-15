@@ -73,9 +73,9 @@ class MultipleInputViewController: UIViewController {
                 self.addNewEvent()
                 break
             default:
-                self.dismiss(animated: true, completion: nil)
                 break
             }
+            self.dismiss(animated: true, completion: nil)
         }
         nextAction = {
             self.contents[self.currentKey] = self.inputTextField.text!
