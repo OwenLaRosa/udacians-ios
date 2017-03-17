@@ -28,6 +28,9 @@ class MultipleInputViewController: UIViewController {
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var negativeButton: UIButton!
     @IBOutlet weak var positiveButton: UIButton!
+    // bottom space constraint of the parent view, used for keyboard movement
+    @IBOutlet weak var viewBottomOffset: NSLayoutConstraint!
+    
     var negativeAction = {}
     var positiveAction = {}
     var dismissAction = {}
@@ -91,6 +94,18 @@ class MultipleInputViewController: UIViewController {
         ref = FIRDatabase.database().reference()
         
         configureUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        subscribeToKeyboardNotifications()
+        inputTextField.becomeFirstResponder()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        unsubscribeToKeyboardNotifications()
+        inputTextField.resignFirstResponder()
     }
 
     @IBAction func negativeButtonTapped(_ sender: UIButton) {
@@ -238,6 +253,30 @@ class MultipleInputViewController: UIViewController {
         contents[InfoKeys.LONGITUDE] = coordinate.longitude
         contents[InfoKeys.LATITUDE] = coordinate.latitude
         contents[InfoKeys.TIMESTAMP] = FIRServerValue.timestamp()
+    }
+    
+    private func subscribeToKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_ :)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    private func unsubscribeToKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        viewBottomOffset.constant = -getKeyboardOffset(notification: notification)
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        viewBottomOffset.constant = 0
+    }
+    
+    private func getKeyboardOffset(notification: Notification) -> CGFloat {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        return keyboardSize.cgRectValue.height
     }
     
 }
