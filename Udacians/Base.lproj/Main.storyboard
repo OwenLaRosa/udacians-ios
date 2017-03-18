@@ -64,26 +64,26 @@
                                 <rect key="frame" x="8" y="20" width="359" height="639"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Udacians!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LLo-Ld-kxm">
-                                        <rect key="frame" x="0.0" y="0.0" width="359" height="33.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="359" height="0.0"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Networking Community By and For Udacity Students" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnj-gS-Ahr">
-                                        <rect key="frame" x="0.0" y="41.5" width="359" height="16"/>
+                                        <rect key="frame" x="0.0" y="8" width="359" height="9.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="bKd-vv-D4t">
-                                        <rect key="frame" x="0.0" y="65.5" width="359" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="25.5" width="359" height="0.0"/>
                                         <color key="backgroundColor" red="0.1176470588" green="0.70588235290000001" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" id="3zE-Ax-4V1"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="uaW-7p-xBr">
-                                        <rect key="frame" x="0.0" y="73.5" width="359" height="270"/>
+                                        <rect key="frame" x="0.0" y="33.5" width="359" height="270"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="udacity_logo" translatesAutoresizingMaskIntoConstraints="NO" id="eSI-Za-seO">
                                                 <rect key="frame" x="0.0" y="0.0" width="359" height="90"/>
@@ -105,7 +105,7 @@
                                                 </constraints>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UdI-JT-tTT">
                                                 <rect key="frame" x="0.0" y="178" width="359" height="36"/>
@@ -115,7 +115,7 @@
                                                 </constraints>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P48-Pj-FdT">
                                                 <rect key="frame" x="0.0" y="222" width="359" height="48"/>
@@ -135,9 +135,23 @@
                                             <constraint firstAttribute="height" constant="270" id="Fqy-2b-jlh"/>
                                         </constraints>
                                     </stackView>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="249" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="UBN-4k-xzI">
-                                        <rect key="frame" x="0.0" y="351.5" width="359" height="245.5"/>
-                                    </activityIndicatorView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2xH-bz-Sz0">
+                                        <rect key="frame" x="0.0" y="311.5" width="359" height="285.5"/>
+                                        <subviews>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="249" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="UBN-4k-xzI">
+                                                <rect key="frame" x="0.0" y="20" width="359" height="245.5"/>
+                                            </activityIndicatorView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.1176470588" green="0.70588235290000001" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="UBN-4k-xzI" firstAttribute="top" secondItem="2xH-bz-Sz0" secondAttribute="top" constant="20" id="2J9-cB-gxY"/>
+                                            <constraint firstItem="UBN-4k-xzI" firstAttribute="centerX" secondItem="2xH-bz-Sz0" secondAttribute="centerX" id="7Zz-XC-7Wd"/>
+                                            <constraint firstAttribute="bottom" secondItem="UBN-4k-xzI" secondAttribute="bottom" constant="20" id="FoG-ui-nL3"/>
+                                            <constraint firstItem="UBN-4k-xzI" firstAttribute="centerY" secondItem="2xH-bz-Sz0" secondAttribute="centerY" id="Rms-hv-GB8"/>
+                                            <constraint firstItem="UBN-4k-xzI" firstAttribute="leading" secondItem="2xH-bz-Sz0" secondAttribute="leading" id="Wxz-6Q-14H"/>
+                                            <constraint firstAttribute="trailing" secondItem="UBN-4k-xzI" secondAttribute="trailing" id="yd5-EP-iDo"/>
+                                        </constraints>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a student-run community and is not a part of Udacity Inc." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jfp-4R-Uno">
                                         <rect key="frame" x="0.0" y="605" width="359" height="34"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>

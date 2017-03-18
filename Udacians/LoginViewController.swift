@@ -16,14 +16,51 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        spinner.isHidden = true
+    }
+    
     @IBAction func loginTapped(_ sender: UIButton) {
-        emailTextField.resignFirstResponder()
-        passwordTextField.resignFirstResponder()
+        login()
     }
     
     @IBAction func dismissKeyboardGesture(_ sender: UITapGestureRecognizer) {
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
+    }
+    
+    func login() {
+        emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+        configureUI(enabled: false)
+    }
+    
+    func configureUI(enabled: Bool) {
+        emailTextField.isEnabled = enabled
+        passwordTextField.isEnabled = enabled
+        loginButton.isEnabled = enabled
+        spinner.isHidden = enabled
+        if enabled {
+            spinner.stopAnimating()
+        } else {
+            spinner.startAnimating()
+        }
+    }
+    
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTextField {
+            passwordTextField.becomeFirstResponder()
+        } else if textField == passwordTextField {
+            login()
+        }
+        return true
     }
     
 }
