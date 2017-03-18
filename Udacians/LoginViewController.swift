@@ -17,7 +17,13 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     @IBAction func loginTapped(_ sender: UIButton) {
-        
+        emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+    }
+    
+    @IBAction func dismissKeyboardGesture(_ sender: UITapGestureRecognizer) {
+        emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
     }
     
 }

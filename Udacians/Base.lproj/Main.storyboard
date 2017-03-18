@@ -148,12 +148,16 @@
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.1176470588" green="0.70588235290000001" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="wNo-gv-bk3" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" constant="-8" id="8ql-B7-WUJ"/>
                             <constraint firstAttribute="trailing" secondItem="wNo-gv-bk3" secondAttribute="trailing" constant="8" id="EUL-oS-KVw"/>
                             <constraint firstItem="wNo-gv-bk3" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="oaJ-rG-DxA"/>
                             <constraint firstItem="wNo-gv-bk3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="qfb-1x-69C"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="qeC-tu-pXv" appends="YES" id="9sA-Xe-Wwx"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="centerStackView" destination="uaW-7p-xBr" id="Plc-ES-Edg"/>
@@ -164,6 +168,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="qeC-tu-pXv">
+                    <connections>
+                        <action selector="dismissKeyboardGesture:" destination="BYZ-38-t0r" id="o6Z-QZ-b3H"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-2090.4000000000001" y="-922.48875562218893"/>
         </scene>
