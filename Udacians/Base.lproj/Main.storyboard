@@ -48,10 +48,10 @@
             </objects>
             <point key="canvasLocation" x="-492" y="-235"/>
         </scene>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="Udacians" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -126,6 +126,9 @@
                                                 <state key="normal" title="Login">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="loginTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YB7-hs-zWz"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -152,6 +155,13 @@
                             <constraint firstItem="wNo-gv-bk3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="qfb-1x-69C"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="centerStackView" destination="uaW-7p-xBr" id="Plc-ES-Edg"/>
+                        <outlet property="emailTextField" destination="LbL-c2-IS9" id="r8G-SB-Y83"/>
+                        <outlet property="loginButton" destination="P48-Pj-FdT" id="kVW-nK-Oz5"/>
+                        <outlet property="passwordTextField" destination="UdI-JT-tTT" id="iMy-OQ-hlt"/>
+                        <outlet property="spinner" destination="UBN-4k-xzI" id="3gj-0z-2r6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

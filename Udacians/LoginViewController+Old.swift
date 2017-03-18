@@ -12,7 +12,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
-class LoginViewController: UIViewController {
+class LoginViewController_Old: UIViewController {
     
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var logoImageView: UIImageView!

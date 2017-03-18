@@ -34,6 +34,7 @@
 		5A585C951DC245F1009647A0 /* MarkupKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5A585C921DC245D9009647A0 /* MarkupKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5A585C981DC24766009647A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5A585C971DC24766009647A0 /* GoogleService-Info.plist */; };
 		5A585C9A1DC24C07009647A0 /* LoginViewController.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5A585C991DC24C07009647A0 /* LoginViewController.xml */; };
+		5A695E761E7D8DF400E082D3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A695E751E7D8DF400E082D3 /* LoginViewController.swift */; };
 		5A76DF8A1E4A6B820032969E /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76DF891E4A6B820032969E /* PostTableViewCell.swift */; };
 		5A7CC8D11E4EC280001CEF72 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7CC8D01E4EC280001CEF72 /* ChatTableViewCell.swift */; };
 		5A8555CA1DC51BFA00D8BF46 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8555C91DC51BFA00D8BF46 /* SwiftyJSON.swift */; };
@@ -115,6 +116,7 @@
 		5A585C921DC245D9009647A0 /* MarkupKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MarkupKit.framework; sourceTree = "<group>"; };
 		5A585C971DC24766009647A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5A585C991DC24C07009647A0 /* LoginViewController.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = LoginViewController.xml; sourceTree = "<group>"; };
+		5A695E751E7D8DF400E082D3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5A76DF891E4A6B820032969E /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		5A7CC8D01E4EC280001CEF72 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		5A8555C91DC51BFA00D8BF46 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				5A059C301E56B0B900DF54BD /* Article.swift */,
 				5A585C641DC2449B009647A0 /* AppDelegate.swift */,
 				5A585C661DC2449B009647A0 /* LoginViewController+Old.swift */,
+				5A695E751E7D8DF400E082D3 /* LoginViewController.swift */,
 				5A585C991DC24C07009647A0 /* LoginViewController.xml */,
 				5A8555CB1DC51CBA00D8BF46 /* UdacityClient.swift */,
 				5A585C681DC2449B009647A0 /* Main.storyboard */,
@@ -561,6 +564,7 @@
 				5A3B88E01E733BA2000FEC96 /* EventViewController.swift in Sources */,
 				5A7CC8D11E4EC280001CEF72 /* ChatTableViewCell.swift in Sources */,
 				5A8555CA1DC51BFA00D8BF46 /* SwiftyJSON.swift in Sources */,
+				5A695E761E7D8DF400E082D3 /* LoginViewController.swift in Sources */,
 				5A4FE8C21E4A444900896D79 /* FeedViewController.swift in Sources */,
 				5A48F3241DC8FB4500D49219 /* User.swift in Sources */,
 				5A585C671DC2449B009647A0 /* LoginViewController+Old.swift in Sources */,
