@@ -24,7 +24,7 @@
 		5A4FE8C61E4A447700896D79 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4FE8C51E4A447700896D79 /* CommunityViewController.swift */; };
 		5A4FE8C81E4A448900896D79 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4FE8C71E4A448900896D79 /* UserViewController.swift */; };
 		5A585C651DC2449B009647A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A585C641DC2449B009647A0 /* AppDelegate.swift */; };
-		5A585C671DC2449B009647A0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A585C661DC2449B009647A0 /* LoginViewController.swift */; };
+		5A585C671DC2449B009647A0 /* LoginViewController+Old.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A585C661DC2449B009647A0 /* LoginViewController+Old.swift */; };
 		5A585C6A1DC2449B009647A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A585C681DC2449B009647A0 /* Main.storyboard */; };
 		5A585C6C1DC2449B009647A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A585C6B1DC2449B009647A0 /* Assets.xcassets */; };
 		5A585C6F1DC2449B009647A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A585C6D1DC2449B009647A0 /* LaunchScreen.storyboard */; };
@@ -101,7 +101,7 @@
 		5A4FE8C71E4A448900896D79 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		5A585C611DC2449A009647A0 /* Udacians.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Udacians.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A585C641DC2449B009647A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5A585C661DC2449B009647A0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		5A585C661DC2449B009647A0 /* LoginViewController+Old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+Old.swift"; sourceTree = "<group>"; };
 		5A585C691DC2449B009647A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5A585C6B1DC2449B009647A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5A585C6E1DC2449B009647A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -210,7 +210,7 @@
 				5AFD42A21E4BCF2000D15EAF /* Message.swift */,
 				5A059C301E56B0B900DF54BD /* Article.swift */,
 				5A585C641DC2449B009647A0 /* AppDelegate.swift */,
-				5A585C661DC2449B009647A0 /* LoginViewController.swift */,
+				5A585C661DC2449B009647A0 /* LoginViewController+Old.swift */,
 				5A585C991DC24C07009647A0 /* LoginViewController.xml */,
 				5A8555CB1DC51CBA00D8BF46 /* UdacityClient.swift */,
 				5A585C681DC2449B009647A0 /* Main.storyboard */,
@@ -563,7 +563,7 @@
 				5A8555CA1DC51BFA00D8BF46 /* SwiftyJSON.swift in Sources */,
 				5A4FE8C21E4A444900896D79 /* FeedViewController.swift in Sources */,
 				5A48F3241DC8FB4500D49219 /* User.swift in Sources */,
-				5A585C671DC2449B009647A0 /* LoginViewController.swift in Sources */,
+				5A585C671DC2449B009647A0 /* LoginViewController+Old.swift in Sources */,
 				5AE1EEDC1E09B52800731775 /* MapViewController.swift in Sources */,
 				5AE9CAB31E6D109000E1E279 /* WritePostViewController.swift in Sources */,
 				5A48F3221DC8F4F100D49219 /* Profile.swift in Sources */,
