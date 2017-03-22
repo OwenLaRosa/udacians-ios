@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginViewController: UIViewController {
     
@@ -43,6 +44,16 @@ class LoginViewController: UIViewController {
                 print("Failed to get XSRF token, status code: \(code)")
                 return
             }
+            FIRAuth.auth()?.signIn(withCustomToken: UdacityClient.shared.token, completion: {(user, error) in
+                if let userId = user?.uid {
+                    UserDefaults.standard.set(userId, forKey: "userId")
+                    print("Successfully authenticated with Firebase")
+                } else {
+                    DispatchQueue.main.async {
+                        self.configureUI(enabled: true)
+                    }
+                }
+            })
             DispatchQueue.main.async {
                 self.configureUI(enabled: true)
             }
