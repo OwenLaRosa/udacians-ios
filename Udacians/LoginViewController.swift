@@ -36,6 +36,17 @@ class LoginViewController: UIViewController {
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
         configureUI(enabled: false)
+        let email = emailTextField.text!
+        let password = passwordTextField.text!
+        _ = UdacityClient.shared.getToken(email: email, password: password, completionHandler: {success, code in
+            if !success {
+                print("Failed to get XSRF token, status code: \(code)")
+                return
+            }
+            DispatchQueue.main.async {
+                self.configureUI(enabled: true)
+            }
+        })
     }
     
     func configureUI(enabled: Bool) {

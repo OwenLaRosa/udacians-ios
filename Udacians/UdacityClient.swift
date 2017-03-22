@@ -40,14 +40,13 @@ public class UdacityClient {
                 let session = URLSession.shared
                 var request = URLRequest(url: URL(string: self.URL_SESSION)!)
                 request.httpMethod = "POST"
-                request.addValue("application/json", forHTTPHeaderField: "Accept")
-                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-                request.httpBody = "{\"username\": \"\(email)\", \"password\": \"\(password)\"}".data(using: String.Encoding.utf8)
+                request.httpBody = "username=\(email)&password=\(password)".data(using: String.Encoding.utf8)
                 let task = session.dataTask(with: request) {data, response, error in
                     if error != nil {
                         completionHandler(false, (response as? HTTPURLResponse)?.statusCode ?? 0)
                     } else {
                         let jsonObject = JSON(data: data!)
+                        print(jsonObject)
                         let code = jsonObject[self.KEY_CODE].intValue
                         if code == 200 {
                             // save the token and alert the caller if successful
