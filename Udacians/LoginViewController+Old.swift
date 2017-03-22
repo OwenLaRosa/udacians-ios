@@ -68,7 +68,7 @@ class LoginViewController_Old: UIViewController {
                     } else {
                         UserDefaults.standard.set(UdacityClient.shared.token, forKey: "token")
                         print("login successful: \(authData)")
-                        _ = UdacityClient.shared.getDataForUserId(userId: authData!.uid) {user, code in
+                        /*_ = UdacityClient.shared.getDataForUserId(userId: authData!.uid) {user, code in
                             // sync user's basic profile information
                             let usersRef = FIRDatabase.database().reference(withPath: "users")
                             let name = usersRef.child(authData!.uid).child("basic").child("name")
@@ -78,7 +78,7 @@ class LoginViewController_Old: UIViewController {
                             enrollments.setValue(user!.profile?.enrollmentsDictionary)
                             // present the app's main screen
                             self.performSegue(withIdentifier: "ShowMainView", sender: nil)
-                        }
+                        }*/
                     }
                 })
             

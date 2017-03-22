@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 public class UdacityClient {
     
@@ -15,6 +16,8 @@ public class UdacityClient {
     
     /// Request token used to authenticate with Firebase
     public var token = ""
+    /// currently logged in user
+    public var userId = ""
     
     // endpoint for session method
     private let URL_SESSION = "https://udacians-df696.appspot.com/_ah/api/myApi/v1/session"
@@ -87,40 +90,38 @@ public class UdacityClient {
         return task
     }
     
-    public func getDataForUserId(userId: String, completionHandler: @escaping (_ user: User?, _ code: Int) -> Void) -> URLSessionTask {
+    public func syncProfileData(completionHandler: @escaping (_ success: Bool, _ code: Int) -> Void) -> URLSessionTask? {
+        if userId == "" {
+            // not logged in
+            return nil
+        }
+        let ref = FIRDatabase.database().reference();
+        let nameRef = ref.child("users").child(userId).child("basic").child("name")
+        let enrollmentsRef = ref.child("users").child(userId).child("enrollments")
         let session = URLSession.shared
         var request = URLRequest(url: URL(string: "\(URL_USER)\(userId)")!)
         request.httpMethod = "GET"
-        print("user id: \(userId)")
         let task = session.dataTask(with: request) {data, response, error in
             if error != nil {
-                completionHandler(nil, (response as? HTTPURLResponse)?.statusCode ?? 0)
+                completionHandler(false, 0)
             } else {
-                // responses from Udacity API must be trimmed
                 let newData = data!.subdata(in: 5..<data!.count)
                 let jsonObject = JSON(data: newData)
                 let firstName = jsonObject["user"]["first_name"].stringValue
                 let lastName = jsonObject["user"]["last_name"].stringValue
-                let user = User(userId: userId, firstName: firstName, lastName: lastName)
-                
+                nameRef.setValue("\(firstName) \(lastName)")
                 let enrollments = jsonObject["user"]["_enrollments"].arrayValue
                 // enrollments that have their own group chat
-                var valid = [String]()
                 for i in enrollments {
                     // only include Nanodegree courses
                     if i["node_key"].stringValue.hasPrefix("nd") {
-                        valid.append(i["node_key"].stringValue)
+                        enrollmentsRef.child(i["node_key"].stringValue).setValue(true)
                     }
                 }
-                let profile = Profile(enrollments: valid)
-                user.profile = profile
-                completionHandler(user, 200)
+                completionHandler(true, 200)
             }
         }
         task.resume()
-        
         return task
     }
-    
-    
 }
