@@ -47,11 +47,12 @@ class LoginViewController: UIViewController {
             FIRAuth.auth()?.signIn(withCustomToken: UdacityClient.shared.token, completion: {user, error in
                 if let userId = user?.uid {
                     UdacityClient.shared.userId = userId
-                    UserDefaults.standard.set(userId, forKey: "userId")
+                    UserDefaults.standard.set(UdacityClient.shared.token, forKey: "token")
                     print("Successfully authenticated with Firebase")
                     _ = UdacityClient.shared.syncProfileData() {success, code in
                         if success {
                             print("successfully synced profile data")
+                            self.dismiss(animated: true, completion: nil)
                         }
                     }
                 } else {

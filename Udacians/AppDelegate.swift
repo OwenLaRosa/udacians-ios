@@ -27,6 +27,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //GMSServices.provideAPIKey("AIzaSyDd4YX1xiy9u0uHcloSlmefAiv2svg1WFo")
         GMSServices.provideAPIKey("AIzaSyCwxxASjGvziAJ5lm7x0OkVwbpXJW5HPyc")
         
+        window = UIWindow(frame: UIScreen.main.bounds)
+        // the authentication process takes time, so we need a dummy VC to stand in for the launch screen
+        // this ensures there isn't an awkward black screen inbetweem the launcher and presented VC
+        let placeholderVC = UIViewController()
+        placeholderVC.view.frame = UIScreen.main.bounds
+        placeholderVC.view.backgroundColor = UIColor.white
+        window?.rootViewController = placeholderVC
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        // user has logged in from a previous session
+        if let token = UserDefaults.standard.string(forKey: "token") {
+            FIRAuth.auth()?.signIn(withCustomToken: token, completion: {user, error in
+                if let _ = user?.uid {
+                    // successfully logged in, proceed to main navigation
+                    let mainVC = storyboard.instantiateViewController(withIdentifier: "MainViewController")
+                    self.window?.rootViewController = mainVC
+                } else {
+                    // authentication token expired
+                    let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+                    self.window?.rootViewController = loginVC
+                }
+            })
+        } else {
+            // no login from previous session
+            let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+            self.window?.rootViewController = loginVC
+        }
+        
         return true
     }
 
