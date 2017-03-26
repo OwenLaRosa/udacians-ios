@@ -22,8 +22,6 @@ class SocialViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let userId = "3050228546"
-    
     var chatsTableViewProvider: ChatsTableViewProvider!
     var followingTableViewProvider: ConnectionsTableViewProvider!
     var followersTableViewProvider: ConnectionsTableViewProvider!
@@ -45,7 +43,7 @@ class SocialViewController: UIViewController {
         
         ref = FIRDatabase.database().reference()
         
-        let userRef = ref.child("users").child(userId)
+        let userRef = ref.child("users").child(getUid())
         let enrollmentsRef = userRef.child("enrollments")
         enrollmentsRef.observe(.childAdded, with: {(snapshot) in
             self.chatsTableViewProvider.enrollments.append(snapshot.key)

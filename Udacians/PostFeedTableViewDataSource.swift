@@ -16,7 +16,6 @@ class PostFeedTableViewDataSource: NSObject, UITableViewDataSource {
     var ref: FIRDatabaseReference
     var tableView: UITableView
     let isThisUser: Bool
-    var userId = "3050228546"
     var eventId: String!
     // is this the list of all posts from users we're following, accessed from the "Feed" tab?
     var isMainFeed = false
@@ -104,7 +103,7 @@ class PostFeedTableViewDataSource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if eventId != nil {
             // users can delete their own posts
-            return eventId == userId
+            return eventId == FIRAuth.auth()!.currentUser!.uid
         } else {
             return isThisUser
         }
@@ -119,7 +118,7 @@ class PostFeedTableViewDataSource: NSObject, UITableViewDataSource {
                 ref.child("events").child(eventId).child("posts").child(post.id).removeValue()
             } else {
                 ref.child("posts").child(post.id).removeValue()
-                ref.child("users").child(userId).child("posts").child(post.id).removeValue()
+                ref.child("users").child(FIRAuth.auth()!.currentUser!.uid).child("posts").child(post.id).removeValue()
             }
             tableView.reloadData()
         }

@@ -21,7 +21,6 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
     @IBOutlet weak var aboutLabel: UILabel!
     @IBOutlet weak var tableViewHeader: UIView!
     
-    let userId = "3050228546"
     var eventId: String!
     var ref: FIRDatabaseReference!
     var eventRef: FIRDatabaseReference!
@@ -52,7 +51,7 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
         let attendeesRef = eventRef.child("members")
         attendeesRef.observe(.childAdded, with: {(snapshot) in
             let user = snapshot.key
-            if self.userId == user {
+            if self.getUid() == user {
                 self.attendees.insert(user, at: 0)
             } else {
                 self.attendees.append(user)
@@ -84,11 +83,11 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
             }
             self.tableView.reloadData()
         })
-        if userId == eventId {
+        if getUid() == eventId {
             // the user that posted the event can email all members
             interactButton.title = "Email"
         } else {
-            isMemberReference = eventRef.child("members").child(userId)
+            isMemberReference = eventRef.child("members").child(getUid())
             isMemberReference.observe(.value, with: {(snapshot) in
                 if let flag = snapshot.value as? Bool, flag {
                     self.isAttending = true
@@ -102,7 +101,7 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     @IBAction func interactButtonTapped(_ sender: UIButton) {
-        if userId == eventId {
+        if getUid() == eventId {
             var memberEmails = [String]()
             // number of emails we've downloaded so far
             var count = 0
@@ -126,7 +125,7 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
         } else {
             if isAttending {
                 isMemberReference.removeValue()
-                ref.child("users").child(userId).child("events").child(eventId).removeValue()
+                ref.child("users").child(getUid()).child("events").child(eventId).removeValue()
             } else {
                 isMemberReference.setValue(true)
             }

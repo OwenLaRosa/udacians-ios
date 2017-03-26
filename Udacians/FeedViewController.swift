@@ -17,8 +17,6 @@ class FeedViewController: UIViewController {
     
     private var posts = [Message]()
     
-    private var userId = "3050228546"
-    
     var ref: FIRDatabaseReference!
     var dataSource: PostFeedTableViewDataSource!
     
@@ -40,7 +38,7 @@ class FeedViewController: UIViewController {
         // only add the listener once to prevent duplicate entries
         if (!viewAppeared) {
             viewAppeared = true
-            let connectionsRef = ref.child("users").child(userId).child("connections")
+            let connectionsRef = ref.child("users").child(getUid()).child("connections")
             connectionsRef.observe(.value, with: { (snapshot) in
                 // user IDs of users we're following
                 var connections = [String]()

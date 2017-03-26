@@ -35,26 +35,25 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     var storageRef: FIRStorageReference!
     var basicRef: FIRDatabaseReference!
     var profileRef: FIRDatabaseReference!
-    let userId = "3050228546"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         ref = FIRDatabase.database().reference()
         storageRef = FIRStorage.storage().reference()
-        let userRef = ref.child("users").child(userId)
+        let userRef = ref.child("users").child(getUid())
         basicRef = userRef.child("basic")
         profileRef = userRef.child("profile")
         
         basicRef.observeSingleEvent(of: .value, with: {(snapshot) in
             guard let value = snapshot.value as? [String : String] else { return }
             if let url = value["photo"] {
-                if let storedImage = WebImageCache.shared.image(with: self.userId) {
+                if let storedImage = WebImageCache.shared.image(with: self.getUid()) {
                     self.profilePictureButton.image = storedImage
                 } else {
                     _ = WebImageCache.shared.downloadImage(at: url) {imageData in
                         DispatchQueue.main.async {
-                            WebImageCache.shared.storeImage(image: imageData, withIdentifier: self.userId)
+                            WebImageCache.shared.storeImage(image: imageData, withIdentifier: self.getUid())
                             self.profilePictureButton.image = imageData
                         }
                     }
@@ -116,7 +115,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             }
         }
         if let imageContents = newImage {
-            let imagesReference = storageRef.child(userId).child("public").child("images")
+            let imagesReference = storageRef.child(getUid()).child("public").child("images")
             setUIState(enabled: false)
             Utils.uploadImage(image: imageContents, toReference: imagesReference) { (url) in
                 if url != nil {

@@ -17,7 +17,6 @@ class CommunityViewController: UIViewController {
     var articlesProvider: ArticlesTableViewProvider!
     var eventsProvider: EventsTableViewProvider!
     
-    let userId = "3050228546"
     var ref: FIRDatabaseReference!
     
     override func viewDidLoad() {
@@ -34,7 +33,7 @@ class CommunityViewController: UIViewController {
                 self.tableView.reloadData()
             }
         })
-        let myEventsReference = ref.child("users").child(userId).child("events")
+        let myEventsReference = ref.child("users").child(getUid()).child("events")
         myEventsReference.observe(.childAdded, with: {(snapshot) in
             self.eventsProvider.myEvents.append(snapshot.key)
             self.tableView.reloadData()

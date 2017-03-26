@@ -21,7 +21,6 @@ class WritePostViewController: UIViewController, UIImagePickerControllerDelegate
     @IBOutlet weak var contentImageHeight: NSLayoutConstraint!
     @IBOutlet weak var postButton: UIBarButtonItem!
     
-    let userId = "3050228546"
     // true if posts are for user profile, false if for events
     var isUserPosts = true
     var eventId: String!
@@ -39,12 +38,12 @@ class WritePostViewController: UIViewController, UIImagePickerControllerDelegate
         ref = FIRDatabase.database().reference()
         if isUserPosts {
             postsRef = ref.child("posts")
-            postLinksRef = ref.child("users").child(userId).child("posts")
+            postLinksRef = ref.child("users").child(getUid()).child("posts")
         } else {
             postsRef = ref.child("events").child(eventId).child("posts")
         }
         storageRef = FIRStorage.storage().reference()
-        imageStorageRef = storageRef.child(userId).child("public").child("images")
+        imageStorageRef = storageRef.child(getUid()).child("public").child("images")
         
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
     }
@@ -65,7 +64,7 @@ class WritePostViewController: UIViewController, UIImagePickerControllerDelegate
             return
         }
         var postContents = [String: Any]()
-        postContents["sender"] = userId
+        postContents["sender"] = getUid()
         postContents["content"] = contentTextView.text
         if !isUserPosts {
             postContents["date"] = FIRServerValue.timestamp()

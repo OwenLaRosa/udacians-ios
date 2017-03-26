@@ -49,8 +49,6 @@ class MultipleInputViewController: UIViewController {
     var currentKey = ""
     var contents = [String: Any]()
     
-    let userId = "3050228546"
-    
     var ref: FIRDatabaseReference!
     
     public enum ContentType: Int {
@@ -190,11 +188,11 @@ class MultipleInputViewController: UIViewController {
         let name = contents[InfoKeys.NAME] as! String
         contents.removeValue(forKey: InfoKeys.NAME)
         
-        let topicLocationRef = ref.child("topic_locations").child(userId)
+        let topicLocationRef = ref.child("topic_locations").child(getUid())
         topicLocationRef.removeValue()
         topicLocationRef.setValue(contents)
         
-        let topicRef = ref.child("topics").child(userId)
+        let topicRef = ref.child("topics").child(getUid())
         let topicNameRef = topicRef.child("info").child("name")
         topicNameRef.setValue(name)
         
@@ -203,7 +201,7 @@ class MultipleInputViewController: UIViewController {
         messagesRef.removeValue()
         
         // make this topic visible on the user's profile
-        let userTopicRef = ref.child("users").child(userId).child("topics").child(userId)
+        let userTopicRef = ref.child("users").child(getUid()).child("topics").child(getUid())
         userTopicRef.setValue(true)
     }
     
@@ -211,7 +209,7 @@ class MultipleInputViewController: UIViewController {
         guard let url = Utils.validateUrl(url: inputTextField.text!) else { return }
         contents[InfoKeys.URL] = url
         addCoordinatesAndTimestamp()
-        let articleRef = ref.child("articles").child(userId)
+        let articleRef = ref.child("articles").child(getUid())
         articleRef.removeValue()
         articleRef.setValue(contents)
     }
@@ -222,11 +220,11 @@ class MultipleInputViewController: UIViewController {
         eventLocation[InfoKeys.LATITUDE] = coordinate.latitude
         eventLocation[InfoKeys.TIMESTAMP] = FIRServerValue.timestamp()
         
-        let eventLocationRef = ref.child("event_locations").child(userId)
+        let eventLocationRef = ref.child("event_locations").child(getUid())
         eventLocationRef.removeValue()
         eventLocationRef.setValue(eventLocation)
         
-        let eventRef = ref.child("events").child(userId)
+        let eventRef = ref.child("events").child(getUid())
         let eventInfoRef = eventRef.child("info")
         eventInfoRef.setValue(contents)
         
@@ -236,17 +234,17 @@ class MultipleInputViewController: UIViewController {
         let eventMembersRef = eventRef.child("members")
         eventMembersRef.observe(.childAdded, with: {(snapshot) in
             let memberId = snapshot.key
-            if memberId == self.userId {
+            if memberId == self.getUid() {
                 return
             }
-            let memberEventReference = self.ref.child("users").child(memberId).child("events").child(self.userId)
+            let memberEventReference = self.ref.child("users").child(memberId).child("events").child(self.getUid())
             memberEventReference.removeValue()
             eventMembersRef.child(memberId).removeValue()
         })
         
-        let thisUserEventReference = ref.child("users").child(userId).child("events").child(userId)
+        let thisUserEventReference = ref.child("users").child(getUid()).child("events").child(getUid())
         thisUserEventReference.setValue(true)
-        eventMembersRef.child(userId).setValue(true)
+        eventMembersRef.child(getUid()).setValue(true)
     }
     
     func addCoordinatesAndTimestamp() {

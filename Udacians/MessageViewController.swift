@@ -34,8 +34,6 @@ class MessageViewController: UIViewController {
     // initial constant value of root stack view bottom space constraint
     var defaultRootBottomSpace: CGFloat = 0
     
-    var userId = "3050228546"
-    
     var ref: FIRDatabaseReference!
     var messagesReference: FIRDatabaseReference!
     var senderDirectMessageReference: FIRDatabaseReference!
@@ -61,9 +59,9 @@ class MessageViewController: UIViewController {
         
         var chatTitleReference: FIRDatabaseReference
         if isDirect {
-            messagesReference = getDirectChatReference(user1: userId, user2: chatId)
-            senderDirectMessageReference = ref.child("users").child(userId).child("direct_messages").child(chatId)
-            recipientDirectMessageReference = ref.child("users").child(chatId).child("direct_messages").child(userId)
+            messagesReference = getDirectChatReference(user1: getUid(), user2: chatId)
+            senderDirectMessageReference = ref.child("users").child(getUid()).child("direct_messages").child(chatId)
+            recipientDirectMessageReference = ref.child("users").child(chatId).child("direct_messages").child(getUid())
             chatTitleReference = ref.child("users").child(chatId).child("basic").child("name")
         } else {
             messagesReference = ref.child("topics").child(chatId).child("messages")
@@ -122,14 +120,14 @@ class MessageViewController: UIViewController {
             return
         }
         var messageContents = [String: Any]()
-        messageContents["sender"] = userId
+        messageContents["sender"] = getUid()
         messageContents["date"] = FIRServerValue.timestamp()
         messageContents["content"] = textEntry.text
         
         if imagePreview.image != nil {
             let imageContents = imagePreview.image!
             self.clearChatEntry()
-            let imagesReference = storageRef.child(userId).child("public").child("images")
+            let imagesReference = storageRef.child(getUid()).child("public").child("images")
             Utils.uploadImage(image: imageContents, toReference: imagesReference) { (url) in
                 if url != nil {
                     messageContents["imageUrl"] = url!

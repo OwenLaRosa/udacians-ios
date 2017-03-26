@@ -36,7 +36,6 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
     @IBOutlet weak var writePostButton: UIBarButtonItem!
     
     var ref: FIRDatabaseReference!
-    let userId = "3050228546"
     var thisUser: String!
     
     override func viewDidLoad() {
@@ -57,10 +56,10 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
             // profile is displayed from the "Me" tab
             followButton.isHidden = true
             title = "My Profile"
-            thisUser = userId
+            thisUser = getUid()
         } else {
             // user should not be able to follow themselves either on the "Me" tab or their profile prsented with navigation
-            if thisUser == userId {
+            if thisUser == getUid() {
                 followButton.isHidden = true
             }
             // no need for edit profile button or writing posts for others' profiles
