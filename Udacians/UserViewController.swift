@@ -58,6 +58,8 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
             title = "My Profile"
             thisUser = getUid()
         } else {
+            // logout button should not show on others' profiles
+            tableView.tableFooterView = nil
             // user should not be able to follow themselves either on the "Me" tab or their profile prsented with navigation
             if thisUser == getUid() {
                 followButton.isHidden = true
@@ -166,6 +168,9 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
     
     @IBAction func followButtonTapped(_ sender: UIButton) {
         print("follow button tapped")
+    }
+    
+    @IBAction func logoutButtonTapped(_ sender: UIButton) {
     }
     
     func updateTableHeaderHeight() {
