@@ -124,4 +124,24 @@ public class UdacityClient {
         task.resume()
         return task
     }
+    
+    /// Remove XSRF token from previous Udacity login
+    public func deleteSession(completion: @escaping (_ complete: Bool) -> Void) -> URLSessionTask {
+        var request = URLRequest(url: URL(string: URL_LOGIN)!)
+        request.httpMethod = "DELETE"
+        let cookieStorage = HTTPCookieStorage.shared
+        for cookie in cookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" {
+                request.setValue(cookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+            }
+        }
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            completion(true)
+        }
+        task.resume()
+        
+        return task
+    }
+    
 }
