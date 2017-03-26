@@ -42,6 +42,9 @@ class LoginViewController: UIViewController {
         _ = UdacityClient.shared.getToken(email: email, password: password, completionHandler: {success, code in
             if !success {
                 print("Failed to get XSRF token, status code: \(code)")
+                DispatchQueue.main.async {
+                    self.configureUI(enabled: true)
+                }
                 return
             }
             FIRAuth.auth()?.signIn(withCustomToken: UdacityClient.shared.token, completion: {user, error in
@@ -52,7 +55,9 @@ class LoginViewController: UIViewController {
                     _ = UdacityClient.shared.syncProfileData() {success, code in
                         if success {
                             print("successfully synced profile data")
-                            self.dismiss(animated: true, completion: nil)
+                            DispatchQueue.main.async {
+                                self.launchMainVC()
+                            }
                         }
                     }
                 } else {
@@ -62,6 +67,12 @@ class LoginViewController: UIViewController {
                 }
             })
         })
+    }
+    
+    func launchMainVC() {
+        let mainVC = storyboard!.instantiateViewController(withIdentifier: "MainViewController")
+        dismiss(animated: true, completion: nil)
+        present(mainVC, animated: true, completion: nil)
     }
     
     func configureUI(enabled: Bool) {
