@@ -30,7 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UITabBar.appearance().tintColor = udaciansColor
         UINavigationBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().backgroundColor = udaciansColor
+        UINavigationBar.appearance().barTintColor = udaciansColor
+        
+        UINavigationBar .appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        UIApplication.shared.statusBarStyle = .lightContent
         
         window = UIWindow(frame: UIScreen.main.bounds)
         // the authentication process takes time, so we need a dummy VC to stand in for the launch screen
