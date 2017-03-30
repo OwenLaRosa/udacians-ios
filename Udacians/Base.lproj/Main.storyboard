@@ -35,7 +35,7 @@
         <scene sceneID="q2P-2A-EQb">
             <objects>
                 <navigationController id="wyj-UW-oNF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Community" id="FuH-ZO-a06"/>
+                    <tabBarItem key="tabBarItem" title="Community" image="event_pin" id="FuH-ZO-a06"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yBU-Bv-8nq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -194,7 +194,7 @@
         <scene sceneID="cri-aY-Ig6">
             <objects>
                 <navigationController id="6df-HV-Jid" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Social" id="xhB-pr-VgM"/>
+                    <tabBarItem key="tabBarItem" title="Social" image="social" id="xhB-pr-VgM"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="7ro-pB-KNH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -633,7 +633,7 @@
         <scene sceneID="HBd-Ir-xch">
             <objects>
                 <navigationController id="zlR-M3-WmB" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Me" id="9gp-zH-ALg"/>
+                    <tabBarItem key="tabBarItem" title="Me" image="user_pin" id="9gp-zH-ALg"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="DyU-DM-MMl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -650,7 +650,7 @@
         <scene sceneID="u1P-iW-Uph">
             <objects>
                 <navigationController id="DB7-2p-kCT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" id="oSB-Fr-8ZM"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="map" id="oSB-Fr-8ZM"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="gac-jd-hTu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -667,7 +667,7 @@
         <scene sceneID="iSp-85-rqM">
             <objects>
                 <navigationController id="4aL-MS-nxk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Feed" id="lIw-DM-rvU"/>
+                    <tabBarItem key="tabBarItem" title="Feed" image="feed" id="lIw-DM-rvU"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="6zF-4M-oxi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1260,7 +1260,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="12:30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AP2-qy-FjW">
-                                                                            <rect key="frame" x="269" y="7" width="34" height="16"/>
+                                                                            <rect key="frame" x="269" y="6.5" width="34" height="16"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -1327,7 +1327,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="12:30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2k-AR-8xJ">
-                                                                            <rect key="frame" x="269" y="6" width="34" height="16"/>
+                                                                            <rect key="frame" x="269" y="5.5" width="34" height="16"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -1785,7 +1785,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="12:30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGw-R2-Xl1">
-                                                                            <rect key="frame" x="269" y="6" width="34" height="16"/>
+                                                                            <rect key="frame" x="269" y="5.5" width="34" height="16"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -1856,7 +1856,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="12:30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="znJ-dc-l42">
-                                                                            <rect key="frame" x="269" y="7" width="34" height="16"/>
+                                                                            <rect key="frame" x="269" y="6.5" width="34" height="16"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -2069,10 +2069,15 @@
         <image name="album" width="30" height="30"/>
         <image name="camera" width="30" height="30"/>
         <image name="clear" width="30" height="30"/>
+        <image name="event_pin" width="30" height="30"/>
+        <image name="feed" width="30" height="30"/>
         <image name="logout" width="30" height="30"/>
+        <image name="map" width="30" height="30"/>
         <image name="message" width="30" height="30"/>
         <image name="settings" width="30" height="30"/>
+        <image name="social" width="30" height="30"/>
         <image name="udacity_logo" width="256" height="256"/>
+        <image name="user_pin" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="45k-73-SZu"/>
