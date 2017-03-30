@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    let udaciansColor = UIColor(red: 30/255, green: 180/255, blue: 226/255, alpha: 1.0)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -26,6 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // set up Google Maps
         //GMSServices.provideAPIKey("AIzaSyDd4YX1xiy9u0uHcloSlmefAiv2svg1WFo")
         GMSServices.provideAPIKey("AIzaSyCwxxASjGvziAJ5lm7x0OkVwbpXJW5HPyc")
+        
+        UITabBar.appearance().tintColor = udaciansColor
+        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().backgroundColor = udaciansColor
         
         window = UIWindow(frame: UIScreen.main.bounds)
         // the authentication process takes time, so we need a dummy VC to stand in for the launch screen
