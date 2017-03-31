@@ -162,10 +162,12 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
                 cell.imageView.image = storedImage
             } else {
                 if let url = snapshot.value as? String {
-                    cell.profileImageTask = WebImageCache.shared.downloadImage(at: url) {imageData in
-                        DispatchQueue.main.async {
-                            WebImageCache.shared.storeImage(image: imageData, withIdentifier: attendee)
-                            cell.imageView.image = imageData
+                    DispatchQueue.global(qos: .userInteractive).async {
+                        cell.profileImageTask = WebImageCache.shared.downloadImage(at: url) {imageData in
+                            DispatchQueue.main.async {
+                                WebImageCache.shared.storeImage(image: imageData, withIdentifier: attendee)
+                                cell.imageView.image = imageData
+                            }
                         }
                     }
                 } else {

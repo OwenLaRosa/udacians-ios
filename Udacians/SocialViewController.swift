@@ -203,10 +203,12 @@ class ChatsTableViewProvider: NSObject, UITableViewDataSource, UITableViewDelega
                     if let storedImage = WebImageCache.shared.image(with: chat) {
                         cell.photoImageView.image = storedImage
                     } else {
-                        cell.photoImageTask = WebImageCache.shared.downloadImage(at: imageUrl) {imageData in
-                            DispatchQueue.main.async {
-                                WebImageCache.shared.storeImage(image: imageData, withIdentifier: chat)
-                                cell.photoImageView.image = imageData
+                        DispatchQueue.global(qos: .userInteractive).async {
+                            cell.photoImageTask = WebImageCache.shared.downloadImage(at: imageUrl) {imageData in
+                                DispatchQueue.main.async {
+                                    WebImageCache.shared.storeImage(image: imageData, withIdentifier: chat)
+                                    cell.photoImageView.image = imageData
+                                }
                             }
                         }
                     }
@@ -232,10 +234,12 @@ class ChatsTableViewProvider: NSObject, UITableViewDataSource, UITableViewDelega
                     if let storedImage = WebImageCache.shared.image(with: chat) {
                         cell.photoImageView.image = storedImage
                     } else {
-                        cell.photoImageTask = WebImageCache.shared.downloadImage(at: imageUrl) {imageData in
-                            DispatchQueue.main.async {
-                                WebImageCache.shared.storeImage(image: imageData, withIdentifier: chat)
-                                cell.photoImageView.image = imageData
+                        DispatchQueue.global(qos: .userInteractive).async {
+                            cell.photoImageTask = WebImageCache.shared.downloadImage(at: imageUrl) {imageData in
+                                DispatchQueue.main.async {
+                                    WebImageCache.shared.storeImage(image: imageData, withIdentifier: chat)
+                                    cell.photoImageView.image = imageData
+                                }
                             }
                         }
                     }
@@ -317,10 +321,12 @@ class ConnectionsTableViewProvider: NSObject, UITableViewDataSource, UITableView
                 if let storedImage = WebImageCache.shared.image(with: connection) {
                     cell.photoImageView.image = storedImage
                 } else {
-                    cell.photoImageTask = WebImageCache.shared.downloadImage(at: imageUrl) {imageData in
-                        DispatchQueue.main.async {
-                            WebImageCache.shared.storeImage(image: imageData, withIdentifier: connection)
-                            cell.photoImageView.image = imageData
+                    DispatchQueue.global(qos: .userInteractive).async {
+                        cell.photoImageTask = WebImageCache.shared.downloadImage(at: imageUrl) {imageData in
+                            DispatchQueue.main.async {
+                                WebImageCache.shared.storeImage(image: imageData, withIdentifier: connection)
+                                cell.photoImageView.image = imageData
+                            }
                         }
                     }
                 }

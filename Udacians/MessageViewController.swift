@@ -309,10 +309,12 @@ extension MessageViewController: UITableViewDataSource {
                 cell.profileImageButton.image = storedImage
             } else {
                 if let url = snapshot.value as? String {
-                    cell.profileImageTask = WebImageCache.shared.downloadImage(at: url) {imageData in
-                        DispatchQueue.main.async {
-                            WebImageCache.shared.storeImage(image: imageData, withIdentifier: message.sender)
-                            cell.profileImageButton.image = imageData
+                    DispatchQueue.global(qos: .userInteractive).async {
+                        cell.profileImageTask = WebImageCache.shared.downloadImage(at: url) {imageData in
+                            DispatchQueue.main.async {
+                                WebImageCache.shared.storeImage(image: imageData, withIdentifier: message.sender)
+                                cell.profileImageButton.image = imageData
+                            }
                         }
                     }
                 } else {
@@ -326,10 +328,12 @@ extension MessageViewController: UITableViewDataSource {
             if let storedImage = WebImageCache.shared.image(with: message.id) {
                 (cell as! PostWithImageTableViewCell).contentImageView.image = storedImage
             } else {
-                (cell as! PostWithImageTableViewCell).contentImageTask = WebImageCache.shared.downloadImage(at: message.imageUrl) {imageData in
-                    DispatchQueue.main.async {
-                        WebImageCache.shared.storeImage(image: imageData, withIdentifier: message.id)
-                        (cell as! PostWithImageTableViewCell).contentImageView.image = imageData
+                DispatchQueue.global(qos: .userInteractive).async {
+                    (cell as! PostWithImageTableViewCell).contentImageTask = WebImageCache.shared.downloadImage(at: message.imageUrl) {imageData in
+                        DispatchQueue.main.async {
+                            WebImageCache.shared.storeImage(image: imageData, withIdentifier: message.id)
+                            (cell as! PostWithImageTableViewCell).contentImageView.image = imageData
+                        }
                     }
                 }
             }

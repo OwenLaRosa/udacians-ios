@@ -51,10 +51,12 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
                 if let storedImage = WebImageCache.shared.image(with: self.getUid()) {
                     self.profilePictureButton.image = storedImage
                 } else {
-                    _ = WebImageCache.shared.downloadImage(at: url) {imageData in
-                        DispatchQueue.main.async {
-                            WebImageCache.shared.storeImage(image: imageData, withIdentifier: self.getUid())
-                            self.profilePictureButton.image = imageData
+                    DispatchQueue.global(qos: .userInteractive).async {
+                        _ = WebImageCache.shared.downloadImage(at: url) {imageData in
+                            DispatchQueue.main.async {
+                                WebImageCache.shared.storeImage(image: imageData, withIdentifier: self.getUid())
+                                self.profilePictureButton.image = imageData
+                            }
                         }
                     }
                 }
