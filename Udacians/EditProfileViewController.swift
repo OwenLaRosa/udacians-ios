@@ -11,6 +11,8 @@ import Firebase
 
 class EditProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     @IBOutlet weak var profilePictureButton: UIButton!
     
     @IBOutlet weak var titleTextField: UITextField!
@@ -26,6 +28,8 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var twitterTextField: UITextField!
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    @IBOutlet weak var scrollViewBottom: NSLayoutConstraint!
     
     let invalidUrlColor = UIColor(colorLiteralRed: 255.0/255.0, green: 138.0/255.0, blue: 128.0/255.0, alpha: 1.0)
     
@@ -71,6 +75,16 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             self.linkedinTextField.text = value["linkedin"] ?? ""
             self.twitterTextField.text = value["twitter"] ?? ""
         })
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        subscribeToKeyboardNotifications()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        unsubscribeToKeyboardNotifications()
     }
     
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
@@ -171,6 +185,78 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             profilePictureButton.image = image
         }
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+        titleTextField.resignFirstResponder()
+        aboutTextView.resignFirstResponder()
+        siteTextField.resignFirstResponder()
+        blogTextField.resignFirstResponder()
+        twitterTextField.resignFirstResponder()
+        linkedinTextField.resignFirstResponder()
+    }
+    
+    private func subscribeToKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_ :)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    private func unsubscribeToKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        var heightToScroll: CGFloat = 0.0
+        if let activeTextField = getActiveTextField() {
+            heightToScroll = activeTextField.frame.origin.y
+        } else if aboutTextView.isFirstResponder {
+            heightToScroll = aboutTextView.frame.origin.y
+        }
+        let keyboardOffset = getKeyboardOffset(notification: notification)
+        let keyboardYOrigin = view.frame.height - keyboardOffset
+        // move the bottom of the scroll view above the top of the keyboard
+        scrollViewBottom.constant = -keyboardOffset
+        if heightToScroll > keyboardYOrigin {
+            // text field is near the bottom of the screen and should be scrolled into view
+            scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height), animated: true)
+        }
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        scrollViewBottom.constant = 0
+    }
+    
+    private func getKeyboardOffset(notification: Notification) -> CGFloat {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        return keyboardSize.cgRectValue.height
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        scrollView.contentSize.height = twitterTextField.frame.origin.y + twitterTextField.frame.height + 8
+    }
+    
+    /// return the text field that is being edited
+    /// if no text field is being edited, return nil
+    private func getActiveTextField() -> UITextField! {
+        if titleTextField.isEditing {
+            return titleTextField
+        }
+        if siteTextField.isEditing {
+            return siteTextField
+        }
+        if blogTextField.isEditing {
+            return blogTextField
+        }
+        if linkedinTextField.isEditing {
+            return linkedinTextField
+        }
+        if twitterTextField.isEditing {
+            return twitterTextField
+        }
+        return nil
     }
     
 }
