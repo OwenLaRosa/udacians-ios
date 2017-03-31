@@ -298,7 +298,7 @@
                                                     <rect key="frame" x="8" y="8" width="359" height="67"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="udacity_logo" translatesAutoresizingMaskIntoConstraints="NO" id="kyr-fC-7pO">
-                                                            <rect key="frame" x="0.0" y="9.5" width="48" height="48"/>
+                                                            <rect key="frame" x="0.0" y="10" width="48" height="48"/>
                                                             <color key="backgroundColor" red="0.50588235290000005" green="0.83137254900000002" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="48" id="fUk-is-1fl"/>
@@ -309,13 +309,13 @@
                                                             <rect key="frame" x="56" y="0.0" width="271" height="67"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="User Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QGR-T2-ElN">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="271" height="22.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="271" height="22"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                                                     <color key="textColor" red="0.0039215686269999999" green="0.3411764706" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Occupation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jho-GZ-kEI">
-                                                                    <rect key="frame" x="0.0" y="26.5" width="271" height="20.5"/>
+                                                                    <rect key="frame" x="0.0" y="26" width="271" height="21"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -329,7 +329,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEp-aA-Med">
-                                                            <rect key="frame" x="335" y="21.5" width="24" height="24"/>
+                                                            <rect key="frame" x="335" y="22" width="24" height="24"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="24" id="7gg-cV-j4y"/>
                                                                 <constraint firstAttribute="width" constant="24" id="8kK-Cf-hOa"/>
@@ -2033,7 +2033,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lKl-U1-XN8" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ul3-yb-PXX">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ul3-yb-PXX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2080,6 +2080,6 @@
         <image name="user_pin" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="45k-73-SZu"/>
+        <segue reference="45S-vK-j91"/>
     </inferredMetricsTieBreakers>
 </document>

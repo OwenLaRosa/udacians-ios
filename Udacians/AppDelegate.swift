@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     let udaciansColor = UIColor(red: 30/255, green: 180/255, blue: 226/255, alpha: 1.0)
+    let accentColor = UIColor(red: 1.0, green: 145/255, blue: 0.0, alpha: 1.0)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -28,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //GMSServices.provideAPIKey("AIzaSyDd4YX1xiy9u0uHcloSlmefAiv2svg1WFo")
         GMSServices.provideAPIKey("AIzaSyCwxxASjGvziAJ5lm7x0OkVwbpXJW5HPyc")
         
-        UITabBar.appearance().tintColor = udaciansColor
+        UITabBar.appearance().tintColor = accentColor
         UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().barTintColor = udaciansColor
         
