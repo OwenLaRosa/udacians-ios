@@ -171,7 +171,7 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
                         }
                     }
                 } else {
-                    cell.imageView.image = UIImage(named: "Udacity_logo")
+                    cell.imageView.image = UIImage(named: "Udacians_logo")
                 }
             }
         })

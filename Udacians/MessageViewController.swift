@@ -318,7 +318,7 @@ extension MessageViewController: UITableViewDataSource {
                         }
                     }
                 } else {
-                    cell.profileImageButton.image = UIImage(named: "Udacity_logo")
+                    cell.profileImageButton.image = UIImage(named: "Udacians_logo")
                 }
             }
         })

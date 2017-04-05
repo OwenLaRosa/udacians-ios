@@ -189,7 +189,7 @@ class ChatsTableViewProvider: NSObject, UITableViewDataSource, UITableViewDelega
                 guard let result = snapshot.value as? [String: Any] else {
                     cell.nameLabel.text = chat
                     cell.descriptionLabel.text = "Course Discussion"
-                    cell.photoImageView.image = UIImage(named: "udacity_logo")
+                    cell.photoImageView.image = UIImage(named: "Udacians_logo")
                     return
                 }
                 let name = result["name"] as? String
@@ -213,7 +213,7 @@ class ChatsTableViewProvider: NSObject, UITableViewDataSource, UITableViewDelega
                         }
                     }
                 } else {
-                    cell.photoImageView.image = UIImage(named: "udacity_logo")
+                    cell.photoImageView.image = UIImage(named: "Udacians_logo")
                 }
             })
         } else {
@@ -244,7 +244,7 @@ class ChatsTableViewProvider: NSObject, UITableViewDataSource, UITableViewDelega
                         }
                     }
                 } else {
-                    cell.photoImageView.image = UIImage(named: "udacity_logo")
+                    cell.photoImageView.image = UIImage(named: "Udacians_logo")
                 }
             })
         }
@@ -331,7 +331,7 @@ class ConnectionsTableViewProvider: NSObject, UITableViewDataSource, UITableView
                     }
                 }
             } else {
-                cell.photoImageView.image = UIImage(named: "udacity_logo")
+                cell.photoImageView.image = UIImage(named: "Udacians_logo")
             }
         })
         let locationRef = ref.child("locations").child(connection).child("location")
