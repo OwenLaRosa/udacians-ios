@@ -72,6 +72,7 @@ class SocialViewController: UIViewController {
         })
         let followingRef = userRef.child("connections")
         followingRef.observe(.value, with: {(snapshot) in
+            self.followingTableViewProvider.connections.removeAll()
             for i in snapshot.children.allObjects as! [FIRDataSnapshot]  {
                 self.followingTableViewProvider.connections.append(i.key)
             }
@@ -81,6 +82,7 @@ class SocialViewController: UIViewController {
         })
         let followersRef = userRef.child("followers")
         followersRef.observe(.value, with: {(snapshot) in
+            self.followersTableViewProvider.connections.removeAll()
             for i in snapshot.children.allObjects as! [FIRDataSnapshot] {
                 self.followersTableViewProvider.connections.append(i.key)
             }
