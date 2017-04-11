@@ -39,7 +39,7 @@ class FeedViewController: UIViewController {
         if (!viewAppeared) {
             viewAppeared = true
             let connectionsRef = ref.child("users").child(getUid()).child("connections")
-            connectionsRef.observe(.value, with: { (snapshot) in
+            connectionsRef.observeSingleEvent(of: .value, with: { (snapshot) in
                 // user IDs of users we're following
                 var connections = [String]()
                 for i in snapshot.children.allObjects as! [FIRDataSnapshot] {
