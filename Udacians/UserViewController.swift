@@ -39,6 +39,8 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
     
     var ref: FIRDatabaseReference!
     var thisUser: String!
+    var isFollowing: Bool!
+    var isFollowingRef: FIRDatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,12 +67,25 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
             // user should not be able to follow themselves either on the "Me" tab or their profile prsented with navigation
             if thisUser == getUid() {
                 followButton.isHidden = true
+            } else {
+                // user can follow/unfollow other users
+                isFollowingRef = ref.child("users").child(getUid()).child("connections").child(thisUser)
+                isFollowingRef.observe(.value, with: {(snapshot) in
+                    if snapshot.value is NSNull {
+                        self.isFollowing = false
+                        self.followButton.title = "Follow"
+                    } else {
+                        self.isFollowing = true
+                        self.followButton.title = "Unfollow"
+                    }
+                })
             }
             // no need for edit profile button or writing posts for others' profiles
             editProfileButton = nil
             writePostButton = nil
             navigationItem.leftBarButtonItem = nil
             navigationItem.rightBarButtonItem = nil
+            
         }
         
         let userRef = ref.child("users").child(thisUser)
@@ -172,6 +187,11 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
     
     @IBAction func followButtonTapped(_ sender: UIButton) {
         print("follow button tapped")
+        if isFollowing! == true {
+            isFollowingRef.removeValue()
+        } else {
+            isFollowingRef.setValue(true)
+        }
     }
     
     @IBAction func logoutButtonTapped(_ sender: UIButton) {
