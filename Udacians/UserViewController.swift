@@ -41,6 +41,8 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
     var thisUser: String!
     var isFollowing: Bool!
     var isFollowingRef: FIRDatabaseReference!
+    var userFollowerRef: FIRDatabaseReference!
+    var followerCountRef: FIRDatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +72,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
             } else {
                 // user can follow/unfollow other users
                 isFollowingRef = ref.child("users").child(getUid()).child("connections").child(thisUser)
+                userFollowerRef = ref.child("users").child(thisUser).child("followers").child(getUid())
                 isFollowingRef.observe(.value, with: {(snapshot) in
                     if snapshot.value is NSNull {
                         self.isFollowing = false
@@ -134,7 +137,7 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
             }
             self.updateTableHeaderHeight()
         })
-        let followerCountRef = userRef.child("follower_count")
+        followerCountRef = userRef.child("follower_count")
         followerCountRef.observeSingleEvent(of: .value, with: {(snapshot) in
             let followers = snapshot.value as? Int ?? 0
             self.followersCountLabel.text = "\(followers) Follower\(followers != 1 ? "s": "")"
@@ -187,8 +190,21 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
         print("follow button tapped")
         if isFollowing! == true {
             isFollowingRef.removeValue()
+            userFollowerRef.removeValue()
+            followerCountRef.runTransactionBlock({(mutableData) in
+                mutableData.value = (mutableData.value! as! Int) - 1
+                if (mutableData.value as! Int) < 0 {
+                    mutableData.value = 0
+                }
+                return FIRTransactionResult.success(withValue: mutableData)
+            })
         } else {
             isFollowingRef.setValue(true)
+            userFollowerRef.setValue(true)
+            followerCountRef.runTransactionBlock({(mutableData) in
+                mutableData.value = (mutableData.value! as! Int) + 1
+                return FIRTransactionResult.success(withValue: mutableData)
+            })
         }
     }
     
