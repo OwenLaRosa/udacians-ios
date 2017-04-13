@@ -28,7 +28,9 @@ class WebImageCache {
                 completionHandler(nil)
             }
         }
-        task.resume()
+        DispatchQueue.global(qos: .userInteractive).async {
+            task.resume()
+        }
         
         return task
     }

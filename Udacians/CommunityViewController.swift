@@ -108,12 +108,11 @@ class ArticlesTableViewProvider: NSObject, UITableViewDataSource, UITableViewDel
                 if let storedImage = WebImageCache.shared.image(with: article.id) {
                     cell.photoImageButton.image = storedImage
                 } else {
-                    DispatchQueue.global(qos: .userInteractive).async {
-                        cell.photoImageTask = WebImageCache.shared.downloadImage(at: url) {imageData in
-                            DispatchQueue.main.async {
-                                WebImageCache.shared.storeImage(image: imageData, withIdentifier: article.id)
-                                cell.photoImageButton.image = imageData
-                            }
+                    cell.photoImageTask = WebImageCache.shared.downloadImage(at: url) {imageData in
+                        WebImageCache.shared.storeImage(image: imageData, withIdentifier: article.id)
+                        DispatchQueue.main.async {
+                            cell.photoImageButton.image = imageData
+                            cell.setNeedsLayout()
                         }
                     }
                 }
@@ -199,9 +198,10 @@ class EventsTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
                     cell.photoImageButton.image = storedImage
                 } else {
                     cell.photoImageTask = WebImageCache.shared.downloadImage(at: url) {imageData in
+                        WebImageCache.shared.storeImage(image: imageData, withIdentifier: eventId)
                         DispatchQueue.main.async {
-                            WebImageCache.shared.storeImage(image: imageData, withIdentifier: eventId)
                             cell.photoImageButton.image = imageData
+                            cell.setNeedsLayout()
                         }
                     }
                 }

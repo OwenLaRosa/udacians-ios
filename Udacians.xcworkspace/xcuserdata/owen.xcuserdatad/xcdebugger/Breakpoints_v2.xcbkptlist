@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Udacians/LoginViewController.swift"
-            timestampString = "512689493.188577"
+            timestampString = "513638386.027825"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155">
+            startingLineNumber = "159"
+            endingLineNumber = "159">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

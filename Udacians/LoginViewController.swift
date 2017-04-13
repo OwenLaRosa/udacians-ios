@@ -58,6 +58,10 @@ class LoginViewController: UIViewController {
                             DispatchQueue.main.async {
                                 self.launchMainVC()
                             }
+                        } else {
+                            DispatchQueue.main.async {
+                                self.configureUI(enabled: true)
+                            }
                         }
                     }
                 } else {

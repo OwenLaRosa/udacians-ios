@@ -63,12 +63,11 @@ class PostFeedTableViewDataSource: NSObject, UITableViewDataSource {
                 if let storedImage = WebImageCache.shared.image(with: post.sender) {
                     cell.profileImageButton.image = storedImage
                 } else {
-                    DispatchQueue.global(qos: .userInteractive).async {
-                        cell.profileImageTask = WebImageCache.shared.downloadImage(at: snapshot.value as! String) {imageData in
-                            DispatchQueue.main.async {
-                                WebImageCache.shared.storeImage(image: imageData, withIdentifier: post.sender)
-                                cell.profileImageButton.image = imageData
-                            }
+                    cell.profileImageTask = WebImageCache.shared.downloadImage(at: snapshot.value as! String) {imageData in
+                        WebImageCache.shared.storeImage(image: imageData, withIdentifier: post.sender)
+                        DispatchQueue.main.async {
+                            cell.profileImageButton.image = imageData
+                            cell.setNeedsLayout()
                         }
                     }
                 }
@@ -90,12 +89,11 @@ class PostFeedTableViewDataSource: NSObject, UITableViewDataSource {
                     (cell as! PostWithImageTableViewCell).contentImageView.image = storedImage
                 }
             } else {
-                DispatchQueue.global(qos: .userInteractive).async {
-                    (cell as! PostWithImageTableViewCell).contentImageTask = WebImageCache.shared.downloadImage(at: post.imageUrl) {imageData in
-                        DispatchQueue.main.async {
-                            WebImageCache.shared.storeImage(image: imageData, withIdentifier: post.id)
-                            (cell as! PostWithImageTableViewCell).contentImageView.image = imageData
-                        }
+                (cell as! PostWithImageTableViewCell).contentImageTask = WebImageCache.shared.downloadImage(at: post.imageUrl) {imageData in
+                    WebImageCache.shared.storeImage(image: imageData, withIdentifier: post.id)
+                    DispatchQueue.main.async {
+                        (cell as! PostWithImageTableViewCell).contentImageView.image = imageData
+                        cell.setNeedsLayout()
                     }
                 }
             }

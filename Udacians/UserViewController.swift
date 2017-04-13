@@ -115,13 +115,11 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
                     self.profileImageView.image = storedImage
                     self.updateTableHeaderHeight()
                 } else {
-                    DispatchQueue.global(qos: .userInteractive).async {
-                        _ = WebImageCache.shared.downloadImage(at: url) {imageData in
-                            DispatchQueue.main.async {
-                                WebImageCache.shared.storeImage(image: imageData, withIdentifier: self.thisUser)
-                                self.profileImageView.image = imageData
-                                self.updateTableHeaderHeight()
-                            }
+                    _ = WebImageCache.shared.downloadImage(at: url) {imageData in
+                        WebImageCache.shared.storeImage(image: imageData, withIdentifier: self.thisUser)
+                        DispatchQueue.main.async {
+                            self.profileImageView.image = imageData
+                            self.updateTableHeaderHeight()
                         }
                     }
                 }
