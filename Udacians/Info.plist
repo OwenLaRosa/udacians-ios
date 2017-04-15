@@ -4,6 +4,8 @@
 <dict>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Sharing General Locality</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Sending photos</string>
 	<key>NSCameraUsageDescription</key>

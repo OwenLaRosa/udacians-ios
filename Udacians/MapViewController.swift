@@ -15,7 +15,7 @@ import Firebase
 // and the map coordinates where the user long-pressed
 typealias InputData = (type: MultipleInputViewController.ContentType, coordinate: CLLocationCoordinate2D)
 
-class MapViewController: UIViewController, GMSMapViewDelegate {
+class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var mapView: GMSMapView!
     
@@ -24,11 +24,14 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
     var eventLocationsRef: FIRDatabaseReference!
     var topicLocationsRef: FIRDatabaseReference!
     var articlesRef: FIRDatabaseReference!
+    var thisUserLocationRef: FIRDatabaseReference!
     
     var idToUserMarker = [String: GMSMarker]()
     var idToEventMarker = [String: GMSMarker]()
     var idToTopicMarker = [String: GMSMarker]()
     var idToArticleMarker = [String: GMSMarker]()
+    
+    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +48,17 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         articlesRef = ref.child("articles")
         
         loadMapData()
+        
+        thisUserLocationRef = ref.child("locations").child(getUid())
+        
+        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+            locationManager.requestLocation()
+        }
     }
     
     func loadMapData() {
@@ -250,6 +264,47 @@ class MapViewController: UIViewController, GMSMapViewDelegate {
         }))
         addNewMenu.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(addNewMenu, animated: true, completion: nil)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let coordinates = manager.location?.coordinate else { return }
+        CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: {placemarks, error in
+            if error != nil {
+                self.updateLocation(coordinates: coordinates, locality: nil)
+                return
+            }
+            
+            if placemarks != nil && placemarks!.count > 0 {
+                let placemark = placemarks![0] 
+                guard let locality = placemark.locality ?? placemark.subLocality else { return }
+                self.updateLocation(coordinates: coordinates, locality: locality)
+            }
+        })
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("failed to get location: \(error.localizedDescription)")
+    }
+    
+    func updateLocation(coordinates: CLLocationCoordinate2D, locality: String!) {
+        var locationData = [String: Any]()
+        locationData["latitude"] = coordinates.latitude
+        locationData["longitude"] = coordinates.longitude
+        locationData["timestamp"] = FIRServerValue.timestamp()
+        if locality != nil {
+            locationData["location"] = locality
+            thisUserLocationRef.setValue(locationData)
+            return
+        }
+        thisUserLocationRef.observeSingleEvent(of: .value, with: {(snapshot) in
+            if snapshot.value != nil {
+                self.thisUserLocationRef.child("longitude").setValue(coordinates.longitude)
+                self.thisUserLocationRef.child("latitude").setValue(coordinates.latitude)
+                self.thisUserLocationRef.child("timestamp").setValue(FIRServerValue.timestamp())
+            } else {
+                self.thisUserLocationRef.setValue(locationData)
+            }
+        })
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
