@@ -270,7 +270,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManager
         guard let coordinates = manager.location?.coordinate else { return }
         CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: {placemarks, error in
             if error != nil {
-                self.updateLocation(coordinates: coordinates, locality: nil)
+                self.updateLocation(coordinates: self.obfuscateLocation(location: coordinates), locality: nil)
                 return
             }
             
@@ -305,6 +305,25 @@ class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManager
                 self.thisUserLocationRef.setValue(locationData)
             }
         })
+    }
+    
+    /// Randomly offset location from the actual coordinates
+    /// This ensures the pin doesn't indicate the user's actual residence
+    private func obfuscateLocation(location old: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
+        if old.latitude > 90 - 0.25 { return old }
+        if old.longitude > 90 - 0.25 { return old }
+        
+        var latOffset = Double(arc4random() % 2500) * 0.0001
+        var lonOffset = Double(arc4random() % 2500) * 0.0001
+        
+        if (arc4random() % 2 == 1) {
+            latOffset = -latOffset
+        }
+        if (arc4random() % 2 == 1) {
+            lonOffset = -lonOffset
+        }
+        
+        return CLLocationCoordinate2D(latitude: old.latitude + latOffset, longitude: old.longitude + lonOffset)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
