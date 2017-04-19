@@ -10,17 +10,17 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Udacians/LoginViewController.swift"
-            timestampString = "514312250.232584"
+            timestampString = "514323467.175646"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164">
+            startingLineNumber = "170"
+            endingLineNumber = "170">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Udacians/PostFeedTableViewDataSource.swift"

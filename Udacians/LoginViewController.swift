@@ -11,6 +11,7 @@ import Firebase
 
 class LoginViewController: UIViewController {
     
+    @IBOutlet weak var rootStackView: UIStackView!
     @IBOutlet weak var centerStackView: UIStackView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -22,6 +23,11 @@ class LoginViewController: UIViewController {
         emailTextField.delegate = self
         passwordTextField.delegate = self
         spinner.isHidden = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        rootStackView.isHidden = AppDelegate.justLaunched
     }
     
     @IBAction func loginTapped(_ sender: UIButton) {

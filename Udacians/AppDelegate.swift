@@ -12,6 +12,8 @@ import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    public static var justLaunched = false
 
     var window: UIWindow?
 
@@ -41,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // this ensures there isn't an awkward black screen inbetweem the launcher and presented VC
         let placeholderVC = UIViewController()
         placeholderVC.view.frame = UIScreen.main.bounds
-        placeholderVC.view.backgroundColor = UIColor.white
+        placeholderVC.view.backgroundColor = udaciansColor
         window?.rootViewController = placeholderVC
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
@@ -50,8 +52,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             FIRAuth.auth()?.signIn(withCustomToken: token, completion: {user, error in
                 if let _ = user?.uid {
                     // successfully logged in, proceed to main navigation
+                    AppDelegate.justLaunched = true
                     let mainVC = storyboard.instantiateViewController(withIdentifier: "MainViewController")
-                    self.window?.rootViewController = mainVC
+                    let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+                    self.window?.rootViewController = loginVC
+                    loginVC.present(mainVC, animated: false, completion: {
+                        AppDelegate.justLaunched = false
+                    })
                 } else {
                     // authentication token expired
                     let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
