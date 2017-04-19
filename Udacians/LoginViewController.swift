@@ -77,8 +77,10 @@ class LoginViewController: UIViewController {
     }
     
     func launchMainVC() {
+        emailTextField.text = ""
+        passwordTextField.text = ""
+        configureUI(enabled: true)
         let mainVC = storyboard!.instantiateViewController(withIdentifier: "MainViewController")
-        dismiss(animated: true, completion: nil)
         present(mainVC, animated: true, completion: nil)
     }
     

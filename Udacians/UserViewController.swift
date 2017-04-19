@@ -211,11 +211,11 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
     @IBAction func logoutButtonTapped(_ sender: UIButton) {
         logoutButton.isEnabled = false
         _ = UdacityClient.shared.deleteSession(completion: { success in
-            let loginVC = self.storyboard!.instantiateViewController(withIdentifier: "LoginViewController")
             try? FIRAuth.auth()?.signOut()
             UserDefaults.standard.removeObject(forKey: "token")
+            UdacityClient.shared.token = ""
+            UdacityClient.shared.userId = ""
             self.dismiss(animated: true, completion: nil)
-            self.present(loginVC, animated: true, completion: nil)
         })
     }
     
