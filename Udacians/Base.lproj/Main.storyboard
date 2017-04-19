@@ -36,7 +36,7 @@
             <objects>
                 <navigationController id="wyj-UW-oNF" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Community" image="event_pin" id="FuH-ZO-a06"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="yBU-Bv-8nq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yBU-Bv-8nq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -195,7 +195,7 @@
             <objects>
                 <navigationController id="6df-HV-Jid" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Social" image="social" id="xhB-pr-VgM"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="7ro-pB-KNH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7ro-pB-KNH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -633,7 +633,7 @@
             <objects>
                 <navigationController id="zlR-M3-WmB" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Me" image="user_pin" id="9gp-zH-ALg"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="DyU-DM-MMl">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DyU-DM-MMl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -650,7 +650,7 @@
             <objects>
                 <navigationController id="DB7-2p-kCT" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" image="map" id="oSB-Fr-8ZM"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="gac-jd-hTu">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gac-jd-hTu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2041,7 +2041,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lKl-U1-XN8" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ul3-yb-PXX">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ul3-yb-PXX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -2088,6 +2088,6 @@
         <image name="user_pin" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="45k-73-SZu"/>
+        <segue reference="45S-vK-j91"/>
     </inferredMetricsTieBreakers>
 </document>

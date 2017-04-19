@@ -43,6 +43,9 @@ class LoginViewController: UIViewController {
             if !success {
                 print("Failed to get XSRF token, status code: \(code)")
                 DispatchQueue.main.async {
+                    if code == 403 {
+                        self.showAlert(title: "Login Failed", message: "Incorrect username or password")
+                    }
                     self.configureUI(enabled: true)
                 }
                 return

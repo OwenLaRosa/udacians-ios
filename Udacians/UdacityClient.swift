@@ -63,6 +63,8 @@ public class UdacityClient {
                     }
                 }
                 task.resume()
+            } else {
+                completionHandler(false, code)
             }
         }).resume()
     }
