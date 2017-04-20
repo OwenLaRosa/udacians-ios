@@ -13,8 +13,6 @@ class FeedViewController: UIViewController {
     
     @IBOutlet var feedTableView: UITableView!
     
-    private var viewAppeared = false
-    
     private var posts = [Message]()
     
     var ref: FIRDatabaseReference!
@@ -36,21 +34,24 @@ class FeedViewController: UIViewController {
         super.viewWillAppear(animated)
         
         // only add the listener once to prevent duplicate entries
-        if (!viewAppeared) {
-            viewAppeared = true
-            let connectionsRef = ref.child("users").child(getUid()).child("connections")
-            connectionsRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                // user IDs of users we're following
-                var connections = [String]()
-                for i in snapshot.children.allObjects as! [FIRDataSnapshot] {
-                    connections.append(i.key)
-                }
+        let connectionsRef = ref.child("users").child(getUid()).child("connections")
+        connectionsRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            // user IDs of users we're following
+            var connections = [String]()
+            for i in snapshot.children.allObjects as! [FIRDataSnapshot] {
+                connections.append(i.key)
+            }
+            if connections.count == 0 {
+                self.dataSource.posts.removeAll()
+                self.feedTableView.reloadData()
+            } else {
                 self.getConnectionPostLinks(connections: connections)
-            })
-        }
+            }
+        })
     }
     
     private func getConnectionPostLinks(connections: [String]) {
+        self.dataSource.posts.removeAll()
         for i in connections {
             let userPostLinksRef = ref.child("users").child(i).child("posts")
             userPostLinksRef.observe(.childAdded, with: { (snapshot) in
