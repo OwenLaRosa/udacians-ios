@@ -57,9 +57,10 @@ class FeedViewController: UIViewController {
             userPostLinksRef.observe(.childAdded, with: { (snapshot) in
                 let postRef = self.ref.child("posts").child(snapshot.key)
                 postRef.observe(.value, with: { (snapshot) in
-                    let post = Message(id: snapshot.key, data: snapshot.value as! [String: AnyObject])
+                    guard let contents = snapshot.value as? [String: AnyObject] else { return }
+                    let post = Message(id: snapshot.key, data: contents)
                     self.dataSource.posts.append(post)
-                    self.dataSource.posts.sort(by: {$0.0.id > $0.1.id})
+                    self.dataSource.posts.sort(by: {$0.0.id < $0.1.id})
                     self.feedTableView.reloadData()
                 })
             })
