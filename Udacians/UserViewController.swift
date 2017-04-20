@@ -192,7 +192,11 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
             isFollowingRef.removeValue()
             userFollowerRef.removeValue()
             followerCountRef.runTransactionBlock({(mutableData) in
-                mutableData.value = (mutableData.value! as! Int) - 1
+                if mutableData.value is NSNull {
+                    mutableData.value = 0
+                } else {
+                    mutableData.value = (mutableData.value! as! Int) - 1
+                }
                 if (mutableData.value as! Int) < 0 {
                     mutableData.value = 0
                 }
@@ -202,7 +206,11 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
             isFollowingRef.setValue(true)
             userFollowerRef.setValue(true)
             followerCountRef.runTransactionBlock({(mutableData) in
-                mutableData.value = (mutableData.value! as! Int) + 1
+                if mutableData.value is NSNull {
+                    mutableData.value = 1
+                } else {
+                    mutableData.value = (mutableData.value! as! Int) + 1
+                }
                 return FIRTransactionResult.success(withValue: mutableData)
             })
         }
