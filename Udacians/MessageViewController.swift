@@ -303,6 +303,12 @@ extension MessageViewController: UITableViewDataSource {
         nameReference.observeSingleEvent(of: .value, with: {(snapshot) in
             cell.nameLabel.text = snapshot.value as? String ?? ""
         })
+        // users should see their own name in a different color
+        if message.sender == getUid() {
+            cell.nameLabel.textColor = AppDelegate.accentColor
+        } else {
+            cell.nameLabel.textColor = AppDelegate.udaciansColorDark
+        }
         let photoReference = ref.child("users").child(message.sender).child("basic").child("photo")
         photoReference.observeSingleEvent(of: .value, with: {(snapshot) in
             if let storedImage = WebImageCache.shared.image(with: message.sender) {

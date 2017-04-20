@@ -17,8 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    let udaciansColor = UIColor(red: 30/255, green: 180/255, blue: 226/255, alpha: 1.0)
-    let accentColor = UIColor(red: 1.0, green: 145/255, blue: 0.0, alpha: 1.0)
+    public static let udaciansColor = UIColor(red: 30/255, green: 180/255, blue: 226/255, alpha: 1.0)
+    public static let udaciansColorDark = UIColor(red: 1/255, green: 87/255, blue: 155/255, alpha: 1.0)
+    public static let accentColor = UIColor(red: 1.0, green: 145/255, blue: 0.0, alpha: 1.0)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -31,9 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //GMSServices.provideAPIKey("AIzaSyDd4YX1xiy9u0uHcloSlmefAiv2svg1WFo")
         GMSServices.provideAPIKey("AIzaSyCwxxASjGvziAJ5lm7x0OkVwbpXJW5HPyc")
         
-        UITabBar.appearance().tintColor = accentColor
+        UITabBar.appearance().tintColor = AppDelegate.accentColor
         UINavigationBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().barTintColor = udaciansColor
+        UINavigationBar.appearance().barTintColor = AppDelegate.udaciansColor
         
         UINavigationBar .appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         UIApplication.shared.statusBarStyle = .lightContent
@@ -43,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // this ensures there isn't an awkward black screen inbetweem the launcher and presented VC
         let placeholderVC = UIViewController()
         placeholderVC.view.frame = UIScreen.main.bounds
-        placeholderVC.view.backgroundColor = udaciansColor
+        placeholderVC.view.backgroundColor = AppDelegate.udaciansColor
         window?.rootViewController = placeholderVC
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
