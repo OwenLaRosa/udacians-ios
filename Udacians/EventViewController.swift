@@ -128,6 +128,7 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
                 ref.child("users").child(getUid()).child("events").child(eventId).removeValue()
             } else {
                 isMemberReference.setValue(true)
+                ref.child("users").child(getUid()).child("events").child(eventId).setValue(true)
             }
         }
     }

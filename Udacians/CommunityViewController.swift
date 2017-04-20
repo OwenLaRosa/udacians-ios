@@ -38,6 +38,14 @@ class CommunityViewController: UIViewController {
             self.eventsProvider.myEvents.append(snapshot.key)
             self.tableView.reloadData()
         })
+        myEventsReference.observe(.childRemoved, with: {(snapshot) in
+            for i in 0..<self.eventsProvider.myEvents.count {
+                if snapshot.key == self.eventsProvider.myEvents[i] {
+                    self.eventsProvider.myEvents.remove(at: i)
+                    self.tableView.reloadData()
+                }
+            }
+        })
         let allEventsReference = ref.child("event_locations")
         allEventsReference.queryOrdered(byChild: "timestamp").queryLimited(toLast: 20).observe(.childAdded, with: {(snapshot) in
             self.eventsProvider.allEvents.append(snapshot.key)
