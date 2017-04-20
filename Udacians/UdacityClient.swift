@@ -120,12 +120,14 @@ public class UdacityClient {
         return task
     }
     
-    public func syncProfileData(completionHandler: @escaping (_ success: Bool, _ code: Int) -> Void) -> URLSessionTask? {
+    public func syncProfileData(email: String, completionHandler: @escaping (_ success: Bool, _ code: Int) -> Void) -> URLSessionTask? {
         if userId == "" {
             // not logged in
             return nil
         }
         let ref = FIRDatabase.database().reference();
+        let emailRef = ref.child("users").child(userId).child("email")
+        emailRef.setValue(email)
         let nameRef = ref.child("users").child(userId).child("basic").child("name")
         let enrollmentsRef = ref.child("users").child(userId).child("enrollments")
         let session = URLSession.shared

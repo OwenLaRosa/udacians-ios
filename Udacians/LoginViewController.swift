@@ -62,7 +62,7 @@ class LoginViewController: UIViewController {
                     KeychainWrapper.standardKeychainAccess().setString(email, forKey: "email")
                     KeychainWrapper.standardKeychainAccess().setString(password, forKey: "password")
                     print("Successfully authenticated with Firebase")
-                    _ = UdacityClient.shared.syncProfileData() {success, code in
+                    _ = UdacityClient.shared.syncProfileData(email: email) {success, code in
                         if success {
                             print("successfully synced profile data")
                             DispatchQueue.main.async {
