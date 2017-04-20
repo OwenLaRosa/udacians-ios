@@ -51,7 +51,15 @@ class CommunityViewController: UIViewController {
             self.eventsProvider.allEvents.append(snapshot.key)
             self.tableView.reloadData()
         })
-        
+        allEventsReference.observe(.childRemoved, with: {(snapshot) in
+            for i in 0..<self.eventsProvider.allEvents.count {
+                if snapshot.key == self.eventsProvider.allEvents[i] {
+                    self.eventsProvider.allEvents.remove(at: i)
+                    self.tableView.reloadData()
+                }
+            }
+        })
+
         tableView.dataSource = articlesProvider
         tableView.delegate = articlesProvider
         tableView.reloadData()
