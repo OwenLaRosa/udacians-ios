@@ -31,6 +31,8 @@
 		5A585C951DC245F1009647A0 /* MarkupKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5A585C921DC245D9009647A0 /* MarkupKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5A585C981DC24766009647A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5A585C971DC24766009647A0 /* GoogleService-Info.plist */; };
 		5A695E761E7D8DF400E082D3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A695E751E7D8DF400E082D3 /* LoginViewController.swift */; };
+		5A6F13B31EA901A300F0946D /* KeychainOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F13B11EA901A300F0946D /* KeychainOptions.swift */; };
+		5A6F13B41EA901A300F0946D /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F13B21EA901A300F0946D /* KeychainWrapper.swift */; };
 		5A76DF8A1E4A6B820032969E /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76DF891E4A6B820032969E /* PostTableViewCell.swift */; };
 		5A7CC8D11E4EC280001CEF72 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7CC8D01E4EC280001CEF72 /* ChatTableViewCell.swift */; };
 		5A8555CA1DC51BFA00D8BF46 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8555C91DC51BFA00D8BF46 /* SwiftyJSON.swift */; };
@@ -109,6 +111,8 @@
 		5A585C921DC245D9009647A0 /* MarkupKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MarkupKit.framework; sourceTree = "<group>"; };
 		5A585C971DC24766009647A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5A695E751E7D8DF400E082D3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		5A6F13B11EA901A300F0946D /* KeychainOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainOptions.swift; sourceTree = "<group>"; };
+		5A6F13B21EA901A300F0946D /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		5A76DF891E4A6B820032969E /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		5A7CC8D01E4EC280001CEF72 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		5A8555C91DC51BFA00D8BF46 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -240,6 +244,8 @@
 		5A32912C1E8EE5BE00DC0F8D /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				5A6F13B11EA901A300F0946D /* KeychainOptions.swift */,
+				5A6F13B21EA901A300F0946D /* KeychainWrapper.swift */,
 				5A29A8101E60D9EF00171486 /* Utils.swift */,
 			);
 			name = Utility;
@@ -611,6 +617,7 @@
 				5A17C5E81E78B28C004B759A /* MultipleInputViewController.swift in Sources */,
 				5ADCF3911E6A5AFE00C4F313 /* PostFeedTableViewDataSource.swift in Sources */,
 				5ADCF38F1E6A56D200C4F313 /* ProfileLinkCollectionViewCell.swift in Sources */,
+				5A6F13B41EA901A300F0946D /* KeychainWrapper.swift in Sources */,
 				5AB6C3111E4FAF030033301F /* ConnectionTableViewCell.swift in Sources */,
 				5A4F82F31E4CCC520047869A /* WebImageCache.swift in Sources */,
 				5A3B88E01E733BA2000FEC96 /* EventViewController.swift in Sources */,
@@ -630,6 +637,7 @@
 				5A25CC171E74C9CB00152AAE /* UIViewController+Convenience.swift in Sources */,
 				5A29A8111E60D9EF00171486 /* Utils.swift in Sources */,
 				5A4FE8C41E4A445700896D79 /* SocialViewController.swift in Sources */,
+				5A6F13B31EA901A300F0946D /* KeychainOptions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

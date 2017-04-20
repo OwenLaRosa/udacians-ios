@@ -212,7 +212,8 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
         logoutButton.isEnabled = false
         _ = UdacityClient.shared.deleteSession(completion: { success in
             try? FIRAuth.auth()?.signOut()
-            UserDefaults.standard.removeObject(forKey: "token")
+            KeychainWrapper.standardKeychainAccess().removeObject(forKey: "email")
+            KeychainWrapper.standardKeychainAccess().removeObject(forKey: "password")
             UdacityClient.shared.token = ""
             UdacityClient.shared.userId = ""
             self.dismiss(animated: true, completion: nil)

@@ -47,24 +47,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = placeholderVC
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
-        // user has logged in from a previous session
-        if let token = UserDefaults.standard.string(forKey: "token") {
-            FIRAuth.auth()?.signIn(withCustomToken: token, completion: {user, error in
-                if let _ = user?.uid {
-                    // successfully logged in, proceed to main navigation
-                    AppDelegate.justLaunched = true
-                    let mainVC = storyboard.instantiateViewController(withIdentifier: "MainViewController")
-                    let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
-                    self.window?.rootViewController = loginVC
-                    loginVC.present(mainVC, animated: false, completion: {
-                        AppDelegate.justLaunched = false
+        if KeychainWrapper.standardKeychainAccess().hasValue(forKey: "email") && KeychainWrapper.standardKeychainAccess().hasValue(forKey: "password") {
+            let email = KeychainWrapper.standardKeychainAccess().string(forKey: "email")!
+            let password = KeychainWrapper.standardKeychainAccess().string(forKey: "password")!
+            _ = UdacityClient.shared.getFirebaseToken(email: email, password: password) {success, token in
+                if success {
+                    FIRAuth.auth()?.signIn(withCustomToken: token!, completion: {user, error in
+                        if let _ = user?.uid {
+                            // successfully logged in, proceed to main navigation
+                            AppDelegate.justLaunched = true
+                            let mainVC = storyboard.instantiateViewController(withIdentifier: "MainViewController")
+                            let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+                            self.window?.rootViewController = loginVC
+                            loginVC.present(mainVC, animated: false, completion: {
+                                AppDelegate.justLaunched = false
+                            })
+                        } else {
+                            // authentication token expired
+                            let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+                            self.window?.rootViewController = loginVC
+                        }
                     })
                 } else {
-                    // authentication token expired
+                    // no login from previous session
                     let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
                     self.window?.rootViewController = loginVC
                 }
-            })
+            }
         } else {
             // no login from previous session
             let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
