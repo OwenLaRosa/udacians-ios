@@ -45,6 +45,7 @@ class MessageViewController: UIViewController {
     
     var isDirect = false
     var chatId = ""
+    var hasJoinedChat = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,6 +136,11 @@ class MessageViewController: UIViewController {
                     if self.isDirect {
                         self.recipientDirectMessageReference.setValue(FIRServerValue.timestamp())
                         self.senderDirectMessageReference.setValue(FIRServerValue.timestamp())
+                    } else if !self.chatId.hasPrefix("nd") {
+                        if !self.hasJoinedChat {
+                            self.hasJoinedChat = true
+                            self.ref.child("users").child(self.getUid()).child("topics").child(self.chatId).setValue(true)
+                        }
                     }
                 }
             }
@@ -145,6 +151,11 @@ class MessageViewController: UIViewController {
             if isDirect {
                 recipientDirectMessageReference.setValue(FIRServerValue.timestamp())
                 senderDirectMessageReference.setValue(FIRServerValue.timestamp())
+            } else if !chatId.hasPrefix("nd") {
+                if !hasJoinedChat {
+                    hasJoinedChat = true
+                    ref.child("users").child(getUid()).child("topics").child(chatId).setValue(true)
+                }
             }
         }
     }
