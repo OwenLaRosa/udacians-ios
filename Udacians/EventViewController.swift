@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import MessageUI
 
-class EventViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class EventViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -86,6 +86,7 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
         if getUid() == eventId {
             // the user that posted the event can email all members
             interactButton.title = "Email"
+            interactButton.isHidden = true
         } else {
             isMemberReference = eventRef.child("members").child(getUid())
             isMemberReference.observe(.value, with: {(snapshot) in
@@ -111,8 +112,7 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
             // copying the arrays will ensure changes to "attendees" will not cause race conditions
             let users = attendees
             for i in users {
-                ref.child("users").child(i).child("email")
-                ref.observeSingleEvent(of: .value, with: {(snapshot) in
+                ref.child("users").child(i).child("email").observeSingleEvent(of: .value, with: {(snapshot) in
                     count += 1
                     if let email = snapshot.value as? String {
                         memberEmails.append(email)
@@ -140,6 +140,7 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
             return
         }
         let mailComposeVC = MFMailComposeViewController()
+        mailComposeVC.delegate = self
         mailComposeVC.setToRecipients(addresses)
         show(mailComposeVC, sender: nil)
     }
@@ -201,6 +202,10 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
             destinationVC.isUserPosts = false
             destinationVC.eventId = eventId
         }
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
     
 }
