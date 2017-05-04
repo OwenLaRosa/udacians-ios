@@ -122,12 +122,12 @@ class ArticlesTableViewProvider: NSObject, UITableViewDataSource, UITableViewDel
         photoReference.observeSingleEvent(of: .value, with: {(snapshot) in
             if let url = snapshot.value as? String {
                 if let storedImage = WebImageCache.shared.image(with: article.id) {
-                    cell.photoImageButton.image = storedImage
+                    cell.photoImageButton.setImage(storedImage, for: .normal)
                 } else {
                     cell.photoImageTask = WebImageCache.shared.downloadImage(at: url) {imageData in
                         WebImageCache.shared.storeImage(image: imageData, withIdentifier: article.id)
                         DispatchQueue.main.async {
-                            cell.photoImageButton.image = imageData
+                            cell.photoImageButton.setImage(imageData, for: .normal)
                             cell.setNeedsLayout()
                         }
                     }
@@ -211,12 +211,12 @@ class EventsTableViewProvider: NSObject, UITableViewDataSource, UITableViewDeleg
         photoReference.observeSingleEvent(of: .value, with: {(snapshot) in
             if let url = snapshot.value as? String {
                 if let storedImage = WebImageCache.shared.image(with: eventId) {
-                    cell.photoImageButton.image = storedImage
+                    cell.photoImageButton.setImage(storedImage, for: .normal)
                 } else {
                     cell.photoImageTask = WebImageCache.shared.downloadImage(at: url) {imageData in
                         WebImageCache.shared.storeImage(image: imageData, withIdentifier: eventId)
                         DispatchQueue.main.async {
-                            cell.photoImageButton.image = imageData
+                            cell.photoImageButton.setImage(imageData, for: .normal)
                             cell.setNeedsLayout()
                         }
                     }

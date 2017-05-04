@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MarkupKit
 
 class PostTableViewCell: UITableViewCell {
     

@@ -76,10 +76,10 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
                 isFollowingRef.observe(.value, with: {(snapshot) in
                     if snapshot.value is NSNull {
                         self.isFollowing = false
-                        self.followButton.title = "Follow"
+                        self.followButton.setTitle("Follow", for: .normal)
                     } else {
                         self.isFollowing = true
-                        self.followButton.title = "Unfollow"
+                        self.followButton.setTitle("Unfollow", for: .normal)
                     }
                 })
             }

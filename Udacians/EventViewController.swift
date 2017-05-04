@@ -85,17 +85,17 @@ class EventViewController: UIViewController, UICollectionViewDataSource, UIColle
         })
         if getUid() == eventId {
             // the user that posted the event can email all members
-            interactButton.title = "Email"
+            interactButton.setTitle("Email", for: .normal)
             interactButton.isHidden = true
         } else {
             isMemberReference = eventRef.child("members").child(getUid())
             isMemberReference.observe(.value, with: {(snapshot) in
                 if let flag = snapshot.value as? Bool, flag {
                     self.isAttending = true
-                    self.interactButton.title = "Not Going"
+                    self.interactButton.setTitle("Not Going", for: .normal)
                 } else {
                     self.isAttending = false
-                    self.interactButton.title = "Attend"
+                    self.interactButton.setTitle("Attend", for: .normal)
                 }
             })
         }

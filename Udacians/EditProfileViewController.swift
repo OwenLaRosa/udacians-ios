@@ -53,12 +53,12 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
             guard let value = snapshot.value as? [String : String] else { return }
             if let url = value["photo"] {
                 if let storedImage = WebImageCache.shared.image(with: self.getUid()) {
-                    self.profilePictureButton.image = storedImage
+                    self.profilePictureButton.setImage(storedImage, for: .normal)
                 } else {
                     _ = WebImageCache.shared.downloadImage(at: url) {imageData in
                         WebImageCache.shared.storeImage(image: imageData, withIdentifier: self.getUid())
                         DispatchQueue.main.async {
-                            self.profilePictureButton.image = imageData
+                            self.profilePictureButton.setImage(imageData, for: .normal)
                         }
                     }
                 }
@@ -180,7 +180,7 @@ class EditProfileViewController: UIViewController, UIImagePickerControllerDelega
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             newImage = image
-            profilePictureButton.image = image
+            profilePictureButton.setImage(image, for: .normal)
         }
         dismiss(animated: true, completion: nil)
     }

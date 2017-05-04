@@ -61,18 +61,18 @@ class PostFeedTableViewDataSource: NSObject, UITableViewDataSource {
         profilePhotoRef.observeSingleEvent(of: .value, with: { (snapshot) in
             if let _ = URL(string: snapshot.value as? String ?? "") {
                 if let storedImage = WebImageCache.shared.image(with: post.sender) {
-                    cell.profileImageButton.image = storedImage
+                    cell.profileImageButton.setImage(storedImage, for: .normal)
                 } else {
                     cell.profileImageTask = WebImageCache.shared.downloadImage(at: snapshot.value as! String) {imageData in
                         WebImageCache.shared.storeImage(image: imageData, withIdentifier: post.sender)
                         DispatchQueue.main.async {
-                            cell.profileImageButton.image = imageData
+                            cell.profileImageButton.setImage(imageData, for: .normal)
                             cell.setNeedsLayout()
                         }
                     }
                 }
             } else {
-                cell.profileImageButton.image = nil
+                cell.profileImageButton.setImage(nil, for: .normal)
             }
         })
         nameRef.observeSingleEvent(of: .value, with: { (snapshot) in

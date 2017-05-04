@@ -122,9 +122,9 @@ class MultipleInputViewController: UIViewController {
             instructionLabel.text = "What would you like to discuss with other students?"
             inputTextField.placeholder = "Discussion prompt"
             // topics only have one page
-            negativeButton.title = MultipleInputViewController.BUTTON_CANCEL
+            negativeButton.setTitle(MultipleInputViewController.BUTTON_CANCEL, for: .normal)
             negativeAction = dismissAction
-            positiveButton.title = MultipleInputViewController.BUTTON_SUBMIT
+            positiveButton.setTitle(MultipleInputViewController.BUTTON_SUBMIT, for: .normal)
             positiveAction = submitAction
             break
         case 1: // article
@@ -133,17 +133,17 @@ class MultipleInputViewController: UIViewController {
                 currentKey = InfoKeys.TITLE
                 instructionLabel.text = "What is the title of the article?"
                 inputTextField.placeholder = "E.g. How to Code Like Jon Skeet"
-                negativeButton.title = MultipleInputViewController.BUTTON_CANCEL
+                negativeButton.setTitle(MultipleInputViewController.BUTTON_CANCEL, for: .normal)
                 negativeAction = dismissAction
-                positiveButton.title = MultipleInputViewController.BUTTON_NEXT
+                positiveButton.setTitle(MultipleInputViewController.BUTTON_NEXT, for: .normal)
                 positiveAction = nextAction
             } else { // page 2
                 currentKey = InfoKeys.URL
                 instructionLabel.text = "What is the URL of the article?"
                 inputTextField.placeholder = "http://google.com"
-                negativeButton.title = MultipleInputViewController.BUTTON_BACK
+                negativeButton.setTitle(MultipleInputViewController.BUTTON_BACK, for: .normal)
                 negativeAction = backAction
-                positiveButton.title = MultipleInputViewController.BUTTON_SUBMIT
+                positiveButton.setTitle(MultipleInputViewController.BUTTON_SUBMIT, for: .normal)
                 positiveAction = submitAction
             }
             break
@@ -153,25 +153,25 @@ class MultipleInputViewController: UIViewController {
                 currentKey = InfoKeys.NAME
                 instructionLabel.text = "What is the name of the event?"
                 inputTextField.placeholder = "iOS Developers meetup"
-                negativeButton.title = MultipleInputViewController.BUTTON_CANCEL
+                negativeButton.setTitle(MultipleInputViewController.BUTTON_CANCEL, for: .normal)
                 negativeAction = dismissAction
-                positiveButton.title = MultipleInputViewController.BUTTON_NEXT
+                positiveButton.setTitle(MultipleInputViewController.BUTTON_NEXT, for: .normal)
                 positiveAction = nextAction
             } else if currentPage == 2 {
                 currentKey = InfoKeys.PLACE
                 instructionLabel.text = "Where is this event?"
                 inputTextField.placeholder = "E.g. Microsoft NERD Center. Cambridge, MA"
-                negativeButton.title = MultipleInputViewController.BUTTON_BACK
+                negativeButton.setTitle(MultipleInputViewController.BUTTON_BACK, for: .normal)
                 negativeAction = backAction
-                positiveButton.title = MultipleInputViewController.BUTTON_NEXT
+                positiveButton.setTitle(MultipleInputViewController.BUTTON_NEXT, for: .normal)
                 positiveAction = nextAction
             } else { // page 3
                 currentKey = InfoKeys.ABOUT
                 instructionLabel.text = "Event Details"
                 inputTextField.placeholder = "Competitive Hackathon, Saturday at 1:00 PM"
-                negativeButton.title = MultipleInputViewController.BUTTON_BACK
+                negativeButton.setTitle(MultipleInputViewController.BUTTON_BACK, for: .normal)
                 negativeAction = backAction
-                positiveButton.title = MultipleInputViewController.BUTTON_SUBMIT
+                positiveButton.setTitle(MultipleInputViewController.BUTTON_SUBMIT, for: .normal)
                 positiveAction = submitAction
             }
             break

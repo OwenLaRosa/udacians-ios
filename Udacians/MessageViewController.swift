@@ -323,18 +323,18 @@ extension MessageViewController: UITableViewDataSource {
         let photoReference = ref.child("users").child(message.sender).child("basic").child("photo")
         photoReference.observeSingleEvent(of: .value, with: {(snapshot) in
             if let storedImage = WebImageCache.shared.image(with: message.sender) {
-                cell.profileImageButton.image = storedImage
+                cell.profileImageButton.setImage(storedImage, for: .normal)
             } else {
                 if let url = snapshot.value as? String {
                     cell.profileImageTask = WebImageCache.shared.downloadImage(at: url) {imageData in
                         WebImageCache.shared.storeImage(image: imageData, withIdentifier: message.sender)
                         DispatchQueue.main.async {
-                            cell.profileImageButton.image = imageData
+                            cell.profileImageButton.setImage(imageData, for: .normal)
                             cell.setNeedsLayout()
                         }
                     }
                 } else {
-                    cell.profileImageButton.image = UIImage(named: "Udacians_logo")
+                    cell.profileImageButton.setImage(UIImage(named: "Udacians_logo"), for: .normal)
                 }
             }
         })
