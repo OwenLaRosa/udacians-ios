@@ -27,8 +27,6 @@
 		5A585C6F1DC2449B009647A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A585C6D1DC2449B009647A0 /* LaunchScreen.storyboard */; };
 		5A585C7A1DC2449B009647A0 /* UdaciansTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A585C791DC2449B009647A0 /* UdaciansTests.swift */; };
 		5A585C851DC2449B009647A0 /* UdaciansUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A585C841DC2449B009647A0 /* UdaciansUITests.swift */; };
-		5A585C941DC245F1009647A0 /* MarkupKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A585C921DC245D9009647A0 /* MarkupKit.framework */; };
-		5A585C951DC245F1009647A0 /* MarkupKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5A585C921DC245D9009647A0 /* MarkupKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5A585C981DC24766009647A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5A585C971DC24766009647A0 /* GoogleService-Info.plist */; };
 		5A695E761E7D8DF400E082D3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A695E751E7D8DF400E082D3 /* LoginViewController.swift */; };
 		5A6F13B31EA901A300F0946D /* KeychainOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F13B11EA901A300F0946D /* KeychainOptions.swift */; };
@@ -67,20 +65,6 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		5A585C961DC245F1009647A0 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				5A585C951DC245F1009647A0 /* MarkupKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		03ABD6AEE36CA7AB8BCF27D5 /* Pods-UdaciansUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UdaciansUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UdaciansUITests/Pods-UdaciansUITests.release.xcconfig"; sourceTree = "<group>"; };
 		5A059C2E1E56AD9800DF54BD /* ThreeTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeTitleTableViewCell.swift; sourceTree = "<group>"; };
@@ -108,7 +92,6 @@
 		5A585C801DC2449B009647A0 /* UdaciansUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UdaciansUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A585C841DC2449B009647A0 /* UdaciansUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdaciansUITests.swift; sourceTree = "<group>"; };
 		5A585C861DC2449B009647A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5A585C921DC245D9009647A0 /* MarkupKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MarkupKit.framework; sourceTree = "<group>"; };
 		5A585C971DC24766009647A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5A695E751E7D8DF400E082D3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5A6F13B11EA901A300F0946D /* KeychainOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainOptions.swift; sourceTree = "<group>"; };
@@ -142,7 +125,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A585C941DC245F1009647A0 /* MarkupKit.framework in Frameworks */,
 				1D00035168E6A2D0D0F0A899 /* Pods_Udacians.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -273,7 +255,6 @@
 		5A585C581DC2449A009647A0 = {
 			isa = PBXGroup;
 			children = (
-				5A585C921DC245D9009647A0 /* MarkupKit.framework */,
 				5A585C631DC2449A009647A0 /* Udacians */,
 				5A585C781DC2449B009647A0 /* UdaciansTests */,
 				5A585C831DC2449B009647A0 /* UdaciansUITests */,
@@ -348,7 +329,6 @@
 				5A585C5D1DC2449A009647A0 /* Sources */,
 				5A585C5E1DC2449A009647A0 /* Frameworks */,
 				5A585C5F1DC2449A009647A0 /* Resources */,
-				5A585C961DC245F1009647A0 /* Embed Frameworks */,
 				784B7E18741A9EC467D8B8F0 /* [CP] Embed Pods Frameworks */,
 				0B444EA4047EAE51FDB4795C /* [CP] Copy Pods Resources */,
 			);
