@@ -51,7 +51,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManager
         
         thisUserLocationRef = ref.child("locations").child(getUid())
         
-        locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
