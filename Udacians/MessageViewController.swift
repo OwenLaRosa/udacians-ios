@@ -343,6 +343,7 @@ extension MessageViewController: UITableViewDataSource {
             (cell as! PostWithImageTableViewCell).contentImageView.image = nil
             if let storedImage = WebImageCache.shared.image(with: message.id) {
                 (cell as! PostWithImageTableViewCell).contentImageView.image = storedImage
+                cell.setNeedsLayout()
             } else {
                 (cell as! PostWithImageTableViewCell).contentImageTask = WebImageCache.shared.downloadImage(at: message.imageUrl) {imageData in
                     WebImageCache.shared.storeImage(image: imageData, withIdentifier: message.id)
