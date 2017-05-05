@@ -43,6 +43,7 @@ class CommunityViewController: UIViewController {
                 if snapshot.key == self.eventsProvider.myEvents[i] {
                     self.eventsProvider.myEvents.remove(at: i)
                     self.tableView.reloadData()
+                    break
                 }
             }
         })
@@ -56,6 +57,7 @@ class CommunityViewController: UIViewController {
                 if snapshot.key == self.eventsProvider.allEvents[i] {
                     self.eventsProvider.allEvents.remove(at: i)
                     self.tableView.reloadData()
+                    break
                 }
             }
         })
