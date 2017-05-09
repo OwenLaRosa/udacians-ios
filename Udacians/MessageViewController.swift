@@ -340,7 +340,7 @@ extension MessageViewController: UITableViewDataSource {
                 }
             }
         })
-        cell.contentLabel.text = message.content
+        cell.contentLabel.text = Utils.filterProfanity(from: message.content)
         if message.imageUrl != nil {
             (cell as! PostWithImageTableViewCell).contentImageView.image = nil
             if let storedImage = WebImageCache.shared.image(with: message.id) {

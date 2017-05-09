@@ -26,6 +26,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManager
     var topicLocationsRef: FIRDatabaseReference!
     var articlesRef: FIRDatabaseReference!
     var thisUserLocationRef: FIRDatabaseReference!
+    var bannedWordsRef: FIRDatabaseReference!
     
     var idToUserMarker = [String: GMSMarker]()
     var idToEventMarker = [String: GMSMarker]()
@@ -43,6 +44,16 @@ class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManager
         mapView.mapType = GMSMapViewType(4)
         
         ref = FIRDatabase.database().reference()
+        
+        bannedWordsRef = ref.child("banned_words")
+        bannedWordsRef.observe(.value, with: {(snapshot) in
+            print(snapshot)
+            guard let bannedWords = snapshot.value as? [String: String] else { return }
+            for word in bannedWords.keys {
+                Utils.bannedWords.append(bannedWords[word]!)
+            }
+        })
+        
         userLocationsRef = ref.child("locations")
         eventLocationsRef = ref.child("event_locations")
         topicLocationsRef = ref.child("topic_locations")

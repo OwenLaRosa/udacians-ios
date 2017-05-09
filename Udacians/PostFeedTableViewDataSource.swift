@@ -82,7 +82,7 @@ class PostFeedTableViewDataSource: NSObject, UITableViewDataSource {
                 cell.nameLabel.text = snapshot.value as? String ?? ""
             }
         })
-        cell.contentLabel.text = post.content
+        cell.contentLabel.text = Utils.filterProfanity(from: post.content)
         
         if post.imageUrl != nil {
             (cell as! PostWithImageTableViewCell).contentImageView.image = nil

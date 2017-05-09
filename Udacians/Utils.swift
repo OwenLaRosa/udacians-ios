@@ -11,6 +11,8 @@ import FirebaseStorage
 
 class Utils {
     
+    static var bannedWords = [String]()
+    
     class func uploadImage(image: UIImage, toReference ref: FIRStorageReference, completionHandler: @escaping (_ url: String?) -> Void) {
         DispatchQueue.global(qos: .background).async {
             // unique file name, string representation of current Unix time
@@ -46,4 +48,34 @@ class Utils {
         }
         return nil
     }
+    
+    class func filterProfanity(from text: String) -> String {
+        var stringToFilter = text;
+        let replacement = "******"
+        for word in Utils.bannedWords {
+            if stringToFilter.characters.count == word.characters.count && stringToFilter.lowercased() == word.lowercased() {
+                return replacement
+            }
+            while let range = stringToFilter.range(of: word, options: .caseInsensitive, range: nil, locale: nil) {
+                if range.lowerBound != stringToFilter.startIndex {
+                    if !String(describing: CharacterSet.letters).contains(String(stringToFilter.characters[stringToFilter.index(before: range.lowerBound)])) {
+                        stringToFilter = stringToFilter.replacingCharacters(in: range, with: replacement)
+                        continue
+                    }
+                } else {
+                    stringToFilter = stringToFilter.replacingCharacters(in: range, with: replacement)
+                }
+                if range.upperBound != stringToFilter.endIndex {
+                    if !String(describing: CharacterSet.letters).contains(String(stringToFilter.characters[stringToFilter.index(after: range.upperBound)])) {
+                        stringToFilter = stringToFilter.replacingCharacters(in: range, with: replacement)
+                        continue
+                    }
+                } else {
+                    stringToFilter = stringToFilter.replacingCharacters(in: range, with: replacement)
+                }
+            }
+        }
+        return stringToFilter
+    }
+    
 }
