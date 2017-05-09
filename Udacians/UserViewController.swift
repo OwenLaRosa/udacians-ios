@@ -27,6 +27,10 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
     @IBOutlet weak var followButton: UIButton!
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBOutlet weak var blockUserButton: UIButton!
+    
+    
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     enum ProfileLink { case personal, blog, linkedin, twitter }
     var profileLinks = [(type: ProfileLink, url: String)]()
@@ -65,9 +69,12 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
             thisUser = getUid()
         } else {
             // logout button should not show on others' profiles
-            tableView.tableFooterView = nil
+            logoutButton.setImage(nil, for: .normal)
+            logoutButton.setTitle("Report", for: .normal)
+            
             // user should not be able to follow themselves either on the "Me" tab or their profile prsented with navigation
             if thisUser == getUid() {
+                tableView.tableFooterView = nil
                 followButton.isHidden = true
             } else {
                 // user can follow/unfollow other users
@@ -217,15 +224,21 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
     }
     
     @IBAction func logoutButtonTapped(_ sender: UIButton) {
-        logoutButton.isEnabled = false
-        _ = UdacityClient.shared.deleteSession(completion: { success in
-            try? FIRAuth.auth()?.signOut()
-            KeychainWrapper.standardKeychainAccess().removeObject(forKey: "email")
-            KeychainWrapper.standardKeychainAccess().removeObject(forKey: "password")
-            UdacityClient.shared.token = ""
-            UdacityClient.shared.userId = ""
-            self.dismiss(animated: true, completion: nil)
-        })
+        if thisUser == getUid() {
+            logoutButton.isEnabled = false
+            _ = UdacityClient.shared.deleteSession(completion: { success in
+                try? FIRAuth.auth()?.signOut()
+                KeychainWrapper.standardKeychainAccess().removeObject(forKey: "email")
+                KeychainWrapper.standardKeychainAccess().removeObject(forKey: "password")
+                UdacityClient.shared.token = ""
+                UdacityClient.shared.userId = ""
+                self.dismiss(animated: true, completion: nil)
+            })
+        } else {
+            let reportAbuseVC = storyboard?.instantiateViewController(withIdentifier: "ReportAbuseViewController") as! ReportAbuseViewController
+            reportAbuseVC.abusiveUserId = thisUser
+            present(reportAbuseVC, animated: true, completion: nil)
+        }
     }
     
     func updateTableHeaderHeight() {

@@ -29,6 +29,7 @@
 		5A585C851DC2449B009647A0 /* UdaciansUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A585C841DC2449B009647A0 /* UdaciansUITests.swift */; };
 		5A585C981DC24766009647A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5A585C971DC24766009647A0 /* GoogleService-Info.plist */; };
 		5A695E761E7D8DF400E082D3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A695E751E7D8DF400E082D3 /* LoginViewController.swift */; };
+		5A6B45231EC11AD8002F6485 /* ReportAbuseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6B45221EC11AD8002F6485 /* ReportAbuseViewController.swift */; };
 		5A6F13B31EA901A300F0946D /* KeychainOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F13B11EA901A300F0946D /* KeychainOptions.swift */; };
 		5A6F13B41EA901A300F0946D /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F13B21EA901A300F0946D /* KeychainWrapper.swift */; };
 		5A76DF8A1E4A6B820032969E /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A76DF891E4A6B820032969E /* PostTableViewCell.swift */; };
@@ -94,6 +95,7 @@
 		5A585C861DC2449B009647A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A585C971DC24766009647A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5A695E751E7D8DF400E082D3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		5A6B45221EC11AD8002F6485 /* ReportAbuseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportAbuseViewController.swift; sourceTree = "<group>"; };
 		5A6F13B11EA901A300F0946D /* KeychainOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainOptions.swift; sourceTree = "<group>"; };
 		5A6F13B21EA901A300F0946D /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		5A76DF891E4A6B820032969E /* PostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				5A4FE8C11E4A444900896D79 /* FeedViewController.swift */,
 				5A695E751E7D8DF400E082D3 /* LoginViewController.swift */,
 				5A5581FA1E8810D5007338EC /* UIViewController+Extension.swift */,
+				5A6B45221EC11AD8002F6485 /* ReportAbuseViewController.swift */,
 				5A32912A1E8EE53200DC0F8D /* Data Services */,
 			);
 			name = Controller;
@@ -588,6 +591,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A6B45231EC11AD8002F6485 /* ReportAbuseViewController.swift in Sources */,
 				5A5581FB1E8810D5007338EC /* UIViewController+Extension.swift in Sources */,
 				5AE9CAB11E6CA9D700E1E279 /* EditProfileViewController.swift in Sources */,
 				5A059C311E56B0B900DF54BD /* Article.swift in Sources */,
