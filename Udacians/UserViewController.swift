@@ -30,7 +30,6 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
     
     @IBOutlet weak var blockUserButton: UIButton!
     
-    
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     enum ProfileLink { case personal, blog, linkedin, twitter }
     var profileLinks = [(type: ProfileLink, url: String)]()
@@ -67,6 +66,8 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
             followButton.isHidden = true
             title = "My Profile"
             thisUser = getUid()
+            // users can't block themselves
+            blockUserButton.isHidden = true
         } else {
             // logout button should not show on others' profiles
             logoutButton.setImage(nil, for: .normal)
