@@ -296,22 +296,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Udacians/Utils.swift"
-            timestampString = "516038211.339837"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "filterProfanity(from:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Udacians/Utils.swift"
             timestampString = "516038259.920617"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"

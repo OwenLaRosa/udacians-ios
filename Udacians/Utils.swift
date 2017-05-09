@@ -64,6 +64,7 @@ class Utils {
                     }
                 } else {
                     stringToFilter = stringToFilter.replacingCharacters(in: range, with: replacement)
+                    continue
                 }
                 if range.upperBound != stringToFilter.endIndex {
                     if !String(describing: CharacterSet.letters).contains(String(stringToFilter.characters[stringToFilter.index(after: range.upperBound)])) {
@@ -72,7 +73,9 @@ class Utils {
                     }
                 } else {
                     stringToFilter = stringToFilter.replacingCharacters(in: range, with: replacement)
+                    continue
                 }
+                break
             }
         }
         return stringToFilter
