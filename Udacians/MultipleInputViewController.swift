@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import Firebase
+import FirebaseDatabase
 
 class MultipleInputViewController: UIViewController {
     

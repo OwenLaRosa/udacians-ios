@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMaps
 import Firebase
+import FirebaseDatabase
 
 // data to be passed to the multiple input VC
 // consists of the type of content (event, topic, article)

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 
 public struct DirectDiscussion {
     // id of the other user in the discussion
