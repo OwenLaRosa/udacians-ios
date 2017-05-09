@@ -38,6 +38,11 @@ class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManager
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if !UserDefaults.standard.bool(forKey: "eula_agreed") {
+            let eulaVC = storyboard!.instantiateViewController(withIdentifier: "CommunityGuidelinesViewController")
+            present(eulaVC, animated: true, completion: nil)
+        }
+    
         mapView.delegate = self
         
         // hybrid satelite and political map

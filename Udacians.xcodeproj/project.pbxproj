@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1D00035168E6A2D0D0F0A899 /* Pods_Udacians.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 855C340DD5C2F0EFD58C9577 /* Pods_Udacians.framework */; };
+		5A051C951EC22D6E0007EFDC /* CommunityGuidelinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A051C941EC22D6E0007EFDC /* CommunityGuidelinesViewController.swift */; };
 		5A059C2F1E56AD9800DF54BD /* ThreeTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A059C2E1E56AD9800DF54BD /* ThreeTitleTableViewCell.swift */; };
 		5A059C311E56B0B900DF54BD /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A059C301E56B0B900DF54BD /* Article.swift */; };
 		5A17C5E81E78B28C004B759A /* MultipleInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A17C5E71E78B28C004B759A /* MultipleInputViewController.swift */; };
@@ -68,6 +69,7 @@
 
 /* Begin PBXFileReference section */
 		03ABD6AEE36CA7AB8BCF27D5 /* Pods-UdaciansUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UdaciansUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UdaciansUITests/Pods-UdaciansUITests.release.xcconfig"; sourceTree = "<group>"; };
+		5A051C941EC22D6E0007EFDC /* CommunityGuidelinesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityGuidelinesViewController.swift; sourceTree = "<group>"; };
 		5A059C2E1E56AD9800DF54BD /* ThreeTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreeTitleTableViewCell.swift; sourceTree = "<group>"; };
 		5A059C301E56B0B900DF54BD /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		5A17C5E71E78B28C004B759A /* MultipleInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleInputViewController.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				5A695E751E7D8DF400E082D3 /* LoginViewController.swift */,
 				5A5581FA1E8810D5007338EC /* UIViewController+Extension.swift */,
 				5A6B45221EC11AD8002F6485 /* ReportAbuseViewController.swift */,
+				5A051C941EC22D6E0007EFDC /* CommunityGuidelinesViewController.swift */,
 				5A32912A1E8EE53200DC0F8D /* Data Services */,
 			);
 			name = Controller;
@@ -606,6 +609,7 @@
 				5A4F82F31E4CCC520047869A /* WebImageCache.swift in Sources */,
 				5A3B88E01E733BA2000FEC96 /* EventViewController.swift in Sources */,
 				5A7CC8D11E4EC280001CEF72 /* ChatTableViewCell.swift in Sources */,
+				5A051C951EC22D6E0007EFDC /* CommunityGuidelinesViewController.swift in Sources */,
 				5A8555CA1DC51BFA00D8BF46 /* SwiftyJSON.swift in Sources */,
 				5A695E761E7D8DF400E082D3 /* LoginViewController.swift in Sources */,
 				5A4FE8C21E4A444900896D79 /* FeedViewController.swift in Sources */,
