@@ -46,6 +46,8 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
     var isFollowingRef: FIRDatabaseReference!
     var userFollowerRef: FIRDatabaseReference!
     var followerCountRef: FIRDatabaseReference!
+    var isBlockedRef: FIRDatabaseReference!
+    var isUserBlocked = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -192,6 +194,18 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
                 }
             })
         })
+        if thisUser != getUid() {
+            isBlockedRef = ref.child("users").child(getUid()).child("blocked").child(thisUser)
+            isBlockedRef.observe(.value, with: {(snapshot) in
+                if let _ = snapshot.value as? Bool {
+                    self.isUserBlocked = true
+                    self.blockUserButton.setTitle("Unblock", for: .normal)
+                } else {
+                    self.isUserBlocked = false
+                    self.blockUserButton.setTitle("Block", for: .normal)
+                }
+            })
+        }
     }
     
     @IBAction func followButtonTapped(_ sender: UIButton) {
@@ -239,6 +253,14 @@ class UserViewController: UIViewController, UITableViewDelegate, UICollectionVie
             let reportAbuseVC = storyboard?.instantiateViewController(withIdentifier: "ReportAbuseViewController") as! ReportAbuseViewController
             reportAbuseVC.abusiveUserId = thisUser
             present(reportAbuseVC, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func blockTapped(_ sender: UIButton) {
+        if isUserBlocked {
+            isBlockedRef.removeValue()
+        } else {
+            isBlockedRef.setValue(true)
         }
     }
     
